@@ -27,6 +27,8 @@ public class DrawView extends View
     int floorTopRightX = width - 10;
     int floorTopRightY = 450;
 
+    boolean jumping = false;
+    int jumpBase = playerY;
 
     public DrawView(Context context)
     {
@@ -49,6 +51,7 @@ public class DrawView extends View
                 playerX += 5;
         }
 
+
         doPhysics();
 
         drawFloor(canvas);
@@ -67,6 +70,13 @@ public class DrawView extends View
     {
         if(!collision(playerX, playerY + 2))
             playerY += 1;
+
+        if(jumping && Math.abs(playerY - jumpBase) > 30)
+            jumping = false;
+
+        if(jumping && !collision(playerX, playerY - 3))
+            playerY -= 3;
+
     }
 
     public boolean collision(int newPlayerX, int newPlayerY)
@@ -146,7 +156,11 @@ public class DrawView extends View
 
         //canvas.drawRect((float)(width-300), (float)(height-200), (float)(width-100), (float)(height -150), paint);
 
-        //if(eventX <= )
+        if(!jumping && eventX >= (float)(width-300) && eventX <= (float)(width-100) && eventY <= (float)(height -150) && eventY >= (float)(height-200))
+        {
+            jumping = true;
+            jumpBase = playerY;
+        }
 
 
         invalidate();

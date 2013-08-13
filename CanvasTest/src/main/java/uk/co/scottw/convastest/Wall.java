@@ -18,6 +18,12 @@ public class Wall
         this.color = color;
     }
 
+    public void move(int x)
+    {
+        top.x += x;
+        bottom.x += x;
+    }
+
     public void draw(Canvas canvas, Paint paint)
     {
         paint.setColor(color);

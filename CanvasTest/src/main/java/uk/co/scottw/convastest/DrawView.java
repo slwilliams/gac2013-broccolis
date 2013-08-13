@@ -6,10 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,6 +17,9 @@ public class DrawView extends View
 
     public static int height = 0;
     public static int width = 0;
+
+    boolean leftDown = false;
+    boolean rightDown = false;
 
     Player player;
     ArrayList<Wall> walls = new ArrayList<Wall>();
@@ -50,9 +51,10 @@ public class DrawView extends View
         walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
         walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
         walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
+        walls.add(new Wall(new Point(500, 200), new Point(1300, 225), Color.YELLOW));
     }
 
-
+    double val = 0.1;
     public void onDraw(Canvas canvas)
     {
         if(leftDown)
@@ -68,10 +70,12 @@ public class DrawView extends View
         }
 
         doPhysics();
+        walls.get(2).move((int)(Math.sin(val)*5));
+        val += 0.03;
 
-        for(Wall w : walls)
+        for(int i = 0; i < walls.size(); i ++)
         {
-            w.draw(canvas, paint);
+            walls.get(i).draw(canvas, paint);
         }
 
         drawButtons(canvas);
@@ -125,11 +129,8 @@ public class DrawView extends View
 
     }
 
-    boolean leftDown = false;
-    boolean rightDown = false;
 
 
-    @Override
     public boolean onTouchEvent(MotionEvent event)
     {
         float eventX = -1.0f;
@@ -154,6 +155,8 @@ public class DrawView extends View
             eventX = event.getX();
             eventY = event.getY();
             actionEvent = event.getAction();
+            if(actionEvent == MotionEvent.ACTION_UP)
+                leftDown = rightDown = false;
         }
 
         if(eventX <= 300 && eventX >= 100 && eventY <= (float)(height -150) && eventY >= (float)(height-200))

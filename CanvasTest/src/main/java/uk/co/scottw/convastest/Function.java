@@ -3,29 +3,33 @@ package uk.co.scottw.convastest;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
+import uk.co.scottw.convastest.util.Constants;
 
 public class Function
 {
+    private static final String NAME = "Function ";
+
     private int[] points;
     private int varX;
-    private Point origin ;
-    private int length ;
+    private Point origin;
+    private int length;
     private Calculable calc = null;
 
     public Function(String function, Point initialCoordinate, int xMax)
     {
+        origin = initialCoordinate;
+        length = xMax;
         try
         {
-            calc = new ExpressionBuilder(function).withVariable("x^2", varX).build() ;
-            origin = initialCoordinate ;
-            length = xMax ;
+            calc = new ExpressionBuilder(function).withVariable("x^2", varX).build();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            //do somthing
+            Log.e(Constants.TAG,NAME+"can't parse the function",e);
         }
     }
 

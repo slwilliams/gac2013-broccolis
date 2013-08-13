@@ -16,7 +16,7 @@ public class Function
     {
         try
         {
-            calc = new ExpressionBuilder(function).withVariable("x", varX).build();
+            this.calc = new ExpressionBuilder(function).withVariable("x", varX).build();
         }
         catch(Exception e)
         {

@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import uk.co.scottw.convastest.ui.model.WallModel;
 
 
 public class DrawView extends View
@@ -24,7 +25,7 @@ public class DrawView extends View
     boolean rightDown = false;
 
     Player player;
-    ArrayList<Wall> walls = new ArrayList<Wall>();
+    ArrayList<WallModel> walls = new ArrayList<WallModel>();
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -43,10 +44,10 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
-        walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
-        walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new Wall(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+        walls.add(new WallModel(new Point(0,500), new Point(1300, 525), Color.RED));
+        walls.add(new WallModel(new Point(500,400), new Point(1300, 425), Color.BLUE));
+        walls.add(new WallModel(new Point(0, 300), new Point(300, 325), Color.GREEN));
+        walls.add(new WallModel(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
     }
 
     double val = 0.1;
@@ -98,7 +99,7 @@ public class DrawView extends View
 
     public boolean collision(int newPlayerX, int newPlayerY)
     {
-        for(Wall w : walls)
+        for(WallModel w : walls)
         {
             if(newPlayerY + 5 >= w.getYMin() && newPlayerX + 5 >w.getXMin() && newPlayerY -5 <= w.getYMax() && newPlayerX - 5 <= w.getXMax())
                 return true;

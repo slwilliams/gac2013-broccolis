@@ -1,17 +1,17 @@
-package uk.co.scottw.convastest;
+package uk.co.scottw.convastest.ui.model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public class Wall
+public class WallModel
 {
     private Point top;
     private Point bottom;
     private int color;
 
 
-    public Wall(Point top, Point bottom, int color)
+    public WallModel(Point top, Point bottom, int color)
     {
         this.top = top;
         this.bottom = bottom;

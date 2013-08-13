@@ -1,6 +1,7 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
@@ -26,7 +27,14 @@ public class FunctionModel
         length = xMax;
         try
         {
-            calc = new ExpressionBuilder(function).withVariable("x^2", varX).build();
+            calc = new ExpressionBuilder(function).withVariable("x", varX).build();
+            int diff = length - origin.x;
+            points = new int[diff];
+            for(int i = 0; i < diff; i ++)
+            {
+                calc.setVariable("x", i);
+                points[i] = (int)calc.calculate();
+            }
         }
         catch (Exception e)
         {
@@ -37,6 +45,11 @@ public class FunctionModel
     public void draw(Canvas canvas, Paint paint)
     {
         //draw self using canvas.path here
+        paint.setColor(Color.BLACK);
+        for(int i = 0; i < points.length; i ++)
+        {
+            canvas.drawCircle(origin.x + i, origin.y + points[i], 2, paint);
+        }
     }
 
     public int getGrad(int x)

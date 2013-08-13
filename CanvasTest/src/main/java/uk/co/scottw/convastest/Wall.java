@@ -1,7 +1,6 @@
 package uk.co.scottw.convastest;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 

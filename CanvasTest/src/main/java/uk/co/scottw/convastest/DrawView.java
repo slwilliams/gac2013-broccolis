@@ -57,7 +57,7 @@ public class DrawView extends View
     {
         if(leftDown)
         {
-            if(!collision(player.getX() + 5, player.getY()))
+            if(!collision(player.getX() - 5, player.getY()))
                 player.move(-5, 0);
         }
 

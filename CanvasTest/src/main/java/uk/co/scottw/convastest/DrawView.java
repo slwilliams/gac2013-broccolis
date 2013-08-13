@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-import uk.co.scottw.convastest.ui.model.WallModel;
 
 
 public class DrawView extends View
@@ -25,7 +24,10 @@ public class DrawView extends View
     boolean rightDown = false;
 
     Player player;
-    ArrayList<WallModel> walls = new ArrayList<WallModel>();
+    ArrayList<Wall> walls = new ArrayList<Wall>();
+    ArrayList<Button> buttons = new ArrayList<Button>();
+
+
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -44,10 +46,15 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        walls.add(new WallModel(new Point(0,500), new Point(1300, 525), Color.RED));
-        walls.add(new WallModel(new Point(500,400), new Point(1300, 425), Color.BLUE));
-        walls.add(new WallModel(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new WallModel(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+        walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
+        walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
+        walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
+        walls.add(new Wall(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+
+        buttons.add(new Button(new Point(25, 550), new Point(225, 625), "left"));
+        buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
+        buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
+
     }
 
     double val = 0.1;
@@ -69,15 +76,17 @@ public class DrawView extends View
         walls.get(2).move((int)(Math.sin(val)*5), 0);
         val += 0.03;
 
-        for(int i = 0; i < walls.size(); i ++)
+        for(Wall w : walls)
         {
-            walls.get(i).draw(canvas, paint);
+            w.draw(canvas, paint);
+        }
+
+        for(Button b : buttons)
+        {
+            b.draw(canvas, paint);
         }
 
 
-
-
-        drawButtons(canvas);
         player.draw(canvas, paint);
         postInvalidateOnAnimation();
     }
@@ -99,7 +108,7 @@ public class DrawView extends View
 
     public boolean collision(int newPlayerX, int newPlayerY)
     {
-        for(WallModel w : walls)
+        for(Wall w : walls)
         {
             if(newPlayerY + 5 >= w.getYMin() && newPlayerX + 5 >w.getXMin() && newPlayerY -5 <= w.getYMax() && newPlayerX - 5 <= w.getXMax())
                 return true;
@@ -107,26 +116,6 @@ public class DrawView extends View
         return false;
     }
 
-    public void drawButtons(Canvas canvas)
-    {
-        paint.setColor(Color.BLACK);
-        //height = 756
-        //width = 1280
-        canvas.drawRect(100.0f, (float)(height-200), 300.0f, (float)(height -150), paint);
-        canvas.drawRect(350.0f, (float)(height-200), 550.0f, (float)(height -150), paint);
-        canvas.drawRect((float)(width-300), (float)(height-200), (float)(width-100), (float)(height -150), paint);
-
-        paint.setColor(Color.WHITE);
-        canvas.drawLine(150, ((height-200) + (height -150)) / 2, 160, ((height-200) + (height -150)) /2 + 10, paint);
-        canvas.drawLine(150, ((height-200) + (height -150)) / 2, 160, ((height-200) + (height -150)) /2 - 10, paint);
-
-        canvas.drawLine(475, ((height-200) + (height -150)) / 2, 465, ((height-200) + (height -150)) /2 + 10, paint);
-        canvas.drawLine(475, ((height-200) + (height -150)) / 2, 465, ((height-200) + (height -150)) /2 - 10, paint);
-
-        canvas.drawLine((float)(width-300) + 20, ((height-200) + (height -150)) / 2 - 10, (float)(width-300) + 20 + 10, ((height-200) + (height -150)) / 2 + 10, paint);
-        canvas.drawLine((float)(width-300) + 20, ((height-200) + (height -150)) / 2 - 10, (float)(width-300) + 20 - 10, ((height-200) + (height -150)) / 2 + 10, paint);
-
-    }
 
 
 
@@ -158,30 +147,39 @@ public class DrawView extends View
                 leftDown = rightDown = false;
         }
 
-        if(eventX <= 300 && eventX >= 100 && eventY <= (float)(height -150) && eventY >= (float)(height-200))
+        for(Button b : buttons)
         {
-            if(actionEvent == MotionEvent.ACTION_DOWN)
-                leftDown = true;
-            else if(actionEvent == MotionEvent.ACTION_UP)
-                leftDown = false;
+            if(b.isTouched((int)eventX, (int)eventY))
+            {
+                if(b.getText().equals("left")) {
+                    if(actionEvent == MotionEvent.ACTION_DOWN)
+                     {
+                        leftDown = true;
+                     }
+                     else if(actionEvent == MotionEvent.ACTION_UP)
+                     {
+                        leftDown = false;
+                     }
+                }
+
+                if(b.getText().equals("right"))
+                {
+                    if(actionEvent == MotionEvent.ACTION_DOWN)
+                    {
+                        rightDown = true;
+                    }
+                    else if(actionEvent == MotionEvent.ACTION_UP)
+                    {
+                        rightDown = false;
+                    }
+                }
+                if(b.getText().equals("jump"))
+                {
+                    jumping = true;
+                    jumpBase = player.getY();
+                }
+            }
         }
-
-
-        if(eventX <= 550 && eventX >= 350 && eventY <= (float)(height -150) && eventY >= (float)(height-200))
-        {
-            if(actionEvent == MotionEvent.ACTION_DOWN)
-                rightDown = true;
-            else if(actionEvent == MotionEvent.ACTION_UP)
-                rightDown = false;
-        }
-
-
-        if(!jumping && eventX >= (float)(width-300) && eventX <= (float)(width-100) && eventY <= (float)(height -150) && eventY >= (float)(height-200))
-        {
-            jumping = true;
-            jumpBase = player.getY();
-        }
-
 
         return true;
     }

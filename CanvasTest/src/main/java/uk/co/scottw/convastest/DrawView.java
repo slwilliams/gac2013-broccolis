@@ -19,8 +19,10 @@ public class DrawView extends View
 
     public static int height = 0;
     public static int width = 0;
-    int playerX = 200;
-    int playerY = 400;
+
+    Player player;
+    ArrayList<Wall> walls = new ArrayList<Wall>();
+
 
     int floorTopLeftX = 10;
     int floorTopLeftY = 450;
@@ -29,63 +31,77 @@ public class DrawView extends View
     int floorTopRightY = 450;
 
     boolean jumping = false;
-    int jumpBase = playerY;
+    int jumpBase = 400;
+    int jumpHeight = 100;
+    int jumpSpeed = 15;
+
+    int gravity = 5;
 
     public DrawView(Context context)
     {
         super(context);
         paint.setAntiAlias(true);
+        player = new Player(200, 400, Color.BLACK);
+        initWorld();
     }
 
-    @Override
+    private void initWorld()
+    {
+        walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
+        walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
+        walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
+    }
+
+
     public void onDraw(Canvas canvas)
     {
         if(leftDown)
         {
-            if(!collision(playerX + 5, playerY))
-                playerX -= 5;
+            if(!collision(player.getX() + 5, player.getY()))
+                player.move(-5, 0);
         }
 
         if(rightDown)
         {
-            if(!collision(playerX + 5, playerY))
-                playerX += 5;
+            if(!collision(player.getX() + 5, player.getY()))
+                player.move(5, 0);
         }
-
 
         doPhysics();
 
-        drawFloor(canvas);
+        for(Wall w : walls)
+        {
+            w.draw(canvas, paint);
+        }
+
         drawButtons(canvas);
-        drawPlayer(canvas);
+        player.draw(canvas, paint);
         postInvalidateOnAnimation();
     }
 
-    public void drawFloor(Canvas canvas)
-    {
-        paint.setColor(Color.RED);
-        canvas.drawRect(floorTopLeftX, floorTopLeftY, floorTopRightX, floorTopLeftY + 20, paint);
-    }
+
 
     public void doPhysics()
     {
-        if(!collision(playerX, playerY + 2))
-            playerY += 1;
+        if(!collision(player.getX(), player.getY() + gravity))
+            player.move(0, gravity);
 
-        if(jumping && Math.abs(playerY - jumpBase) > 30)
+        if(jumping && Math.abs(player.getY() - jumpBase) > jumpHeight)
             jumping = false;
 
-        if(jumping && !collision(playerX, playerY - 3))
-            playerY -= 3;
+        if(jumping && !collision(player.getX(), player.getY() - jumpSpeed))
+            player.move(0, -jumpSpeed);
 
     }
 
     public boolean collision(int newPlayerX, int newPlayerY)
     {
-        if(newPlayerY + 5 >= floorTopLeftY)
-            return true;
-        else
-            return false;
+        for(Wall w : walls)
+        {
+            if(newPlayerY + 5 >= w.getYMin() && newPlayerX + 5 >w.getXMin() && newPlayerY -5 <= w.getYMax() && newPlayerX - 5 <= w.getXMax())
+                return true;
+        }
+        return false;
     }
 
     public void drawButtons(Canvas canvas)
@@ -107,18 +123,6 @@ public class DrawView extends View
         canvas.drawLine((float)(width-300) + 20, ((height-200) + (height -150)) / 2 - 10, (float)(width-300) + 20 + 10, ((height-200) + (height -150)) / 2 + 10, paint);
         canvas.drawLine((float)(width-300) + 20, ((height-200) + (height -150)) / 2 - 10, (float)(width-300) + 20 - 10, ((height-200) + (height -150)) / 2 + 10, paint);
 
-
-        //left,top,right,btm
-        //st,sy,ex,ey
-    }
-
-    public void drawPlayer(Canvas canvas)
-    {
-        paint.setColor(Color.BLACK);
-        canvas.drawLine(playerX-10, playerY-10, playerX+10, playerY+10, paint);
-        canvas.drawLine(playerX-10, playerY+10, playerX+10, playerY-10, paint);
-
-        //sx sy ex ey
     }
 
     boolean leftDown = false;
@@ -159,10 +163,7 @@ public class DrawView extends View
             else if(actionEvent == MotionEvent.ACTION_UP)
                 leftDown = false;
         }
-        else
-        {
-            //leftDown = false;
-        }
+
 
         if(eventX <= 550 && eventX >= 350 && eventY <= (float)(height -150) && eventY >= (float)(height-200))
         {
@@ -171,15 +172,12 @@ public class DrawView extends View
             else if(actionEvent == MotionEvent.ACTION_UP)
                 rightDown = false;
         }
-        else
-        {
-            //rightDown = false;
-        }
+
 
         if(!jumping && eventX >= (float)(width-300) && eventX <= (float)(width-100) && eventY <= (float)(height -150) && eventY >= (float)(height-200))
         {
             jumping = true;
-            jumpBase = playerY;
+            jumpBase = player.getY();
         }
 
 

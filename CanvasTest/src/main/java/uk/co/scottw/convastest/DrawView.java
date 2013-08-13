@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.MotionEvent;
@@ -57,7 +58,7 @@ public class DrawView extends View
         drawFloor(canvas);
         drawButtons(canvas);
         drawPlayer(canvas);
-        invalidate();
+        postInvalidateOnAnimation();
     }
 
     public void drawFloor(Canvas canvas)
@@ -127,34 +128,53 @@ public class DrawView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        float eventX = event.getX();
-        float eventY = event.getY();
+        float eventX = -1.0f;
+        float eventY = -1.0f;
+        int actionEvent = -1;
+
+
+        int action = event.getAction();
+        if(event.getPointerCount()>1)
+        {
+            actionEvent = event.getActionMasked();
+            int actionPointerId = event.getActionIndex();
+            Log.i("err", Integer.toString(actionPointerId));
+            int index = event.findPointerIndex(actionPointerId);
+
+            // Gets its coordinates
+            eventX = event.getX(index);
+            eventY = event.getY(index);
+        }
+        else
+        {
+            eventX = event.getX();
+            eventY = event.getY();
+            actionEvent = event.getAction();
+        }
 
         if(eventX <= 300 && eventX >= 100 && eventY <= (float)(height -150) && eventY >= (float)(height-200))
         {
-            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            if(actionEvent == MotionEvent.ACTION_DOWN)
                 leftDown = true;
-            else if(event.getAction() == MotionEvent.ACTION_UP)
+            else if(actionEvent == MotionEvent.ACTION_UP)
                 leftDown = false;
         }
         else
         {
-            leftDown = false;
+            //leftDown = false;
         }
 
         if(eventX <= 550 && eventX >= 350 && eventY <= (float)(height -150) && eventY >= (float)(height-200))
         {
-            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            if(actionEvent == MotionEvent.ACTION_DOWN)
                 rightDown = true;
-            else if(event.getAction() == MotionEvent.ACTION_UP)
+            else if(actionEvent == MotionEvent.ACTION_UP)
                 rightDown = false;
         }
         else
         {
-            rightDown = false;
+            //rightDown = false;
         }
-
-        //canvas.drawRect((float)(width-300), (float)(height-200), (float)(width-100), (float)(height -150), paint);
 
         if(!jumping && eventX >= (float)(width-300) && eventX <= (float)(width-100) && eventY <= (float)(height -150) && eventY >= (float)(height-200))
         {
@@ -163,7 +183,6 @@ public class DrawView extends View
         }
 
 
-        invalidate();
         return true;
     }
 }

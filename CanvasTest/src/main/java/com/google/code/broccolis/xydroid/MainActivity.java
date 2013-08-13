@@ -10,7 +10,7 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class MainActivity extends Activity
 {
-    DrawView drawView;
+    private DrawView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState)

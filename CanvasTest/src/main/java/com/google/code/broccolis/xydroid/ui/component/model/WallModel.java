@@ -8,7 +8,6 @@ public class WallModel
     private Point bottom;
     private int color;
 
-
     public WallModel(Point top, Point bottom, int color)
     {
         this.top = top;
@@ -53,11 +52,4 @@ public class WallModel
     {
         return y + 5 >= getYMin() && x + 5 > getXMin() && y - 5 <= getYMax() && x - 5 <= getXMax();
     }
-
-
-
-  /*  public boolean collision(Player player)
-    {
-        return (player.getX() <= bottom.getX() && player.getX() >= top.getX() && player.getY() <= bottom.getY() && player.getY() >= top.getY());
-    }*/
 }

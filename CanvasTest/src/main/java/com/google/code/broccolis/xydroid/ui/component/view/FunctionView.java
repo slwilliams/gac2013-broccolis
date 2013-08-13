@@ -2,6 +2,7 @@ package com.google.code.broccolis.xydroid.ui.component.view;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
@@ -21,12 +22,13 @@ public class
     @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        model.draw(canvas,paint);
+        Path path = model.getPath();
+        canvas.drawPath(path, paint); //TODO check this
     }
 
     @Override
     public boolean collidesWith(int x, int y)
     {
-        return false; //TODO colliding with function
+        return model.contains(x, y);
     }
 }

@@ -10,14 +10,11 @@ public class Player
     private int playerY = 0;
     private int color = Color.BLACK;
 
-    public void setX(int x)
+    public Player(int initialX, int initialY, int color)
     {
-        playerX = x;
-    }
-
-    public void setY(int y)
-    {
-        playerY = y;
+        this.playerX = initialX;
+        this.playerY = initialY;
+        this.color = color;
     }
 
     public int getX()
@@ -25,23 +22,25 @@ public class Player
         return playerX;
     }
 
+    public void setX(int x)
+    {
+        playerX = x;
+    }
+
     public int getY()
     {
         return playerY;
+    }
+
+    public void setY(int y)
+    {
+        playerY = y;
     }
 
     public void move(int xAmt, int yAmt)
     {
         playerX += xAmt;
         playerY += yAmt;
-    }
-
-
-    public Player(int initialX, int initialY, int color)
-    {
-        this.playerX = initialX;
-        this.playerY = initialY;
-        this.color = color;
     }
 
     public void draw(Canvas canvas, Paint paint)

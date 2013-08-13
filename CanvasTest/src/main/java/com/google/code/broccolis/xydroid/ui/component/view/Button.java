@@ -12,7 +12,6 @@ public class Button
     private Point bottom;
     private String text;
 
-
     public Button(Point top, Point bottom, String text)
     {
         this.top = top;

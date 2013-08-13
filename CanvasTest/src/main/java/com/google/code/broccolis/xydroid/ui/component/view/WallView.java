@@ -13,7 +13,7 @@ public class WallView implements Drawable, Colliding
 {
     private WallModel model;
 
-    public WallView(Point bottom, Point top, int color)
+    public WallView(Point top, Point bottom, int color)
     {
         model = new WallModel(top, bottom, color);
     }

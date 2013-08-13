@@ -8,7 +8,8 @@ import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Colliding;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 
-public class FunctionView implements Drawable, Colliding
+public class
+        FunctionView implements Drawable, Colliding
 {
     private FunctionModel model;
 

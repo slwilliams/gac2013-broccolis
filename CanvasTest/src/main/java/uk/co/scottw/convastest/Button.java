@@ -22,10 +22,11 @@ public class Button
 
     public void draw(Canvas canvas, Paint paint)
     {
+        paint.setTextSize(30f);
         paint.setColor(Color.BLACK);
         canvas.drawRect(top.x, top.y, bottom.x, bottom.y, paint);
         paint.setColor(Color.WHITE);
-        canvas.drawText(text, top.x + 10, top.y + 10, paint);
+        canvas.drawText(text, top.x + 50, top.y + 40, paint);
     }
 
     public boolean isTouched(int touchX, int touchY)

@@ -1,16 +1,19 @@
-package uk.co.scottw.convastest.ui.drawable;
+package uk.co.scottw.convastest.ui.view;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import uk.co.scottw.convastest.Player;
+import uk.co.scottw.convastest.ui.interfaces.Colliding;
+import uk.co.scottw.convastest.ui.interfaces.Drawable;
 import uk.co.scottw.convastest.ui.model.WallModel;
 
-public class Wall implements Drawable
+public class WallView implements Drawable, Colliding
 {
     private WallModel model;
 
-    public Wall(Point bottom, Point top, int color)
+    public WallView(Point bottom, Point top, int color)
     {
         model = new WallModel(top, bottom, color);
     }
@@ -20,6 +23,12 @@ public class Wall implements Drawable
         model.move(x,y);
     }
 
+    public boolean collidesWith(Player player)
+    {
+        return collidesWith(player.getX(),player.getY());
+    }
+
+    @Override
     public boolean collidesWith(int x, int y)
     {
         return model.contains(x,y);

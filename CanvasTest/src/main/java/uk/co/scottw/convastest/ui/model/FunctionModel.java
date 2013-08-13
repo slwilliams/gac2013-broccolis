@@ -1,4 +1,4 @@
-package uk.co.scottw.convastest;
+package uk.co.scottw.convastest.ui.model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,9 +9,9 @@ import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 import uk.co.scottw.convastest.util.Constants;
 
-public class Function
+public class FunctionModel
 {
-    private static final String NAME = "Function ";
+    private static final String NAME = "FunctionModel ";
 
     private int[] points;
     private int varX;
@@ -19,7 +19,7 @@ public class Function
     private int length;
     private Calculable calc = null;
 
-    public Function(String function, Point initialCoordinate, int xMax)
+    public FunctionModel(String function, Point initialCoordinate, int xMax)
     {
         origin = initialCoordinate;
         length = xMax;

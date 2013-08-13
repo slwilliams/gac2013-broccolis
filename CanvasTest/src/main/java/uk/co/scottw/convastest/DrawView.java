@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-import uk.co.scottw.convastest.ui.drawable.Wall;
+import uk.co.scottw.convastest.ui.view.WallView;
 
 
 public class DrawView extends View
@@ -25,7 +25,7 @@ public class DrawView extends View
     boolean rightDown = false;
 
     Player player;
-    ArrayList<Wall> walls = new ArrayList<Wall>();
+    ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
 
 
@@ -47,10 +47,10 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
-        walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
-        walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new Wall(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+        walls.add(new WallView(new Point(0,500), new Point(1300, 525), Color.RED));
+        walls.add(new WallView(new Point(500,400), new Point(1300, 425), Color.BLUE));
+        walls.add(new WallView(new Point(0, 300), new Point(300, 325), Color.GREEN));
+        walls.add(new WallView(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
 
         buttons.add(new Button(new Point(25, 550), new Point(225, 625), "left"));
         buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
@@ -77,7 +77,7 @@ public class DrawView extends View
         walls.get(2).move((int)(Math.sin(val)*5), 0);
         val += 0.03;
 
-        for(Wall w : walls)
+        for(WallView w : walls)
         {
             w.draw(canvas, paint);
         }
@@ -109,7 +109,7 @@ public class DrawView extends View
 
     public boolean collision(int newPlayerX, int newPlayerY)
     {
-        for(Wall w : walls)
+        for(WallView w : walls)
         {
             if (w.collidesWith(newPlayerX,newPlayerY))
             {
@@ -122,11 +122,13 @@ public class DrawView extends View
 
 
 
+    @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        float eventX = -1.0f;
-        float eventY = -1.0f;
-        int actionEvent = -1;
+
+        float eventX;
+        float eventY;
+        int actionEvent;
 
 
         int action = event.getAction();

@@ -18,10 +18,12 @@ public class Wall
         this.color = color;
     }
 
-    public void move(int x)
+    public void move(int x, int y)
     {
         top.x += x;
         bottom.x += x;
+        top.y += y;
+        bottom.y += y;
     }
 
     public void draw(Canvas canvas, Paint paint)

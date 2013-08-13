@@ -11,6 +11,10 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import de.congrace.exp4j.Calculable;
+import de.congrace.exp4j.ExpressionBuilder;
+
+
 public class DrawView extends View
 {
     Paint paint = new Paint();
@@ -23,13 +27,6 @@ public class DrawView extends View
 
     Player player;
     ArrayList<Wall> walls = new ArrayList<Wall>();
-
-
-    int floorTopLeftX = 10;
-    int floorTopLeftY = 450;
-
-    int floorTopRightX = width - 10;
-    int floorTopRightY = 450;
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -46,12 +43,29 @@ public class DrawView extends View
         initWorld();
     }
 
+      int[] vals = new int[500];
     private void initWorld()
     {
         walls.add(new Wall(new Point(0,500), new Point(1300, 525), Color.RED));
         walls.add(new Wall(new Point(500,400), new Point(1300, 425), Color.BLUE));
         walls.add(new Wall(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new Wall(new Point(500, 200), new Point(1300, 225), Color.YELLOW));
+        walls.add(new Wall(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+
+        int i = 0;
+        Calculable calc = null;
+
+           for(i = 0; i < 500; i ++){
+        try {
+            calc = new ExpressionBuilder("2*sqrt(x)")
+                    .withVariable("x", i)
+                    .build();
+            int out = (int)calc.calculate();
+            //Log.i("canvas", Integer.toString(out));
+            vals[i] = out;
+        } catch(Exception e)
+        {
+
+        }}
     }
 
     double val = 0.1;
@@ -70,13 +84,24 @@ public class DrawView extends View
         }
 
         doPhysics();
-        walls.get(2).move((int)(Math.sin(val)*5));
+        walls.get(2).move((int)(Math.sin(val)*5), 0);
         val += 0.03;
 
         for(int i = 0; i < walls.size(); i ++)
         {
             walls.get(i).draw(canvas, paint);
         }
+
+
+        paint.setColor(Color.BLACK);
+
+        for(int i = 0; i < 500; i ++)
+        {
+            canvas.drawCircle(i, vals[i], 2, paint);
+
+
+        }
+
 
         drawButtons(canvas);
         player.draw(canvas, paint);

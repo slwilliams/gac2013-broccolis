@@ -1,18 +1,19 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1376322825000 403 5a7cff5e41a08217b25277cadf2c91d0dbbe0ceb /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$menu.class
-1376400002000 1264 6102ed2245fed1a60bd4b4cf84604958278a6a1c /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/MainActivity.class
-1376322825000 446 be0550d82a6abcd450964934ccd444c57b171afe /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$style.class
-1376322825000 418 d5df6a1d91f8a957dedcd4a0977ad8b201faf083 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$layout.class
-1376322825000 487 a7cb1752486a4fbd2bf466c8d39aa1aaefe68560 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$string.class
-1376405744000 1379 1f4ff11e2b807e5e0e61ec4e8b6d1bdb749baa79 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/Wall.class
-1376322825000 408 3fd6e4281a5fc70546dd1a9729791d7e0226fd40 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$id.class
-1376322825000 355 2fbe2f3a026caae6435f8ccc0ed69403f0f5f26c /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/BuildConfig.class
-1376322825000 727 fe7465acedafe51044b097f87276e54eb19a50af /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R.class
-1376322825000 355 9db751fe720440104c0375eca4df16367a2f98f6 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$attr.class
+1376413680000 403 5a7cff5e41a08217b25277cadf2c91d0dbbe0ceb /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$menu.class
+1376413294000 44051 e883dd9228509720e0de5fa1f6840c3823f5d4ae /Users/demouser/.gradle/caches/artifacts-24/filestore/de.congrace/exp4j/0.3.10/jar/e883dd9228509720e0de5fa1f6840c3823f5d4ae/exp4j-0.3.10.jar
+1376413680000 1264 6102ed2245fed1a60bd4b4cf84604958278a6a1c /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/MainActivity.class
+1376413680000 446 be0550d82a6abcd450964934ccd444c57b171afe /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$style.class
+1376413680000 418 d5df6a1d91f8a957dedcd4a0977ad8b201faf083 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$layout.class
+1376413680000 487 a7cb1752486a4fbd2bf466c8d39aa1aaefe68560 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$string.class
+1376413680000 1431 53bc14ae06b4debde4495d6e9ac9d2fde4319cad /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/Wall.class
+1376413680000 408 3fd6e4281a5fc70546dd1a9729791d7e0226fd40 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$id.class
+1376413680000 355 2fbe2f3a026caae6435f8ccc0ed69403f0f5f26c /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/BuildConfig.class
+1376413680000 727 fe7465acedafe51044b097f87276e54eb19a50af /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R.class
+1376413680000 355 9db751fe720440104c0375eca4df16367a2f98f6 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$attr.class
 1375279198000 490914 3fe75433da602500cc71fcc1c46e5550291dd45d /Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-v4/13.0.0/support-v4-13.0.0.jar
-1376322825000 422 caf667671896737e1d144098893878ee16c271d0 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$drawable.class
-1376400002000 1397 8d2b51a3c9db5470bf4547b0c76c957e1ce46dd1 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/Player.class
-1376322825000 476 5128ee081a2b0990d3df466df177ef361ffe8add /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$dimen.class
-1376405809000 5384 adef4a278549fa471a30155e8e0c5d16abf916e9 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/DrawView.class
+1376413680000 422 caf667671896737e1d144098893878ee16c271d0 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$drawable.class
+1376413680000 1397 8d2b51a3c9db5470bf4547b0c76c957e1ce46dd1 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/Player.class
+1376413680000 476 5128ee081a2b0990d3df466df177ef361ffe8add /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/R$dimen.class
+1376414761000 5936 b06f971c6d084f2e58b5472b35315c51492361a6 /Users/demouser/AndroidStudioProjects/CanvasTestProject/CanvasTest/build/classes/debug/uk/co/scottw/convastest/DrawView.class

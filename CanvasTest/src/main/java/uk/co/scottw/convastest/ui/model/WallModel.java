@@ -1,7 +1,5 @@
 package uk.co.scottw.convastest.ui.model;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Point;
 
 public class WallModel
@@ -26,13 +24,6 @@ public class WallModel
         bottom.y += y;
     }
 
-    public void draw(Canvas canvas, Paint paint)
-    {
-        paint.setColor(color);
-        canvas.drawRect(top.x, top.y, bottom.x, bottom.y, paint);
-
-    }
-
     public int getYMin()
     {
         return top.y;
@@ -51,6 +42,16 @@ public class WallModel
     public int getXMax()
     {
         return bottom.x;
+    }
+
+    public int getColor()
+    {
+        return color;
+    }
+
+    public boolean contains(int x, int y)
+    {
+        return y + 5 >= getYMin() && x + 5 > getXMin() && y - 5 <= getYMax() && x - 5 <= getXMax();
     }
 
 

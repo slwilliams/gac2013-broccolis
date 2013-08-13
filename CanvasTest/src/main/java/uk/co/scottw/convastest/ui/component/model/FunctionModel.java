@@ -1,4 +1,4 @@
-package uk.co.scottw.convastest.ui.model;
+package uk.co.scottw.convastest.ui.component.model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

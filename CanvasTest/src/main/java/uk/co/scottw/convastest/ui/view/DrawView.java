@@ -1,4 +1,4 @@
-package uk.co.scottw.convastest;
+package uk.co.scottw.convastest.ui.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,7 +11,9 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-import uk.co.scottw.convastest.ui.view.WallView;
+import uk.co.scottw.convastest.util.Player;
+import uk.co.scottw.convastest.ui.component.view.Button;
+import uk.co.scottw.convastest.ui.component.view.WallView;
 
 
 public class DrawView extends View

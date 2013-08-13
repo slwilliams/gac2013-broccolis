@@ -1,13 +1,13 @@
-package uk.co.scottw.convastest.ui.view;
+package uk.co.scottw.convastest.ui.component.view;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-import uk.co.scottw.convastest.Player;
+import uk.co.scottw.convastest.util.Player;
 import uk.co.scottw.convastest.ui.interfaces.Colliding;
 import uk.co.scottw.convastest.ui.interfaces.Drawable;
-import uk.co.scottw.convastest.ui.model.WallModel;
+import uk.co.scottw.convastest.ui.component.model.WallModel;
 
 public class WallView implements Drawable, Colliding
 {

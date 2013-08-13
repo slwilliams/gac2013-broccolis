@@ -1,4 +1,4 @@
-package uk.co.scottw.convastest;
+package uk.co.scottw.convastest.ui.component.view;
 
 
 import android.graphics.Canvas;

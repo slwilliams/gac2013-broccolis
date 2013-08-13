@@ -6,6 +6,8 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 
+import uk.co.scottw.convastest.ui.view.DrawView;
+
 public class MainActivity extends Activity {
     DrawView drawView;
 

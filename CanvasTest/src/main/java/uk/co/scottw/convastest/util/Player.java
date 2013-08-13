@@ -1,4 +1,4 @@
-package uk.co.scottw.convastest;
+package uk.co.scottw.convastest.util;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -21,7 +21,7 @@ public class
     @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        //TODO drawing the function
+        model.draw(canvas,paint);
     }
 
     @Override

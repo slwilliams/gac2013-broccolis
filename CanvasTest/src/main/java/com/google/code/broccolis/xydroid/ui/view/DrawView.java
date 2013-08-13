@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class DrawView extends View
     Player player;
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
-
+    ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -57,6 +58,7 @@ public class DrawView extends View
         buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
         buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
 
+        functions.add(new FunctionView("50*sin(x*0.1)", new Point(0,300), 600));
     }
 
     double val = 0.1;
@@ -93,6 +95,10 @@ public class DrawView extends View
             b.draw(canvas, paint);
         }
 
+        for(FunctionView f : functions)
+        {
+            f.draw(canvas, paint);
+        }
 
         player.draw(canvas, paint);
         postInvalidateOnAnimation();

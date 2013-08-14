@@ -58,9 +58,9 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        buttons.add(new Button(new Point(25, 550), new Point(225, 625), "left"));
-        buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
-        buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
+        buttons.add(new Button(new Point(50, 600), new Point(250, 675), "Left"));
+        buttons.add(new Button(new Point(300, 600), new Point(500, 675), "Right"));
+        buttons.add(new Button(new Point(1000, 600), new Point(1200, 675), "Jump"));
 
         functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
@@ -140,7 +140,7 @@ public class DrawView extends View
         {
             for (FunctionView f : functions)
             {
-                if(f.collidesWith(newPlayerX, newPlayerY))
+                if(f.collidesWith(player))
                 {
                     return true;
                 }
@@ -182,7 +182,7 @@ public class DrawView extends View
         {
             if (b.isTouched((int) eventX, (int) eventY))
             {
-                if (b.getText().equals("left"))
+                if (b.getText().toLowerCase().equals("left"))
                 {
                     if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
@@ -194,7 +194,7 @@ public class DrawView extends View
                     }
                 }
 
-                if (b.getText().equals("right"))
+                if (b.getText().toLowerCase().equals("right"))
                 {
                     if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
@@ -206,7 +206,7 @@ public class DrawView extends View
                     }
                 }
 
-                if (b.getText().equals("jump"))
+                if (b.getText().toLowerCase().equals("jump"))
                 {
                     jumping = true;
                     jumpBase = player.getY();

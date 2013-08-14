@@ -30,7 +30,7 @@ public class Button
         canvas.drawRect(top.x, top.y, bottom.x, bottom.y, paint);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
-        canvas.drawText(text, top.x + 60, top.y + 50, paint);
+        canvas.drawText(text, top.x + 70, top.y + 50, paint);
     }
 
     public boolean isTouched(int touchX, int touchY)

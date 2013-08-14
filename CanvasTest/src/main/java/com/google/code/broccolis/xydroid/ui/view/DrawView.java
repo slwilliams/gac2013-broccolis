@@ -48,7 +48,7 @@ public class DrawView extends View
     {
         super(context);
         paint.setAntiAlias(true);
-        player = new Player(100, 450, Color.BLACK);
+        player = new Player(100, 450, Color.BLACK, getResources());
         initWorld();
     }
 
@@ -105,7 +105,7 @@ public class DrawView extends View
             f.draw(canvas, paint);
         }
 
-        player.draw(canvas, paint, getResources());
+        player.draw(canvas, paint);
 
         canvas.drawBitmap(broccoli, 700, 300, paint);
 

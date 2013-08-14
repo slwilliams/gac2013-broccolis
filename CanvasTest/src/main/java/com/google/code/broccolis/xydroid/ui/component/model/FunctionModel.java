@@ -20,6 +20,7 @@ public class FunctionModel
     private static final int RADIUS = 5;
     private static final String NAME = "FunctionModel ";
     private Calculable calculable = null;
+    private Point origin;
     private List<Point> points;
     private List<Point> allPoints;
 
@@ -28,11 +29,12 @@ public class FunctionModel
         try
         {
             int x = initialCoordinate.x;
+            this.origin = initialCoordinate;
             calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
             points = new ArrayList<Point>();
             for (int i = 0; i < xMax; i++)
             {
-                points.add(new Point(x + i, (int) calculable.calculate(x + i)));
+                points.add(new Point(i, (int) calculable.calculate(i)));
             }
             allPoints = new ArrayList<Point>(points);
         }
@@ -69,11 +71,13 @@ public class FunctionModel
     public Path getPath()
     {
         Path path = new Path();
-
+        path.moveTo(points.get(0).x + origin.x, points.get(0).y + origin.y);
         for (Point point : points)
         {
-            path.lineTo(point.x, point.y);
+            path.lineTo(point.x + origin.x, point.y + origin.y);
         }
+
+
 
         return path;
     }

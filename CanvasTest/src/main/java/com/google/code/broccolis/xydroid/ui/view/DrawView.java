@@ -1,6 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,6 +12,7 @@ import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
@@ -62,6 +65,8 @@ public class DrawView extends View
         buttons.add(new Button(new Point(50, 600), new Point(250, 675), "Left"));
         buttons.add(new Button(new Point(300, 600), new Point(500, 675), "Right"));
         buttons.add(new Button(new Point(1000, 600), new Point(1200, 675), "Jump"));
+        buttons.add(new Button(new Point(750, 600), new Point(950, 675), "Functions"));
+
 
         functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
@@ -219,6 +224,34 @@ public class DrawView extends View
                 {
                     jumping = true;
                     jumpBase = player.getY();
+                }
+
+                if(b.getText().toLowerCase().equals("functions"))
+                {
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder( getContext());
+
+                    alert.setTitle("Title");
+                    alert.setMessage("Message");
+
+                    // Set an EditText view to get user input
+                    final EditText input = new EditText( getContext());
+                    alert.setView(input);
+
+                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            String value = input.getText().toString();
+                            functions.add(new FunctionView(value, new Point(600, 300), 1000));
+                        }
+                    });
+
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+                        }
+                    });
+
+                    alert.show();
                 }
             }
             else

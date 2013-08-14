@@ -105,7 +105,7 @@ public class DrawView extends View
             f.draw(canvas, paint);
         }
 
-        player.draw(canvas, paint);
+        player.draw(canvas, paint, getResources());
 
         canvas.drawBitmap(broccoli, 700, 300, paint);
 
@@ -158,24 +158,21 @@ public class DrawView extends View
         return false;
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-
         float eventX;
         float eventY;
         int actionEvent;
 
-
         int action = event.getAction();
+
         if (event.getPointerCount() > 1)
         {
             actionEvent = event.getActionMasked();
             int actionPointerId = event.getActionIndex();
             int index = event.findPointerIndex(actionPointerId);
 
-            // Gets its coordinates
             eventX = event.getX(index);
             eventY = event.getY(index);
         }

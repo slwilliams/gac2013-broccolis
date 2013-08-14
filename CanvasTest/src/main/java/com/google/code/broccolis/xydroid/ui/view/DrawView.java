@@ -43,7 +43,7 @@ public class DrawView extends View
     {
         super(context);
         paint.setAntiAlias(true);
-        player = new Player(200, 400, Color.BLACK);
+        player = new Player(100, 450, Color.BLACK);
         initWorld();
     }
 
@@ -58,7 +58,7 @@ public class DrawView extends View
         buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
         buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
 
-        functions.add(new FunctionView("50*sin(x*0.1)", new Point(0,300), 600));
+        functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
 
     double val = 0.1;
@@ -117,9 +117,16 @@ public class DrawView extends View
             jumping = false;
         }
 
-        if (jumping && !collision(player.getX(), player.getY() - jumpSpeed))
+        if (jumping)
         {
-            player.move(0, -jumpSpeed);
+            if (!collision(player.getX(), player.getY() - jumpSpeed))
+            {
+                player.move(0, -jumpSpeed);
+            }
+            else
+            {
+                jumping = false;
+            }
         }
 
     }
@@ -158,7 +165,6 @@ public class DrawView extends View
         {
             actionEvent = event.getActionMasked();
             int actionPointerId = event.getActionIndex();
-            Log.i("err", Integer.toString(actionPointerId));
             int index = event.findPointerIndex(actionPointerId);
 
             // Gets its coordinates
@@ -203,6 +209,7 @@ public class DrawView extends View
                         rightDown = false;
                     }
                 }
+
                 if (b.getText().equals("jump"))
                 {
                     jumping = true;

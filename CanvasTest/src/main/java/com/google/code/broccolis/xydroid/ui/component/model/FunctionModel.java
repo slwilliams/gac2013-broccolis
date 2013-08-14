@@ -90,7 +90,6 @@ public class FunctionModel
     {
         for (Point point : allPoints)
         {
-            Log.i(TAG, NAME + Integer.toString(point.x) + ", " + Integer.toString(x));
             if (abs(point.x + origin.x - x) < RADIUS && abs(point.y + origin.y - y) < RADIUS)
             {
                 return true;

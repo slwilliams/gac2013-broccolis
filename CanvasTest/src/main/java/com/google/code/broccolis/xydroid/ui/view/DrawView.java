@@ -31,6 +31,7 @@ public class DrawView extends View
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
+    
 
     boolean jumping = false;
     int jumpBase = 400;

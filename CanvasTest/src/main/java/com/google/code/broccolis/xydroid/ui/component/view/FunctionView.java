@@ -36,9 +36,10 @@ public class FunctionView implements Drawable, Colliding
         paint.setStyle(FILL);
     }
 
-    public boolean collidesWith(Player player)
+    @Override
+    public boolean collidesWith(Player player, Point moveAmount)
     {
         //TODO
-        return model.contains(0, 0);
+        return false;
     }
 }

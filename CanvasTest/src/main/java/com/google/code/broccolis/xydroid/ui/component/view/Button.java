@@ -24,6 +24,11 @@ public class Button
         paint.setTextSize(30f);
         paint.setColor(Color.BLACK);
         canvas.drawRect(top.x, top.y, bottom.x, bottom.y, paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2.f);
+        paint.setColor(Color.RED);
+        canvas.drawRect(top.x, top.y, bottom.x, bottom.y, paint);
+        paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.WHITE);
         canvas.drawText(text, top.x + 50, top.y + 40, paint);
     }

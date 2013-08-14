@@ -13,6 +13,8 @@ import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
 
 public class FunctionModel
 {
@@ -64,6 +66,24 @@ public class FunctionModel
                 i++;
             }
         }
+
+        i = 0;
+        while (i < allPoints.size())
+        {
+            if (isOutOfBounds(allPoints.get(i)))
+            {
+                allPoints.remove(i);
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+
+    private boolean isOutOfBounds(Point point)
+    {
+        return point.x > SCREEN_WIDTH || point.x < 0 || point.y < 0 || point.y > SCREEN_HEIGHT;
     }
 
     public Path getPath()
@@ -99,7 +119,11 @@ public class FunctionModel
 
         for (Point point : allPoints)
         {
-            if (top.x < point.x || bottom.x > point.x || top.y < point.y || bottom.y > point.y)
+            if (top.x < point.x)
+            {
+                break;
+            }
+            if (bottom.x > point.x || top.y < point.y || bottom.y > point.y)
             {
                 continue;
             }

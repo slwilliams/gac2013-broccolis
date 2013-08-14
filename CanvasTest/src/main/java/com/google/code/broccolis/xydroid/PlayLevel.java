@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
-import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
 

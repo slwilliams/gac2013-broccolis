@@ -5,11 +5,10 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.WallModel;
-import com.google.code.broccolis.xydroid.ui.interfaces.Obstacle;
-import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
+import com.google.code.broccolis.xydroid.ui.interfaces.Terrain;
 import com.google.code.broccolis.xydroid.util.Player;
 
-public class WallView implements Drawable, Obstacle
+public class WallView implements Terrain
 {
     private WallModel model;
 

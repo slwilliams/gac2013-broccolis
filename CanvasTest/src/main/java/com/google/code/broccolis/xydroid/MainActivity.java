@@ -2,13 +2,12 @@ package com.google.code.broccolis.xydroid;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 
-import com.google.code.broccolis.xydroid.ui.view.DrawView;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
 
 public class MainActivity extends Activity
 {
@@ -20,6 +19,17 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.start_interface);
+
+        setScreenSize();
+    }
+
+    private void setScreenSize()
+    {
+        Point screenSize = new Point();
+        getWindowManager().getDefaultDisplay().getSize(screenSize);
+
+        SCREEN_WIDTH = screenSize.x;
+        SCREEN_HEIGHT = screenSize.y;
     }
 
     public void newGame(View view)

@@ -17,9 +17,9 @@ import android.widget.EditText;
 
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
+import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
-import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 
 import java.util.ArrayList;
 
@@ -66,9 +66,11 @@ public class DrawView extends View
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        sensorManager.registerListener(new SensorEventListener() {
+        sensorManager.registerListener(new SensorEventListener()
+        {
             @Override
-            public void onSensorChanged(SensorEvent event) {
+            public void onSensorChanged(SensorEvent event)
+            {
 
                 xAcc = event.values[1];
                 float y = event.values[1];
@@ -77,7 +79,8 @@ public class DrawView extends View
             }
 
             @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            public void onAccuracyChanged(Sensor sensor, int accuracy)
+            {
             }
 
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
@@ -91,14 +94,14 @@ public class DrawView extends View
         buttons.add(new Button(new Point(750, 600), new Point(950, 675), "Functions"));
 
 
-        functions.add(new FunctionView("5*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
+        functions.add(new FunctionView("5*sin(x*0.1)*(0.01*x)", new Point(0, 300), 600));
     }
 
     public void onDraw(Canvas canvas)
     {
-        if (!collision(player, new Point((int)xAcc*2, 0)))
+        if (!collision(player, new Point((int) xAcc * 2, 0)))
         {
-            player.move((int)xAcc*2, 0);
+            player.move((int) xAcc * 2, 0);
         }
 
         doPhysics();
@@ -109,7 +112,7 @@ public class DrawView extends View
             b.draw(canvas, paint);
         }
 
-        for(FunctionView f : functions)
+        for (FunctionView f : functions)
         {
             f.draw(canvas, paint);
         }
@@ -156,7 +159,7 @@ public class DrawView extends View
         {
             for (FunctionView f : functions)
             {
-                if(f.collidesWith(player, moveAmount))
+                if (f.collidesWith(player, moveAmount))
                 {
                     return true;
                 }
@@ -228,27 +231,32 @@ public class DrawView extends View
                     jumpBase = player.getY();
                 }
 
-                if(b.getText().toLowerCase().equals("functions"))
+                if (b.getText().toLowerCase().equals("functions"))
                 {
 
-                    AlertDialog.Builder alert = new AlertDialog.Builder( getContext());
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
                     alert.setTitle("Title");
                     alert.setMessage("Message");
 
                     // Set an EditText view to get user input
-                    final EditText input = new EditText( getContext());
+                    final EditText input = new EditText(getContext());
                     alert.setView(input);
 
-                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                             String value = input.getText().toString();
                             functions.add(new FunctionView(value, new Point(600, 300), 1000));
+                            dialog.dismiss();
                         }
                     });
 
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                             // Canceled.
                         }
                     });

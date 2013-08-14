@@ -133,6 +133,13 @@ public class DrawView extends View
                 return true;
             }
         }
+        for (FunctionView f : functions)
+        {
+            if(f.collidesWith(newPlayerX, newPlayerY))
+            {
+                return true;
+            }
+        }
         return false;
     }
 

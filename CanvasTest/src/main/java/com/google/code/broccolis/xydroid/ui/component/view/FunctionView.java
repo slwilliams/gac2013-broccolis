@@ -1,6 +1,7 @@
 package com.google.code.broccolis.xydroid.ui.component.view;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -23,6 +24,7 @@ public class
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
+        paint.setColor(Color.BLACK);
         canvas.drawPath(path, paint); //TODO check this
     }
 

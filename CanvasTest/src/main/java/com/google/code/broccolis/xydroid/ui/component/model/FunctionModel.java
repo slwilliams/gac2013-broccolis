@@ -28,7 +28,7 @@ public class FunctionModel
         try
         {
             int x = initialCoordinate.x;
-            calculable = new ExpressionBuilder(function).withVariable("x^2", 0).build();
+            calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
             points = new ArrayList<Point>();
             for (int i = 0; i < xMax; i++)
             {

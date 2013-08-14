@@ -3,21 +3,16 @@ package com.google.code.broccolis.xydroid.ui.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
-import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
@@ -37,11 +32,10 @@ public class DrawView extends View
 
     Player player;
 
-    Level level = new Level1();
+    Level level = new Level1(getResources());
 
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
-    Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
 
 
     boolean jumping = false;
@@ -67,7 +61,7 @@ public class DrawView extends View
         buttons.add(new Button(new Point(750, 600), new Point(950, 675), "Functions"));
 
 
-        functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
+        functions.add(new FunctionView("5*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
 
     public void onDraw(Canvas canvas)
@@ -102,8 +96,6 @@ public class DrawView extends View
         }
 
         player.draw(canvas, paint);
-
-        canvas.drawBitmap(broccoli, 700, 300, paint);
 
         postInvalidateOnAnimation();
     }

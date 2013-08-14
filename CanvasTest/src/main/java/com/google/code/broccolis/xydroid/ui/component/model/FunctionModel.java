@@ -92,7 +92,8 @@ public class FunctionModel
     {
         for (Point point : allPoints)
         {
-            if (min(abs(point.x - x), abs(point.y - y)) < RADIUS)
+            Log.i("functiondraw", Integer.toString(point.x) + ", " + Integer.toString(x) );
+            if (abs(point.x + origin.x - x) < RADIUS && abs(point.y + origin.y - y) < RADIUS)
             {
                 return true;
             }

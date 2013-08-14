@@ -196,7 +196,7 @@ public class DrawView extends View
             {
                 if (b.getText().equals("left"))
                 {
-                    if (actionEvent == MotionEvent.ACTION_DOWN)
+                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
                         leftDown = true;
                     }
@@ -208,7 +208,7 @@ public class DrawView extends View
 
                 if (b.getText().equals("right"))
                 {
-                    if (actionEvent == MotionEvent.ACTION_DOWN)
+                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
                         rightDown = true;
                     }
@@ -222,6 +222,17 @@ public class DrawView extends View
                 {
                     jumping = true;
                     jumpBase = player.getY();
+                }
+            }
+            else
+            {
+                if (b.getText().equals("left"))
+                {
+                    leftDown = false;
+                }
+                else if (b.getText().equals("right"))
+                {
+                    rightDown = false;
                 }
             }
         }

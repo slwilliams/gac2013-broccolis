@@ -4,5 +4,8 @@
     <string name="app_name">XYDroid</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="newGameButton">New Game</string>
+    <string name="selectLevelButton">Select Level</string>
+    <string name="aboutButton">About</string>
 
 </resources>

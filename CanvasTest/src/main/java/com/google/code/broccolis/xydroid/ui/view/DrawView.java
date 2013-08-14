@@ -1,6 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.util.Player;
@@ -31,6 +34,8 @@ public class DrawView extends View
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
+    Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
+
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -101,6 +106,9 @@ public class DrawView extends View
         }
 
         player.draw(canvas, paint);
+
+        canvas.drawBitmap(broccoli, 700, 300, paint);
+
         postInvalidateOnAnimation();
     }
 

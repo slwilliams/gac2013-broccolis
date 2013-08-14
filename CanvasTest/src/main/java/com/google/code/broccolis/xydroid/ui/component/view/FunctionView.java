@@ -1,7 +1,6 @@
 package com.google.code.broccolis.xydroid.ui.component.view;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -10,8 +9,11 @@ import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Colliding;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 
-public class
-        FunctionView implements Drawable, Colliding
+import static android.graphics.Color.BLACK;
+import static android.graphics.Paint.Style.FILL;
+import static android.graphics.Paint.Style.STROKE;
+
+public class FunctionView implements Drawable, Colliding
 {
     private FunctionModel model;
 
@@ -25,10 +27,12 @@ public class
     {
         Path path = model.getPath();
         paint.setStrokeWidth(1.f);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.BLACK);
-        canvas.drawPath(path, paint); //TODO check this
-        paint.setStyle(Paint.Style.FILL);
+        paint.setStyle(STROKE);
+        paint.setColor(BLACK);
+
+        canvas.drawPath(path, paint);
+
+        paint.setStyle(FILL);
     }
 
     @Override

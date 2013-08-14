@@ -1,6 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.util.Player;
@@ -31,6 +34,8 @@ public class DrawView extends View
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
+    Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
+
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -43,7 +48,7 @@ public class DrawView extends View
     {
         super(context);
         paint.setAntiAlias(true);
-        player = new Player(200, 400, Color.BLACK);
+        player = new Player(100, 450, Color.BLACK);
         initWorld();
     }
 
@@ -58,7 +63,7 @@ public class DrawView extends View
         buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
         buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
 
-        functions.add(new FunctionView("50*sin(x*0.1)", new Point(0,300), 600));
+        functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
 
     double val = 0.1;
@@ -100,7 +105,10 @@ public class DrawView extends View
             f.draw(canvas, paint);
         }
 
-        player.draw(canvas, paint);
+        player.draw(canvas, paint, getResources());
+
+        canvas.drawBitmap(broccoli, 700, 300, paint);
+
         postInvalidateOnAnimation();
     }
 
@@ -117,9 +125,16 @@ public class DrawView extends View
             jumping = false;
         }
 
-        if (jumping && !collision(player.getX(), player.getY() - jumpSpeed))
+        if (jumping)
         {
-            player.move(0, -jumpSpeed);
+            if (!collision(player.getX(), player.getY() - jumpSpeed))
+            {
+                player.move(0, -jumpSpeed);
+            }
+            else
+            {
+                jumping = false;
+            }
         }
 
     }
@@ -143,25 +158,21 @@ public class DrawView extends View
         return false;
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-
         float eventX;
         float eventY;
         int actionEvent;
 
-
         int action = event.getAction();
+
         if (event.getPointerCount() > 1)
         {
             actionEvent = event.getActionMasked();
             int actionPointerId = event.getActionIndex();
-            Log.i("err", Integer.toString(actionPointerId));
             int index = event.findPointerIndex(actionPointerId);
 
-            // Gets its coordinates
             eventX = event.getX(index);
             eventY = event.getY(index);
         }
@@ -203,6 +214,7 @@ public class DrawView extends View
                         rightDown = false;
                     }
                 }
+
                 if (b.getText().equals("jump"))
                 {
                     jumping = true;

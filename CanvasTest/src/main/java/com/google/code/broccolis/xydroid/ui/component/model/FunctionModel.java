@@ -4,16 +4,14 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.util.Log;
 
-import com.google.code.broccolis.xydroid.util.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
+import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static java.lang.Math.abs;
-import static java.lang.Math.min;
 
 public class FunctionModel
 {
@@ -26,22 +24,24 @@ public class FunctionModel
 
     public FunctionModel(String function, Point initialCoordinate, int xMax)
     {
+        points = new ArrayList<Point>();
+
         try
         {
             int x = initialCoordinate.x;
             this.origin = initialCoordinate;
             calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
-            points = new ArrayList<Point>();
             for (int i = 0; i < xMax; i++)
             {
                 points.add(new Point(i, (int) calculable.calculate(i)));
             }
-            allPoints = new ArrayList<Point>(points);
         }
         catch (Exception e)
         {
-            Log.e(Constants.TAG, NAME + "can't parse the function", e);
+            Log.e(TAG, NAME + "can't parse the function", e);
         }
+
+        allPoints = new ArrayList<Point>(points);
         optimizePoints();
     }
 
@@ -77,8 +77,6 @@ public class FunctionModel
             path.lineTo(point.x + origin.x, point.y + origin.y);
         }
 
-
-
         return path;
     }
 
@@ -92,7 +90,6 @@ public class FunctionModel
     {
         for (Point point : allPoints)
         {
-            Log.i("functiondraw", Integer.toString(point.x) + ", " + Integer.toString(x) );
             if (abs(point.x + origin.x - x) < RADIUS && abs(point.y + origin.y - y) < RADIUS)
             {
                 return true;

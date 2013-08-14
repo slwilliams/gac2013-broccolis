@@ -24,8 +24,11 @@ public class
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
+        paint.setStrokeWidth(1.f);
+        paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.BLACK);
         canvas.drawPath(path, paint); //TODO check this
+        paint.setStyle(Paint.Style.FILL);
     }
 
     @Override

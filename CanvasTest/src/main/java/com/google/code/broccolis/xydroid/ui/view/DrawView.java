@@ -12,8 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.google.code.broccolis.xydroid.R;
+import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
+import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 
@@ -31,7 +33,9 @@ public class DrawView extends View
     boolean rightDown = false;
 
     Player player;
-    ArrayList<WallView> walls = new ArrayList<WallView>();
+
+    Level level = new Level1();
+
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
@@ -48,31 +52,24 @@ public class DrawView extends View
     {
         super(context);
         paint.setAntiAlias(true);
-        player = new Player(100, 450, Color.BLACK);
+        player = new Player(100, 450, Color.BLACK, getResources());
         initWorld();
     }
 
     private void initWorld()
     {
-        walls.add(new WallView(new Point(0, 500), new Point(1300, 525), Color.RED));
-        walls.add(new WallView(new Point(500, 400), new Point(1300, 425), Color.BLUE));
-        walls.add(new WallView(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new WallView(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
-
-        buttons.add(new Button(new Point(25, 550), new Point(225, 625), "left"));
-        buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
-        buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
+        buttons.add(new Button(new Point(50, 600), new Point(250, 675), "Left"));
+        buttons.add(new Button(new Point(300, 600), new Point(500, 675), "Right"));
+        buttons.add(new Button(new Point(1000, 600), new Point(1200, 675), "Jump"));
 
         functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
-
-    double val = 0.1;
 
     public void onDraw(Canvas canvas)
     {
         if (leftDown)
         {
-            if (!collision(player.getX() - 5, player.getY()))
+            if (!collision(player, new Point(-5, 0)))
             {
                 player.move(-5, 0);
             }
@@ -80,20 +77,14 @@ public class DrawView extends View
 
         if (rightDown)
         {
-            if (!collision(player.getX() + 5, player.getY()))
+            if (!collision(player, new Point(5, 0)))
             {
                 player.move(5, 0);
             }
         }
 
         doPhysics();
-        walls.get(2).move((int) (Math.sin(val) * 5), 0);
-        val += 0.03;
-
-        for (WallView w : walls)
-        {
-            w.draw(canvas, paint);
-        }
+        level.draw(canvas, paint);
 
         for (Button b : buttons)
         {
@@ -105,7 +96,7 @@ public class DrawView extends View
             f.draw(canvas, paint);
         }
 
-        player.draw(canvas, paint, getResources());
+        player.draw(canvas, paint);
 
         canvas.drawBitmap(broccoli, 700, 300, paint);
 
@@ -115,7 +106,7 @@ public class DrawView extends View
 
     public void doPhysics()
     {
-        if (!collision(player.getX(), player.getY() + gravity))
+        if (!collision(player, new Point(0, gravity)))
         {
             player.move(0, gravity);
         }
@@ -127,7 +118,7 @@ public class DrawView extends View
 
         if (jumping)
         {
-            if (!collision(player.getX(), player.getY() - jumpSpeed))
+            if (!collision(player, new Point(0, -jumpSpeed)))
             {
                 player.move(0, -jumpSpeed);
             }
@@ -139,20 +130,20 @@ public class DrawView extends View
 
     }
 
-    public boolean collision(int newPlayerX, int newPlayerY)
+    public boolean collision(Player player, Point moveAmount)
     {
-        for (WallView w : walls)
+        if (level.collidesWith(player, moveAmount))
         {
-            if (w.collidesWith(newPlayerX, newPlayerY))
-            {
-                return true;
-            }
+            return true;
         }
-        for (FunctionView f : functions)
+        else
         {
-            if(f.collidesWith(newPlayerX, newPlayerY))
+            for (FunctionView f : functions)
             {
-                return true;
+                if(f.collidesWith(player, moveAmount))
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -191,9 +182,9 @@ public class DrawView extends View
         {
             if (b.isTouched((int) eventX, (int) eventY))
             {
-                if (b.getText().equals("left"))
+                if (b.getText().toLowerCase().equals("left"))
                 {
-                    if (actionEvent == MotionEvent.ACTION_DOWN)
+                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
                         leftDown = true;
                     }
@@ -203,9 +194,9 @@ public class DrawView extends View
                     }
                 }
 
-                if (b.getText().equals("right"))
+                if (b.getText().toLowerCase().equals("right"))
                 {
-                    if (actionEvent == MotionEvent.ACTION_DOWN)
+                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
                     {
                         rightDown = true;
                     }
@@ -215,10 +206,21 @@ public class DrawView extends View
                     }
                 }
 
-                if (b.getText().equals("jump"))
+                if (b.getText().toLowerCase().equals("jump"))
                 {
                     jumping = true;
                     jumpBase = player.getY();
+                }
+            }
+            else
+            {
+                if (b.getText().equals("left"))
+                {
+                    leftDown = false;
+                }
+                else if (b.getText().equals("right"))
+                {
+                    rightDown = false;
                 }
             }
         }

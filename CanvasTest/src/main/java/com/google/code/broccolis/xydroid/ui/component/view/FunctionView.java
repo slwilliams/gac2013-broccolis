@@ -8,6 +8,7 @@ import android.graphics.Point;
 import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Colliding;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
+import com.google.code.broccolis.xydroid.util.Player;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Paint.Style.FILL;
@@ -36,8 +37,9 @@ public class FunctionView implements Drawable, Colliding
     }
 
     @Override
-    public boolean collidesWith(int x, int y)
+    public boolean collidesWith(Player player, Point moveAmount)
     {
-        return model.contains(x, y);
+        //TODO
+        return false;
     }
 }

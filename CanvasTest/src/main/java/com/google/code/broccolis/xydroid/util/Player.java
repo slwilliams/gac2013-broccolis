@@ -7,17 +7,31 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.google.code.broccolis.xydroid.R;
+
 public class Player
 {
     private int playerX = 0;
     private int playerY = 0;
     private int color = Color.BLACK;
+    Bitmap b;
 
-    public Player(int initialX, int initialY, int color)
+    public Player(int initialX, int initialY, int color, Resources res)
     {
         this.playerX = initialX;
         this.playerY = initialY;
         this.color = color;
+        b = BitmapFactory.decodeResource(res, R.drawable.x);
+    }
+
+    public int getWidth()
+    {
+        return b.getWidth();
+    }
+
+    public int getHeight()
+    {
+        return b.getHeight();
     }
 
     public int getX()
@@ -46,12 +60,11 @@ public class Player
         playerY += yAmt;
     }
 
-    public void draw(Canvas canvas, Paint paint, Resources res)
+    public void draw(Canvas canvas, Paint paint)
     {
         paint.setColor(color);
-        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
-        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
-       // Bitmap b = BitmapFactory.decodeResource(res, R.drawable.x);
-        //canvas.drawBitmap(b, 0, 0, paint);
+//        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
+//        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
+        canvas.drawBitmap(b, playerX - 10, playerY - 15, paint);
     }
 }

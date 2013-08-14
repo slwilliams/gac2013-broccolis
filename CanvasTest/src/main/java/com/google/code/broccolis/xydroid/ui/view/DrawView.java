@@ -7,6 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -37,11 +41,13 @@ public class DrawView extends View
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
 
+    float xAcc = 0;
 
     boolean jumping = false;
     int jumpBase = 400;
     int jumpHeight = 100;
     int jumpSpeed = 15;
+    private Context context;
 
     int gravity = 5;
 
@@ -51,6 +57,30 @@ public class DrawView extends View
         paint.setAntiAlias(true);
         player = new Player(100, 450, Color.BLACK, getResources());
         initWorld();
+        this.context = context;
+        initAcceleromiter();
+    }
+
+    public void initAcceleromiter()
+    {
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        sensorManager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+
+                xAcc = event.values[1];
+                float y = event.values[1];
+                float z = event.values[2];
+
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            }
+
+        }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     private void initWorld()
@@ -66,20 +96,9 @@ public class DrawView extends View
 
     public void onDraw(Canvas canvas)
     {
-        if (leftDown)
+        if (!collision(player, new Point((int)xAcc*2, 0)))
         {
-            if (!collision(player, new Point(-5, 0)))
-            {
-                player.move(-5, 0);
-            }
-        }
-
-        if (rightDown)
-        {
-            if (!collision(player, new Point(5, 0)))
-            {
-                player.move(5, 0);
-            }
+            player.move((int)xAcc*2, 0);
         }
 
         doPhysics();

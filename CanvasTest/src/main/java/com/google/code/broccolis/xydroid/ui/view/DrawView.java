@@ -1,8 +1,6 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,7 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.util.Player;
@@ -34,8 +31,6 @@ public class DrawView extends View
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
-    Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
-
 
     boolean jumping = false;
     int jumpBase = 400;
@@ -105,10 +100,7 @@ public class DrawView extends View
             f.draw(canvas, paint);
         }
 
-        player.draw(canvas, paint);
-
-        canvas.drawBitmap(broccoli, 700, 300, paint);
-
+        player.draw(canvas, paint, getResources());
         postInvalidateOnAnimation();
     }
 
@@ -158,21 +150,24 @@ public class DrawView extends View
         return false;
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+
         float eventX;
         float eventY;
         int actionEvent;
 
-        int action = event.getAction();
 
+        int action = event.getAction();
         if (event.getPointerCount() > 1)
         {
             actionEvent = event.getActionMasked();
             int actionPointerId = event.getActionIndex();
             int index = event.findPointerIndex(actionPointerId);
 
+            // Gets its coordinates
             eventX = event.getX(index);
             eventY = event.getY(index);
         }

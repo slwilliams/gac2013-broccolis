@@ -12,8 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.google.code.broccolis.xydroid.R;
+import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
+import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 
@@ -31,7 +33,9 @@ public class DrawView extends View
     boolean rightDown = false;
 
     Player player;
-    ArrayList<WallView> walls = new ArrayList<WallView>();
+
+    Level level = new Level1();
+
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     Bitmap broccoli = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
@@ -54,19 +58,12 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        walls.add(new WallView(new Point(0, 500), new Point(1300, 525), Color.RED));
-        walls.add(new WallView(new Point(500, 400), new Point(1300, 425), Color.BLUE));
-        walls.add(new WallView(new Point(0, 300), new Point(300, 325), Color.GREEN));
-        walls.add(new WallView(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
-
         buttons.add(new Button(new Point(25, 550), new Point(225, 625), "left"));
         buttons.add(new Button(new Point(300, 550), new Point(500, 625), "right"));
         buttons.add(new Button(new Point(1000, 550), new Point(1200, 625), "jump"));
 
         functions.add(new FunctionView("60*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
     }
-
-    double val = 0.1;
 
     public void onDraw(Canvas canvas)
     {
@@ -87,13 +84,7 @@ public class DrawView extends View
         }
 
         doPhysics();
-        walls.get(2).move((int) (Math.sin(val) * 5), 0);
-        val += 0.03;
-
-        for (WallView w : walls)
-        {
-            w.draw(canvas, paint);
-        }
+        level.draw(canvas, paint);
 
         for (Button b : buttons)
         {
@@ -141,18 +132,18 @@ public class DrawView extends View
 
     public boolean collision(int newPlayerX, int newPlayerY)
     {
-        for (WallView w : walls)
+        if (level.collidesWith(newPlayerX, newPlayerY))
         {
-            if (w.collidesWith(newPlayerX, newPlayerY))
-            {
-                return true;
-            }
+            return true;
         }
-        for (FunctionView f : functions)
+        else
         {
-            if(f.collidesWith(newPlayerX, newPlayerY))
+            for (FunctionView f : functions)
             {
-                return true;
+                if(f.collidesWith(newPlayerX, newPlayerY))
+                {
+                    return true;
+                }
             }
         }
         return false;

@@ -48,10 +48,10 @@ public class Player
 
     public void draw(Canvas canvas, Paint paint, Resources res)
     {
-//        paint.setColor(color);
-//        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
-//        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
-        Bitmap b = BitmapFactory.decodeResource(res, R.drawable.x);
-        canvas.drawBitmap(b, 0, 0, paint);
+        paint.setColor(color);
+        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
+        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
+       // Bitmap b = BitmapFactory.decodeResource(res, R.drawable.x);
+        //canvas.drawBitmap(b, 0, 0, paint);
     }
 }

@@ -6,7 +6,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
-import com.google.code.broccolis.xydroid.ui.interfaces.Colliding;
+import com.google.code.broccolis.xydroid.ui.interfaces.Obstacle;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 import com.google.code.broccolis.xydroid.util.Player;
 
@@ -14,7 +14,7 @@ import static android.graphics.Color.BLACK;
 import static android.graphics.Paint.Style.FILL;
 import static android.graphics.Paint.Style.STROKE;
 
-public class FunctionView implements Drawable, Colliding
+public class FunctionView implements Drawable, Obstacle
 {
     private FunctionModel model;
 
@@ -37,9 +37,8 @@ public class FunctionView implements Drawable, Colliding
     }
 
     @Override
-    public boolean collidesWith(Player player, Point moveAmount)
+    public boolean collidesWith(Player player, Point moveVector)
     {
-        //TODO
-        return false;
+        return model.contains(player,moveVector);
     }
 }

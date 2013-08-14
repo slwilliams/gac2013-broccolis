@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.util.Player;
 
-public interface Colliding
+public interface Obstacle
 {
     public boolean collidesWith(Player player, Point movingAmount);
 }

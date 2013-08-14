@@ -4,6 +4,8 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.google.code.broccolis.xydroid.util.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,12 @@ import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
-import static java.lang.Math.abs;
 
 public class FunctionModel
 {
     private static final int RADIUS = 5;
     private static final String NAME = "FunctionModel ";
     private Calculable calculable = null;
-    private Point origin;
     private List<Point> points;
     private List<Point> allPoints;
 
@@ -28,17 +28,15 @@ public class FunctionModel
 
         try
         {
-            int x = initialCoordinate.x;
-            this.origin = initialCoordinate;
             calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
             for (int i = 0; i < xMax; i++)
             {
-                points.add(new Point(i, (int) calculable.calculate(i)));
+                points.add(new Point(i + initialCoordinate.x, (int) calculable.calculate(i) + initialCoordinate.y));
             }
         }
         catch (Exception e)
         {
-            Log.e(TAG, NAME + "can't parse the function", e);
+            Log.e(TAG, NAME + "can't parse the function " + function, e);
         }
 
         allPoints = new ArrayList<Point>(points);
@@ -71,10 +69,10 @@ public class FunctionModel
     public Path getPath()
     {
         Path path = new Path();
-        path.moveTo(points.get(0).x + origin.x, points.get(0).y + origin.y);
+        path.moveTo(points.get(0).x, points.get(0).y);
         for (Point point : points)
         {
-            path.lineTo(point.x + origin.x, point.y + origin.y);
+            path.lineTo(point.x, point.y);
         }
 
         return path;
@@ -86,14 +84,26 @@ public class FunctionModel
         return (int) ((calculable.calculate(x + h) - calculable.calculate(x)) / h); //TODO its just approximation, can implement better algorithm
     }
 
-    public boolean contains(int x, int y)
+    public boolean contains(Player player, Point moveVector)
     {
+        int x = player.getX();
+        int y = player.getY();
+
+        int moveX = moveVector.x < 0 ? moveVector.x : 0;
+        int moveY = moveVector.y < 0 ? moveVector.y : 0;
+        Point bottom = new Point(x + moveX, y + moveY);
+
+        moveX = moveVector.x > 0 ? moveVector.x : 0;
+        moveY = moveVector.y > 0 ? moveVector.y : 0;
+        Point top = new Point(x + player.getWidth() + moveX, y + player.getHeight() + moveY);
+
         for (Point point : allPoints)
         {
-            if (abs(point.x + origin.x - x) < RADIUS && abs(point.y + origin.y - y) < RADIUS)
+            if (top.x < point.x || bottom.x > point.x || top.y < point.y || bottom.y > point.y)
             {
-                return true;
+                continue;
             }
+            return true;
         }
         return false;
     }

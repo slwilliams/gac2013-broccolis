@@ -72,7 +72,7 @@ public class DrawView extends View
     {
         if (leftDown)
         {
-            if (!collision(player.getX() - 5, player.getY()))
+            if (!collision(player, new Point(-5, 0)))
             {
                 player.move(-5, 0);
             }
@@ -80,7 +80,7 @@ public class DrawView extends View
 
         if (rightDown)
         {
-            if (!collision(player.getX() + 5, player.getY()))
+            if (!collision(player, new Point(5, 0)))
             {
                 player.move(5, 0);
             }
@@ -115,7 +115,7 @@ public class DrawView extends View
 
     public void doPhysics()
     {
-        if (!collision(player.getX(), player.getY() + gravity))
+        if (!collision(player, new Point(0, gravity)))
         {
             player.move(0, gravity);
         }
@@ -127,7 +127,7 @@ public class DrawView extends View
 
         if (jumping)
         {
-            if (!collision(player.getX(), player.getY() - jumpSpeed))
+            if (!collision(player, new Point(0, -jumpSpeed)))
             {
                 player.move(0, -jumpSpeed);
             }
@@ -139,18 +139,18 @@ public class DrawView extends View
 
     }
 
-    public boolean collision(int newPlayerX, int newPlayerY)
+    public boolean collision(Player player, Point moveAmount)
     {
         for (WallView w : walls)
         {
-            if (w.collidesWith(newPlayerX, newPlayerY))
+            if (w.collidesWith(player, moveAmount))
             {
                 return true;
             }
         }
         for (FunctionView f : functions)
         {
-            if(f.collidesWith(player))
+            if(f.collidesWith(player, moveAmount))
             {
                 return true;
             }

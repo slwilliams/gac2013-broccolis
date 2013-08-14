@@ -23,15 +23,10 @@ public class WallView implements Drawable, Colliding
         model.move(x, y);
     }
 
-    public boolean collidesWith(Player player)
-    {
-        return collidesWith(player.getX(), player.getY());
-    }
-
     @Override
-    public boolean collidesWith(int x, int y)
+    public boolean collidesWith(Player player, Point movingAmount)
     {
-        return model.contains(x, y);
+        return model.contains(player.getX() + movingAmount.x, player.getY() + movingAmount.y);
     }
 
     @Override
@@ -39,6 +34,5 @@ public class WallView implements Drawable, Colliding
     {
         paint.setColor(model.getColor());
         canvas.drawRect(model.getXMin(), model.getYMin(), model.getXMax(), model.getYMax(), paint);
-
     }
 }

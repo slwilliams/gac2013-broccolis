@@ -8,6 +8,7 @@ import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
+import com.google.code.broccolis.xydroid.util.Player;
 
 import java.util.ArrayList;
 
@@ -35,10 +36,10 @@ public class Level1 implements Level {
     }
 
     @Override
-    public boolean collidesWith(int playerX, int playerY) {
+    public boolean collidesWith(Player player, Point moveAmount) {
         for (WallView w : walls)
         {
-            if (w.collidesWith(playerX, playerY))
+            if (w.collidesWith(player, moveAmount))
             {
                 return true;
             }

@@ -25,7 +25,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:background="#042a3e"
-            android:onClick="selectLevel"/>
+            />
 
     <Button
             style="?android:attr/buttonStyleSmall"
@@ -122,7 +122,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:background="#042a3e"
-            android:onClick="selectLevel"/>
+            />
 
     <Button
             style="?android:attr/buttonStyleSmall"

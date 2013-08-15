@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
 
 public class MainActivity extends Activity
 {

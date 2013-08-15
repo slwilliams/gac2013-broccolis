@@ -25,8 +25,8 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
-import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
 
 public class DrawView extends View
 {

@@ -15,7 +15,8 @@ public class SpikeModel
         this.color = color;
     }
 
-    public int getColor(){
+    public int getColor()
+    {
         return  color;
     }
 

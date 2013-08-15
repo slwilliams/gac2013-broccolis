@@ -1,5 +1,6 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,7 +48,7 @@ public class DrawView extends View
     private boolean jumping = false;
     private boolean falling = false;
     private Paint paint = new Paint();
-    private Level level = new Level1(getResources());
+    private Level level;
     private Player player;
     private Context context;
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
@@ -55,9 +56,16 @@ public class DrawView extends View
     private AlertDialog alertDialog;
     private double then;
 
-    public DrawView(Context context)
+    public DrawView(Context context, int levelNum)
     {
         super(context);
+
+        switch(levelNum)
+        {
+            case 1: level = new Level1(getResources());
+                    break;
+            case 2: level = new Level2(getResources());
+        }
 
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);

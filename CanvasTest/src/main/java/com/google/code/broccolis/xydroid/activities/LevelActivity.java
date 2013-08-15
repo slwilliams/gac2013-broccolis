@@ -1,6 +1,7 @@
 package com.google.code.broccolis.xydroid.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -28,8 +29,10 @@ public class LevelActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Intent called = getIntent();
+        int level = Integer.parseInt(called.getExtras().get("level").toString());
 
-        drawView = new DrawView(this);
+        drawView = new DrawView(this, level);
         drawView.setBackgroundColor(Color.WHITE);
 
         setContentView(R.layout.main_view);

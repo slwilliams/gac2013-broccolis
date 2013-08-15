@@ -26,24 +26,12 @@ public class SelectLevelActivity extends Activity
 
     public void selectLevel(View view)
     {
-        int lNumber = Integer.parseInt((String) ((Button) view).getText());
-        Intent intent;
+        int level = Integer.parseInt((String) ((Button) view).getText());
 
-        Log.i(TAG, NAME + "starting level " + lNumber);
+        Log.i(TAG, NAME + "starting level " + level);
 
-        switch (lNumber)
-        {
-            case 1:
-                intent = new Intent(this, LevelActivity.class);
-                startActivity(intent);
-                break;
-
-            case 2:
-//                intent = new Intent(this, class);
-//                startActivity(intent);
-                break;
-        }
-
+        Intent intent = new Intent(SelectLevelActivity.this, LevelActivity.class);
+        intent.putExtra("level", Integer.toString(level));
+        startActivity(intent);
     }
-
 }

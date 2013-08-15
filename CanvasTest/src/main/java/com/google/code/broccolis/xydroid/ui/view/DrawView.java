@@ -59,6 +59,13 @@ public class DrawView extends View
         isPaused = true;
     }
 
+    public void addFunction(String function)
+    {
+        functionString = function;
+        Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
+        waitForFunctionTap = true;
+    }
+
     public DrawView(Context context)
     {
         super(context);

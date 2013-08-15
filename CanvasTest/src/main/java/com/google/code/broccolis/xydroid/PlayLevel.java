@@ -18,10 +18,11 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class PlayLevel extends Activity
 {
-    private String[] items = {"x^2", "sin(x)",  "Custom", "Clear"};
+    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)",  "Custom", "Clear"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     DrawView drawView;
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -60,26 +61,24 @@ public class PlayLevel extends Activity
 
     private void selectItem(int position)
     {
-        if(position == 0)
+        switch(position)
         {
-            drawView.addFunction("(x*0.05)^2");
+            case 0: drawView.addFunction("x");
+                    break;
+            case 1: drawView.addFunction("-x");
+                    break;
+            case 2: drawView.addFunction("(x*0.05)^2");
+                    break;
+            case 3: drawView.addFunction("60*sin(x*0.02)");
+                    break;
+            case 4: drawView.addFunction("60*sin(x*0.1)*(x*0.007)");
+                    break;
+            case 5: drawView.addCustomFunction();
+                    break;
+            case 6: drawView.clear();
         }
-        if(position == 1)
-        {
-            drawView.addFunction("60*sin(x*0.02)");
-        }
-        if(position == 2)
-        {
-            drawView.addCustomFunction();
-        }
-        if(position == 3)
-        {
-            drawView.clear();
-        }
-        // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);
         drawerLayout.closeDrawer(drawerList);
     }
-
 }

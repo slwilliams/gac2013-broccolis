@@ -29,7 +29,7 @@ public class FunctionModel
         this.points = new ArrayList<Point>();
         try
         {
-            calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
+            calculable = new ExpressionBuilder("-1*(" + function + ")").withVariable("x", 0).build();
             for (int i = 0; i < xMax; i++)
             {
                 int calc = (int) calculable.calculate(i);

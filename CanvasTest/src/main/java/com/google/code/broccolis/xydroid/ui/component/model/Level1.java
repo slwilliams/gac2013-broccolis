@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
 public class Level1 implements Level
 {
@@ -48,7 +50,7 @@ public class Level1 implements Level
             w.draw(canvas, paint);
         }
 
-        canvas.drawBitmap(broccoliBitmap, 700, 300, paint);
+        canvas.drawBitmap(broccoliBitmap, parseXToInt(700f / NEXUS_WIDTH), parseYToInt(300f / NEXUS_HEIGHT), paint);
     }
 
     @Override

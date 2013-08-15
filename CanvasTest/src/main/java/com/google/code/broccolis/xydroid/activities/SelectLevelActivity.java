@@ -39,8 +39,8 @@ public class SelectLevelActivity extends Activity
                 break;
 
             case 2:
-                //intent = new Intent(this, class);
-                //startActivity(intent);
+//                intent = new Intent(this, class);
+//                startActivity(intent);
                 break;
         }
 

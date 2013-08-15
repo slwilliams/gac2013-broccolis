@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
@@ -37,6 +38,29 @@ public class LevelActivity extends Activity
         setContentView(R.layout.main_view);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View view, float v) {
+            }
+
+            @Override
+            public void onDrawerOpened(View view) {
+                drawView.setPaused();
+            }
+
+            @Override
+            public void onDrawerClosed(View view) {
+                if (!drawView.isAwaitingFunctionTap())
+                {
+                    drawView.resume();
+                }
+            }
+
+            @Override
+            public void onDrawerStateChanged(int i) {
+
+            }
+        });
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
         ((FrameLayout) findViewById(R.id.content_frame)).addView(drawView);

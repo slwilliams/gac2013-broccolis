@@ -2,48 +2,36 @@ package com.google.code.broccolis.xydroid.ui.component.model;
 
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
-import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
-import java.util.ArrayList;
-
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
 public class Level1 extends Level
 {
     public Level1(Resources res)
     {
-        super();
+        super(res);
 
-        walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(150f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(300f / NEXUS_WIDTH, 525f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(930f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(1050f / NEXUS_WIDTH, 130f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 130f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 190f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(1160f / NEXUS_WIDTH, 550f / NEXUS_HEIGHT), new PointOnScreen(1280f / NEXUS_WIDTH, 590f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(1160f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), new PointOnScreen(1280f / NEXUS_WIDTH, 475f / NEXUS_HEIGHT), res));
+        pointY = new Point(parseXToInt(parseNexusX(960)), parseNexusY(50));
 
-        yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
-        pointY = new Point(parseXToInt(960f / NEXUS_WIDTH), parseNexusY(50));
+        walls.add(new WallView(new PointOnScreen(0, parseNexusY(100)), new PointOnScreen(parseNexusX(100), parseNexusY(125)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(500), parseNexusY(400)), new PointOnScreen(parseNexusX(800), parseNexusY(450)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(150), parseNexusY(500)), new PointOnScreen(parseNexusX(300), parseNexusY(525)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(930), parseNexusY(100)), new PointOnScreen(parseNexusX(1050), parseNexusY(130)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(300), parseNexusY(130)), new PointOnScreen(parseNexusX(400), parseNexusY(190)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(1160), parseNexusY(550)), new PointOnScreen(parseNexusX(1280), parseNexusY(590)), res));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(1160), parseNexusY(450)), new PointOnScreen(parseNexusX(1280), parseNexusY(475)), res));
 
         for (int i = 945; i < 1020; i += 30)
         {
@@ -88,9 +76,9 @@ public class Level1 extends Level
             }, Color.BLACK));
         }
 
-        broccolis.add(new Broccoli(20f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
-        broccolis.add(new Broccoli(500f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT, res));
-        broccolis.add(new Broccoli(1200f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(parseNexusX(20), parseNexusY(50), res));
+        broccolis.add(new Broccoli(parseNexusX(500), parseNexusY(100), res));
+        broccolis.add(new Broccoli(parseNexusX(1200), parseNexusY(500), res));
     }
 
     @Override

@@ -20,8 +20,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.code.broccolis.xydroid.activities.LevelActivity;
-import com.google.code.broccolis.xydroid.R;
-//import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
@@ -34,15 +32,18 @@ import java.util.ArrayList;
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
+
+//import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 
 public class DrawView extends View
 {
     private static final String NAME = "DrawView ";
-    private static final int jumpHeight = 100;
-    private static final int jumpSpeed = 15;
-    private double gravity = 3;
+    private static final int jumpHeight = parseNexusY(100);
+    private static final int jumpSpeed = parseNexusY(15);
+    private static int gravity = 3;
     private double delta = 0.3;
     private final double SHAKE_DELTA = 2;
     private boolean isPaused = false;
@@ -146,16 +147,21 @@ public class DrawView extends View
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        sensorManager.registerListener(new SensorEventListener() {
+        sensorManager.registerListener(new SensorEventListener()
+        {
             @Override
-            public void onSensorChanged(SensorEvent event) {
-                if (!isPaused) {
+            public void onSensorChanged(SensorEvent event)
+            {
+                if (!isPaused)
+                {
                     xAcc = event.values[1];
                     double zAcc = (double) event.values[2];
 
 
-                    if (Math.abs(zAcc - then) > SHAKE_DELTA) {
-                        if (!falling) {
+                    if (Math.abs(zAcc - then) > SHAKE_DELTA)
+                    {
+                        if (!falling)
+                        {
                             jumpBase = player.getY();
                             jumping = true;
                         }
@@ -165,7 +171,8 @@ public class DrawView extends View
             }
 
             @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            public void onAccuracyChanged(Sensor sensor, int accuracy)
+            {
             }
 
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
@@ -204,9 +211,9 @@ public class DrawView extends View
 
     public void doPhysics()
     {
-        if (!collision(player, new Point(0, (int)gravity)))
+        if (!collision(player, new Point(0, (int) gravity)))
         {
-            player.move(0, (int)gravity);
+            player.move(0, (int) gravity);
             gravity += delta;
 
             falling = true;

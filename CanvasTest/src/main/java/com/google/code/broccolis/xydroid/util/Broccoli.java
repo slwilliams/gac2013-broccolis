@@ -2,7 +2,6 @@ package com.google.code.broccolis.xydroid.util;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -10,6 +9,10 @@ import android.graphics.Point;
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 
+import static android.graphics.Bitmap.createScaledBitmap;
+import static android.graphics.BitmapFactory.decodeResource;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
@@ -24,7 +27,7 @@ public class Broccoli implements Drawable
     {
         this.x = x;
         this.y = y;
-        broccoliImage = BitmapFactory.decodeResource(res, R.drawable.broccoli);
+        broccoliImage = createScaledBitmap(decodeResource(res, R.drawable.broccoli), parseNexusX(32), parseNexusY(32), true);
     }
 
     public int getXTop()

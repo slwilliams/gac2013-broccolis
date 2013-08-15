@@ -1,31 +1,21 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.util.Log;
 
-import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
-import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
-import java.util.ArrayList;
-
-import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
 
 public class Level2 extends Level
@@ -35,9 +25,8 @@ public class Level2 extends Level
 
     public Level2(Resources res)
     {
-        super();
+        super(res);
 
-        yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
         pointY = new Point(parseNexusX(20), parseNexusY(50));
 
         walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
@@ -83,9 +72,9 @@ public class Level2 extends Level
             }, Color.BLACK));
         }
 
-        broccolis.add(new Broccoli(1020f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
-        broccolis.add(new Broccoli(330f / NEXUS_WIDTH, 250f / NEXUS_HEIGHT, res));
-        broccolis.add(new Broccoli(550f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(parseNexusX(1020), parseNexusY(50), res));
+        broccolis.add(new Broccoli(parseNexusX(330), parseNexusY(250), res));
+        broccolis.add(new Broccoli(parseNexusX(550), parseNexusY(400), res));
     }
 
     @Override

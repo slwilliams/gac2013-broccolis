@@ -1,11 +1,13 @@
 package com.google.code.broccolis.xydroid.ui.interfaces;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.util.Broccoli;
@@ -14,8 +16,9 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static android.graphics.Bitmap.createScaledBitmap;
+import static android.graphics.BitmapFactory.decodeResource;
+import static android.graphics.Color.BLACK;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 
@@ -29,12 +32,15 @@ public abstract class Level
     protected double val = 0.1;
     protected int score = 0;
 
-    public Level()
+    public Level(Resources res)
     {
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
-        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, parseNexusY(700))));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(parseNexusX(1270), 0)));
+        walls.add(new WallView(new PointOnScreen(parseNexusX(1270), 0), new PointOnScreen(parseNexusX(1270), parseNexusY(700))));
+        walls.add(new WallView(new PointOnScreen(0, parseNexusY(700)), new PointOnScreen(parseNexusX(1270), parseNexusY(700))));
+
+        yBitmap = decodeResource(res, R.drawable.y);
+        yBitmap = createScaledBitmap(yBitmap, parseNexusX(yBitmap.getWidth()), parseNexusY(yBitmap.getHeight()), true);
     }
 
     public final boolean goalReached(Player player, Point movingAmount)
@@ -126,7 +132,7 @@ public abstract class Level
                 br.draw(canvas, paint);
             }
         }
-        paint.setColor(Color.BLACK);
+        paint.setColor(BLACK);
         canvas.drawRect(0, parseNexusY(300), parseNexusX(20), parseNexusY(400), paint);
         paint.setColor(Color.WHITE);
         canvas.drawLine(parseNexusX(3), parseNexusY(325), parseNexusX(17), parseNexusY(350), paint);
@@ -135,7 +141,8 @@ public abstract class Level
 
 
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
-        paint.setTextSize(25);
+        paint.setColor(BLACK);
+        paint.setTextSize(parseNexusY(25));
         canvas.drawText("Broccolis: " + score, parseNexusX(1110), parseNexusY(50), paint);
     }
 }

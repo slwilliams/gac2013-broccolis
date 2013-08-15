@@ -18,16 +18,16 @@ public class FunctionView implements Drawable, Obstacle
 {
     private FunctionModel model;
 
-    public FunctionView(String function, Point initialCoordinate, int xMax)
+    public FunctionView(String function, Point initialCoordinate, int xMax, int screenWidth, int screenHeight)
     {
-        model = new FunctionModel(function, initialCoordinate, xMax);
+        model = new FunctionModel(function, initialCoordinate, xMax, screenWidth, screenHeight);
     }
 
     @Override
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
-        paint.setStrokeWidth(1.f);
+        paint.setStrokeWidth(1.5f);
         paint.setStyle(STROKE);
         paint.setColor(BLACK);
 
@@ -39,6 +39,6 @@ public class FunctionView implements Drawable, Obstacle
     @Override
     public boolean collidesWith(Player player, Point moveVector)
     {
-        return model.contains(player,moveVector);
+        return model.contains(player, moveVector);
     }
 }

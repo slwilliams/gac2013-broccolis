@@ -31,9 +31,6 @@ public class DrawView extends View
     public static int height = 0;
     public static int width = 0;
 
-    boolean leftDown = false;
-    boolean rightDown = false;
-
     Player player;
 
     Level level = new Level1(getResources());
@@ -58,40 +55,32 @@ public class DrawView extends View
         player = new Player(100, 450, Color.BLACK, getResources());
         initWorld();
         this.context = context;
-        initAcceleromiter();
+        initAccelerometer();
     }
 
-    public void initAcceleromiter()
+    public void initAccelerometer()
     {
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        sensorManager.registerListener(new SensorEventListener() {
+        sensorManager.registerListener(new SensorEventListener()
+        {
             @Override
-            public void onSensorChanged(SensorEvent event) {
-
+            public void onSensorChanged(SensorEvent event)
+            {
                 xAcc = event.values[1];
-                float y = event.values[1];
-                float z = event.values[2];
-
             }
 
             @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            }
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     private void initWorld()
     {
-        buttons.add(new Button(new Point(50, 600), new Point(250, 675), "Left"));
-        buttons.add(new Button(new Point(300, 600), new Point(500, 675), "Right"));
-        buttons.add(new Button(new Point(1000, 600), new Point(1200, 675), "Jump"));
-        buttons.add(new Button(new Point(750, 600), new Point(950, 675), "Functions"));
-
-
-        functions.add(new FunctionView("5*sin(x*0.1)*(0.01*x)", new Point(0,300), 600));
+        buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
+        functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0,300), 600, width, height));
     }
 
     public void onDraw(Canvas canvas)
@@ -143,7 +132,6 @@ public class DrawView extends View
                 jumping = false;
             }
         }
-
     }
 
     public boolean collision(Player player, Point moveAmount)
@@ -170,13 +158,9 @@ public class DrawView extends View
     {
         float eventX;
         float eventY;
-        int actionEvent;
-
-        int action = event.getAction();
 
         if (event.getPointerCount() > 1)
         {
-            actionEvent = event.getActionMasked();
             int actionPointerId = event.getActionIndex();
             int index = event.findPointerIndex(actionPointerId);
 
@@ -187,70 +171,34 @@ public class DrawView extends View
         {
             eventX = event.getX();
             eventY = event.getY();
-            actionEvent = event.getAction();
-            if (actionEvent == MotionEvent.ACTION_UP)
-            {
-                leftDown = rightDown = false;
-            }
         }
 
         for (Button b : buttons)
         {
             if (b.isTouched((int) eventX, (int) eventY))
             {
-                if (b.getText().toLowerCase().equals("left"))
-                {
-                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
-                    {
-                        leftDown = true;
-                    }
-                    else if (actionEvent == MotionEvent.ACTION_UP)
-                    {
-                        leftDown = false;
-                    }
-                }
-
-                if (b.getText().toLowerCase().equals("right"))
-                {
-                    if ((actionEvent == MotionEvent.ACTION_DOWN) || (actionEvent == MotionEvent.ACTION_MOVE))
-                    {
-                        rightDown = true;
-                    }
-                    else if (actionEvent == MotionEvent.ACTION_UP)
-                    {
-                        rightDown = false;
-                    }
-                }
-
-                if (b.getText().toLowerCase().equals("jump"))
-                {
-                    jumping = true;
-                    jumpBase = player.getY();
-                }
-
                 if(b.getText().toLowerCase().equals("functions"))
                 {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
-                    AlertDialog.Builder alert = new AlertDialog.Builder( getContext());
+                    alert.setTitle("Enter Function");
+                    alert.setMessage("e.g. x^2 + 2x + 5");
 
-                    alert.setTitle("Title");
-                    alert.setMessage("Message");
-
-                    // Set an EditText view to get user input
-                    final EditText input = new EditText( getContext());
+                    final EditText input = new EditText(getContext());
                     alert.setView(input);
 
-                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
                             String value = input.getText().toString();
-                            functions.add(new FunctionView(value, new Point(600, 300), 1000));
+                            functions.add(new FunctionView(value, new Point(600, 300), 800, width, height));
                         }
                     });
 
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            // Canceled.
-                        }
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int whichButton) { }
                     });
 
                     alert.show();
@@ -258,14 +206,8 @@ public class DrawView extends View
             }
             else
             {
-                if (b.getText().equals("left"))
-                {
-                    leftDown = false;
-                }
-                else if (b.getText().equals("right"))
-                {
-                    rightDown = false;
-                }
+                jumping = true;
+                jumpBase = player.getY();
             }
         }
 

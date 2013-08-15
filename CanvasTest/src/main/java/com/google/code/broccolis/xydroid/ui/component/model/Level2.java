@@ -15,17 +15,14 @@ import com.google.code.broccolis.xydroid.util.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by demouser on 8/14/13.
- */
 public class Level2 implements Level {
 
     ArrayList<WallView> walls = new ArrayList<WallView>();
     Bitmap b;
     Bitmap broccoli;
 
-    public Level2(Resources res){
-
+    public Level2(Resources res)
+    {
         b = BitmapFactory.decodeResource(res, R.drawable.y);
         broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
 
@@ -35,12 +32,11 @@ public class Level2 implements Level {
         walls.add(new WallView(new Point(300, 500), new Point(400,555), Color.GREEN));
         walls.add(new WallView(new Point(600, 500), new Point(800,555), Color.GREEN));
         walls.add(new WallView(new Point(1000, 450), new Point(1100,475), Color.GREEN));
-
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
-
+    public void draw(Canvas canvas, Paint paint)
+    {
         for (WallView w : walls)
         {
             w.draw(canvas, paint);
@@ -50,12 +46,10 @@ public class Level2 implements Level {
         canvas.drawBitmap(broccoli, 330, 250, paint);
         canvas.drawBitmap(broccoli, 550, 400, paint);
     }
-    public ArrayList<WallView> getWalls(){
-        return walls;
-    }
 
     @Override
-    public boolean collidesWith(Player player, Point movingAmount) {
+    public boolean collidesWith(Player player, Point movingAmount)
+    {
         for (WallView w : walls)
         {
             if (w.collidesWith(player, movingAmount))

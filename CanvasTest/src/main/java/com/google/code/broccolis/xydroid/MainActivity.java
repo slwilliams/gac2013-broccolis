@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;

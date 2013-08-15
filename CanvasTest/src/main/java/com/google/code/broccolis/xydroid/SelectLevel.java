@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
+import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class SelectLevel extends Activity
 {
@@ -16,8 +19,21 @@ public class SelectLevel extends Activity
 
     public void selectLevel(View view)
     {
-        Intent intent = new Intent(this, PlayLevel.class);
-        startActivity(intent);
+        int lNumber = Integer.parseInt((String) ((Button) view).getText());
+        Intent intent;
+
+        switch (lNumber){
+            case 1:
+                intent = new Intent(this, PlayLevel.class);
+                startActivity(intent);
+            break;
+
+            case 2:
+                //intent = new Intent(this, class);
+                //startActivity(intent);
+             break;
+        }
+
     }
 
 }

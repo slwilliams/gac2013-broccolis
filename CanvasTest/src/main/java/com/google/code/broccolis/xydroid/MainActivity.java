@@ -40,7 +40,7 @@ public class MainActivity extends Activity
     {
         Log.i(TAG, NAME + "starting new game");
 
-        Intent intent = new Intent(MainActivity.this, PlayLevel.class);
+        Intent intent = new Intent(MainActivity.this, LevelActivity.class);
 
         startActivity(intent);
     }
@@ -49,13 +49,14 @@ public class MainActivity extends Activity
     {
         Log.i(TAG, NAME + "starting level selection screen");
 
-        Intent intent = new Intent(MainActivity.this, SelectLevel.class);
+        Intent intent = new Intent(MainActivity.this, SelectLevelActivity.class);
 
         startActivity(intent);
     }
 
-    public void about(View view){
-        Intent intent = new Intent(this, About.class);
+    public void about(View view)
+    {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 

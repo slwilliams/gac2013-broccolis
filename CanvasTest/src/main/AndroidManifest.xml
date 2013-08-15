@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PlayLevel"
+        <activity android:name=".LevelActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".SelectLevel"
+        <activity android:name=".SelectLevelActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".About"
+        <activity android:name=".AboutActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
     </application>

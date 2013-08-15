@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 
-public class SelectLevel extends Activity
+public class SelectLevelActivity extends Activity
 {
     private static final String NAME = "LevelSelectionScreen ";
 
@@ -32,7 +32,7 @@ public class SelectLevel extends Activity
         switch (lNumber)
         {
             case 1:
-                intent = new Intent(this, PlayLevel.class);
+                intent = new Intent(this, LevelActivity.class);
                 startActivity(intent);
                 break;
 

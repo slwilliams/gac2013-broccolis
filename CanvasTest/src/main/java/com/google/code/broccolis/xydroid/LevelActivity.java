@@ -15,7 +15,7 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 
-public class PlayLevel extends Activity
+public class LevelActivity extends Activity
 {
     private static final String NAME = "Level ";
     private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "Custom", "Clear"};

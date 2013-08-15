@@ -14,7 +14,6 @@ import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
-import com.google.code.broccolis.xydroid.util.Constants;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 

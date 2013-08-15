@@ -16,10 +16,9 @@ import com.google.code.broccolis.xydroid.util.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by demouser on 8/14/13.
- */
-public class Level2 implements Level {
+
+public class Level2 implements Level
+{
 
     ArrayList<WallView> walls = new ArrayList<WallView>();
     ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
@@ -27,7 +26,8 @@ public class Level2 implements Level {
     Bitmap b;
     Bitmap broccoli;
 
-    public Level2(Resources res){
+    public Level2(Resources res)
+    {
 
         b = BitmapFactory.decodeResource(res, R.drawable.y);
         broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
@@ -80,7 +80,8 @@ public class Level2 implements Level {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint paint) {
+    public void draw(Canvas canvas, Paint paint)
+    {
 
         walls.get(5).move(0, (int) (Math.sin(val) * 5));
         val -= 0.03;
@@ -93,24 +94,19 @@ public class Level2 implements Level {
         {
             s.draw(canvas, paint);
         }
-//        Point[] points = {
-//                new Point(1000,160),
-//                new Point(1030, 160),
-//                new Point(1015, 200)
-//
-//        };
-       // new SpikeView(points, Color.BLACK).draw(canvas, paint);
         canvas.drawBitmap(b, 20, 50, paint);
         canvas.drawBitmap(broccoli, 1020, 50, paint);
         canvas.drawBitmap(broccoli, 330, 250, paint);
         canvas.drawBitmap(broccoli, 550, 400, paint);
     }
-    public ArrayList<WallView> getWalls(){
+    public ArrayList<WallView> getWalls()
+    {
         return walls;
     }
 
     @Override
-    public boolean collidesWith(Player player, Point movingAmount) {
+    public boolean collidesWith(Player player, Point movingAmount)
+    {
         for (WallView w : walls)
         {
             if (w.collidesWith(player, movingAmount))

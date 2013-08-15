@@ -54,6 +54,11 @@ public class DrawView extends View
 
     int gravity = 5;
 
+    public void setPaused()
+    {
+        isPaused = true;
+    }
+
     public DrawView(Context context)
     {
         super(context);

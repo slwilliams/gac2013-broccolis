@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +49,8 @@ public class DrawView extends View
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
+    private final double SHAKE_DELTA = 1;
+    private double then;
 
     public DrawView(Context context)
     {
@@ -62,8 +65,12 @@ public class DrawView extends View
         alertDialogInput = new EditText(context);
         createAlert();
 
-        initWorld();
         initAccelerometer();
+    }
+
+    public void clear()
+    {
+        functions.clear();
     }
 
     public void addFunction(String function)
@@ -102,6 +109,16 @@ public class DrawView extends View
                 if (!isPaused)
                 {
                     xAcc = event.values[1];
+                    double zAcc = (double)event.values[2];
+
+
+                    if(Math.abs(zAcc - then) > SHAKE_DELTA)
+                        if (!falling)
+                        {
+                            jumpBase = player.getY();
+                            jumping = true;
+                        }
+                    then = zAcc;
                 }
             }
 
@@ -111,12 +128,6 @@ public class DrawView extends View
             }
 
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
-    }
-
-    private void initWorld()
-    {
-        buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
-        //functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
     }
 
     public void onDraw(Canvas canvas)
@@ -235,7 +246,6 @@ public class DrawView extends View
             jumping = true;
             jumpBase = player.getY();
         }
-
 
         return true;
     }

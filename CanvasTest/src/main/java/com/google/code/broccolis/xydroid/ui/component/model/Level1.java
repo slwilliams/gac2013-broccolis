@@ -23,9 +23,9 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 public class Level1 implements Level
 {
 
-    ArrayList<WallView> walls = new ArrayList<WallView>();
-    double val = 0.1;
-    Bitmap broccoli;
+    private ArrayList<WallView> walls = new ArrayList<WallView>();
+    private double val = 0.1;
+    private Bitmap broccoliBitmap;
 
     public Level1(Resources res)
     {
@@ -34,7 +34,7 @@ public class Level1 implements Level
         walls.add(new WallView(new PointOnScreen(0, 500f / NEXUS_HEIGHT), new PointOnScreen(300f / NEXUS_WIDTH, 525f / NEXUS_HEIGHT), Color.GREEN));
         walls.add(new WallView(new PointOnScreen(700f / NEXUS_WIDTH, 200f / NEXUS_HEIGHT), new PointOnScreen(1300f / NEXUS_WIDTH, 225f / NEXUS_HEIGHT), Color.YELLOW));
 
-        broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
+        broccoliBitmap = BitmapFactory.decodeResource(res, R.drawable.broccoli);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Level1 implements Level
             w.draw(canvas, paint);
         }
 
-        canvas.drawBitmap(broccoli, 700, 300, paint);
+        canvas.drawBitmap(broccoliBitmap, 700, 300, paint);
     }
 
     @Override

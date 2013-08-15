@@ -12,12 +12,14 @@ import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SC
 
 public class MainActivity extends Activity
 {
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.start_interface);
+        
         setScreenSize();
     }
 
@@ -41,4 +43,5 @@ public class MainActivity extends Activity
         Intent intent = new Intent(MainActivity.this, SelectLevel.class);
         startActivity(intent);
     }
+
 }

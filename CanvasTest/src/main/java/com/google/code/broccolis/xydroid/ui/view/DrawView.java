@@ -21,42 +21,49 @@ import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
 
 public class DrawView extends View
 {
+    private static final int jumpHeight = 100;
+    private static final int jumpSpeed = 15;
+    private static final int gravity = 5;
     boolean isPaused = false;
     boolean waitForFunctionTap = false;
     String functionString = null;
-
-    Paint paint = new Paint();
-
-    public static int height = 0;
-    public static int width = 0;
-
-    Player player;
-
-    Level level = new Level2(getResources());
-
-    ArrayList<Button> buttons = new ArrayList<Button>();
-    ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
-
-    float xAcc = 0;
-
-    boolean jumping = false;
-    boolean falling = false;
-    int jumpBase = 400;
-    int jumpHeight = 100;
-    int jumpSpeed = 15;
+    private int jumpBase = 400;
+    private float xAcc = 0;
+    private boolean jumping = false;
+    private boolean falling = false;
+    private Paint paint = new Paint();
+    private Level level = new Level2(getResources());
+    private Player player;
     private Context context;
+    private ArrayList<Button> buttons = new ArrayList<Button>();
+    private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
+    private EditText alertDialogInput;
+    private AlertDialog alertDialog;
 
-    int gravity = 5;
-
-    public void setPaused()
+    public DrawView(Context context)
     {
-        isPaused = true;
+        super(context);
+
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+
+        player = new Player(100, 650, Color.BLACK, getResources());
+        this.context = context;
+
+        alertDialogInput = new EditText(context);
+        createAlert();
+
+        initWorld();
+        initAccelerometer();
     }
 
     public void addFunction(String function)
@@ -70,52 +77,16 @@ public class DrawView extends View
     {
         isPaused = true;
         xAcc = 0;
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
-        alert.setTitle("Enter Function");
-        alert.setMessage("e.g. x^2 + 2x + 5");
-
-        final EditText input = new EditText(getContext());
-        alert.setView(input);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        if (!alertDialog.isShowing())
         {
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
-                functionString = input.getText().toString();
-                Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
-                waitForFunctionTap = true;
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
-                isPaused = false;
-            }
-        });
-
-        alert.setOnDismissListener(new DialogInterface.OnDismissListener()
-        {
-            public void onDismiss(DialogInterface dialog)
-            {
-                isPaused = false;
-            }
-        });
-
-        alert.show();
+            alertDialog.show();
+        }
     }
 
-    public DrawView(Context context)
+    public void setPaused()
     {
-        super(context);
-        paint.setAntiAlias(true);
-        paint.setSubpixelText(true);
-        player = new Player(100, 650, Color.BLACK, getResources());
-        initWorld();
-        this.context = context;
-        initAccelerometer();
+        isPaused = true;
     }
 
     public void initAccelerometer()
@@ -144,6 +115,7 @@ public class DrawView extends View
 
     private void initWorld()
     {
+        buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
         //functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
     }
 
@@ -171,7 +143,6 @@ public class DrawView extends View
 
         postInvalidateOnAnimation();
     }
-
 
     public void doPhysics()
     {
@@ -255,7 +226,7 @@ public class DrawView extends View
                 limitLeft = tapX;
                 maxX = player.getX() - limitLeft;
             }
-            functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY() - 20), maxX, width, height));
+            functions.add(new FunctionView(functionString, new PointOnScreen((float) limitLeft / (float) SCREEN_WIDTH, (float) (player.getY() - 20) / (float) SCREEN_HEIGHT), maxX));
             waitForFunctionTap = false;
             isPaused = false;
         }
@@ -266,7 +237,44 @@ public class DrawView extends View
         }
 
 
-
         return true;
+    }
+
+    private void createAlert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle("Enter Function");
+        builder.setMessage("e.g. x^2 + 2x + 5");
+
+        builder.setView(alertDialogInput);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                functionString = alertDialogInput.getText().toString();
+                Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
+                waitForFunctionTap = true;
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                isPaused = false;
+            }
+        });
+
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener()
+        {
+            public void onDismiss(DialogInterface dialog)
+            {
+                isPaused = false;
+            }
+        });
+
+        alertDialog = builder.create();
     }
 }

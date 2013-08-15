@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.util.Log;
 
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,41 +16,72 @@ import de.congrace.exp4j.ExpressionBuilder;
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
+import static java.lang.Character.isDigit;
 
 public class FunctionModel
 {
     private static final String NAME = "FunctionModel ";
     private Calculable calculable = null;
-    private List<Point> points;
-    private List<Point> allPoints;
+    private List<PointOnScreen> points;
+    private List<PointOnScreen> allPoints;
     private Path path;
 
-    public FunctionModel(String function, Point initialCoordinate, int xMax, int screenWidth, int screenHeight)
+    public FunctionModel(String function, PointOnScreen initialCoordinate, int xMax) throws IllegalArgumentException
     {
-        this.points = new ArrayList<Point>();
+        this.points = new ArrayList<PointOnScreen>();
+
+        function = repairSmallMistakes(function);
+
+        Log.i(TAG,NAME+"INITCOORDS"+initialCoordinate.getScreenX()+","+initialCoordinate.getScreenY());
+
         try
         {
             calculable = new ExpressionBuilder("-1*(" + function + ")").withVariable("x", 0).build();
             for (int i = 0; i < xMax; i++)
             {
                 int calc = (int) calculable.calculate(i);
-                int x = i + initialCoordinate.x;
-                int y = calc + initialCoordinate.y;
-                if (x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                int x = i + initialCoordinate.getScreenX();
+                int y = calc + initialCoordinate.getScreenY();
+                if (x > SCREEN_WIDTH || y > SCREEN_HEIGHT || x < 0 || y < 0)
                 {
                     continue;
                 }
-                points.add(new Point(x, y));
+                points.add(new PointOnScreen((float)x/(float)SCREEN_WIDTH, (float)y/(float)SCREEN_HEIGHT));
             }
         }
         catch (Exception e)
         {
             Log.e(TAG, NAME + "can't parse the function " + function, e);
+            throw new IllegalArgumentException();
         }
 
-        allPoints = new ArrayList<Point>(points);
+        allPoints = new ArrayList<PointOnScreen>(points);
         optimizePoints();
         generatePath();
+    }
+
+    private String repairSmallMistakes(String function)
+    {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i=0; i<function.length(); i++)
+        {
+            char c = function.charAt(i);
+
+            if (isDigit(c) && builder.length()>0 && builder.toString().endsWith("x"))
+            {
+                builder.append("*");
+            }
+
+            if (c=='x' && builder.length()>0 && isDigit(builder.charAt(builder.length()-1)))
+            {
+                builder.append("*");
+            }
+
+            builder.append(c);
+        }
+
+        return builder.toString();
     }
 
     private void optimizePoints()
@@ -57,12 +89,12 @@ public class FunctionModel
         int i = 0;
         while (i + 2 < points.size())
         {
-            Point p1 = points.get(i);
-            Point p2 = points.get(i + 1);
-            Point p3 = points.get(i + 2);
+            PointOnScreen p1 = points.get(i);
+            PointOnScreen p2 = points.get(i + 1);
+            PointOnScreen p3 = points.get(i + 2);
 
-            float a = (((float) p1.y - (float) p3.y)) / ((float) p1.x - (float) p3.x);
-            float b = (float) p1.y - a * (float) p1.x;
+            float a = (((float) p1.getScreenY() - (float) p3.getScreenY())) / ((float) p1.getScreenX() - (float) p3.getScreenX());
+            float b = (float) p1.getScreenY() - a * (float) p1.getScreenX();
 
             if (p2.x * a + b == p2.y)
             {
@@ -88,19 +120,19 @@ public class FunctionModel
         }
     }
 
-    private boolean isOutOfBounds(Point point)
+    private boolean isOutOfBounds(PointOnScreen point)
     {
-        return point.x > SCREEN_WIDTH || point.x < 0 || point.y < 0 || point.y > SCREEN_HEIGHT;
+        return point.getScreenX() > SCREEN_WIDTH || point.getScreenX() < 0 || point.getScreenY() < 0 || point.getScreenY() > SCREEN_HEIGHT;
     }
 
     public void generatePath()
     {
         path = new Path();
-        path.moveTo(points.get(0).x, points.get(0).y);
+        path.moveTo(points.get(0).getScreenX(), points.get(0).getScreenY());
 
-        for (Point point : points)
+        for (PointOnScreen point : points)
         {
-            path.lineTo(point.x, point.y);
+            path.lineTo(point.getScreenX(), point.getScreenY());
         }
     }
 
@@ -128,13 +160,13 @@ public class FunctionModel
         moveY = moveVector.y > 0 ? moveVector.y : 0;
         Point top = new Point(x + player.getWidth() + moveX, y + player.getHeight() + moveY);
 
-        for (Point point : allPoints)
+        for (PointOnScreen point : allPoints)
         {
-            if (top.x < point.x)
+            if (top.x < point.getScreenX())
             {
                 break;
             }
-            if (bottom.x > point.x || top.y < point.y || bottom.y > point.y)
+            if (bottom.x > point.getScreenX() || top.y < point.getScreenY() || bottom.y > point.getScreenY())
             {
                 continue;
             }

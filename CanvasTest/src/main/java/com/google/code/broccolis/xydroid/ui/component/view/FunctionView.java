@@ -8,6 +8,7 @@ import android.graphics.Point;
 import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Terrain;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Paint.Style.FILL;
@@ -17,9 +18,9 @@ public class FunctionView implements Terrain
 {
     private FunctionModel model;
 
-    public FunctionView(String function, Point initialCoordinate, int xMax, int screenWidth, int screenHeight)
+    public FunctionView(String function, PointOnScreen initialCoordinate, int xMax)
     {
-        model = new FunctionModel(function, initialCoordinate, xMax, screenWidth, screenHeight);
+        model = new FunctionModel(function, initialCoordinate, xMax);
     }
 
     @Override

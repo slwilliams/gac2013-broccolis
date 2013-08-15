@@ -37,7 +37,8 @@ public class DrawView extends View
     private static final String NAME = "DrawView ";
     private static final int jumpHeight = 100;
     private static final int jumpSpeed = 15;
-    private static final int gravity = 5;
+    private double gravity = 3;
+    private double delta = 0.3;
     private final double SHAKE_DELTA = 2;
     private boolean isPaused = false;
     private boolean waitForFunctionTap = false;
@@ -188,9 +189,11 @@ public class DrawView extends View
 
     public void doPhysics()
     {
-        if (!collision(player, new Point(0, gravity)))
+        if (!collision(player, new Point(0, (int)gravity)))
         {
-            player.move(0, gravity);
+            player.move(0, (int)gravity);
+            gravity += delta;
+
             falling = true;
         }
 
@@ -217,6 +220,7 @@ public class DrawView extends View
         if (level.collidesWith(player, moveAmount))
         {
             falling = false;
+            gravity = 5;
             return true;
         }
         else
@@ -226,6 +230,7 @@ public class DrawView extends View
                 if (f.collidesWith(player, moveAmount))
                 {
                     falling = false;
+                    gravity = 5;
                     return true;
                 }
             }

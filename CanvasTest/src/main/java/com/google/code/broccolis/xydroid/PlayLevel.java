@@ -45,6 +45,7 @@ public class PlayLevel extends Activity
 
     public void onPause()
     {
+        super.onPause();
         drawView.setPaused();
     }
 

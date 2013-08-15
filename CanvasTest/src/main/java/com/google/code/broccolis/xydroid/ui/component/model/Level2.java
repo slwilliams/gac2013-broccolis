@@ -1,8 +1,5 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,7 +10,6 @@ import android.graphics.Point;
 import android.util.Log;
 
 import com.google.code.broccolis.xydroid.R;
-import com.google.code.broccolis.xydroid.activities.LevelActivity;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
@@ -26,13 +22,16 @@ import java.util.ArrayList;
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
 
 public class Level2 implements Level
 {
     private static final String NAME = "Level2 ";
     private static final int levelNum = 2;
-
     private Bitmap yBitmap;
     private ArrayList<WallView> walls = new ArrayList<WallView>();
     private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
@@ -44,56 +43,56 @@ public class Level2 implements Level
     public Level2(Resources res)
     {
         yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
-        pointY = new Point(20, 50);
+        pointY = new Point(parseNexusX(20), parseNexusY(50));
 
-        walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 160f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 300f / NEXUS_HEIGHT), new PointOnScreen(850f / NEXUS_WIDTH, 355f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(600f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 475f / NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 160f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 300f / NEXUS_HEIGHT), new PointOnScreen(850f / NEXUS_WIDTH, 355f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(600f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 475f / NEXUS_HEIGHT), res));
 
         for (int i = 1005; i < 1090; i += 30)
         {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i, 160),
-                    new Point(i + 30, 160),
-                    new Point(i + 15, 200)
+                    new Point(parseNexusX(i), parseNexusY(160)),
+                    new Point(parseNexusX(i + 30), parseNexusY(160)),
+                    new Point(parseNexusX(i + 15), parseNexusY(200))
             }, Color.BLACK));
         }
 
         for (int i = 310; i < 850; i += 30)
         {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i, 355),
-                    new Point(i + 30, 355),
-                    new Point(i + 15, 420)
+                    new Point(parseNexusX(i), parseNexusY(355)),
+                    new Point(parseNexusX(i + 30), parseNexusY(355)),
+                    new Point(parseNexusX(i + 15), parseNexusY(420))
             }, Color.BLACK));
         }
 
         for (int i = 305; i < 390; i += 30)
         {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i, 500),
-                    new Point(i + 30, 500),
-                    new Point(i + 15, 480)
+                    new Point(parseNexusX(i), parseNexusY(500)),
+                    new Point(parseNexusX(i + 30), parseNexusY(500)),
+                    new Point(parseNexusX(i + 15), parseNexusY(480))
             }, Color.BLACK));
         }
 
         for (int i = 610; i < 780; i += 30)
         {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i, 500),
-                    new Point(i + 30, 500),
-                    new Point(i + 15, 480)
+                    new Point(parseNexusX(i), parseNexusY(500)),
+                    new Point(parseNexusX(i + 30), parseNexusY(500)),
+                    new Point(parseNexusX(i + 15), parseNexusY(480))
             }, Color.BLACK));
         }
 
         //bounds
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT), Color.BLACK));
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0), Color.BLACK));
-        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT), Color.BLACK));
-        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT), Color.BLACK));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
+        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
 
         broccolis.add(new Broccoli(1020f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
         broccolis.add(new Broccoli(330f / NEXUS_WIDTH, 250f / NEXUS_HEIGHT, res));
@@ -128,7 +127,7 @@ public class Level2 implements Level
 
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
         paint.setTextSize(25);
-        canvas.drawText("Broccolis: " + score, 1110, 50, paint);
+        canvas.drawText("Broccolis: " + score, parseNexusX(1110), parseNexusY(50), paint);
 
     }
 
@@ -142,6 +141,7 @@ public class Level2 implements Level
     {
         if (goalReached(player, movingAmount))
         {
+            Log.i(TAG, "complete");
         }
 
         for (WallView w : walls)
@@ -177,6 +177,13 @@ public class Level2 implements Level
             }
 
         }
+        return false;
+    }
+
+    @Override
+    public boolean reachedY(Player player)
+    {
+//        WallView yBlock = new WallView(new PointOnScreen(parseXToFloat(pointY.x),parseYToFloat(pointY.y)));
         return false;
     }
 

@@ -9,13 +9,11 @@ public class WallModel
 {
     private PointOnScreen top;
     private PointOnScreen bottom;
-    private int color;
 
-    public WallModel(PointOnScreen top, PointOnScreen bottom, int color)
+    public WallModel(PointOnScreen top, PointOnScreen bottom)
     {
         this.top = top;
         this.bottom = bottom;
-        this.color = color;
     }
 
     public void move(float x, float y)
@@ -44,11 +42,6 @@ public class WallModel
     public int getXMax()
     {
         return bottom.getScreenX();
-    }
-
-    public int getColor()
-    {
-        return color;
     }
 
     public boolean contains(Player player, Point moveAmount)

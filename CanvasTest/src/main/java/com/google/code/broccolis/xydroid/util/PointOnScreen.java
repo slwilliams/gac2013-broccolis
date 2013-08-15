@@ -19,7 +19,7 @@ public class PointOnScreen extends PointF
 
         if (x > 1 || y > 1 || x < 0 || y < 0)
         {
-            Log.e(TAG, NAME + "at least one of arguments out of bound", new IllegalArgumentException(x + " " + y));
+            Log.e(TAG, NAME + "at least one of arguments is out of bound", new IllegalArgumentException(x + " " + y));
         }
     }
 

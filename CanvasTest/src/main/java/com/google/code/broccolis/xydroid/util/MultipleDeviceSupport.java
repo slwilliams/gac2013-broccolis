@@ -41,4 +41,15 @@ public class MultipleDeviceSupport
         }
         return (int) (y * SCREEN_HEIGHT);
     }
+
+    public static int parseNexusX(int x)
+    {
+        return parseXToInt(((float)x)/NEXUS_WIDTH);
+    }
+
+    public static int parseNexusY(int y)
+    {
+        return parseXToInt(((float)y)/NEXUS_HEIGHT);
+    }
+
 }

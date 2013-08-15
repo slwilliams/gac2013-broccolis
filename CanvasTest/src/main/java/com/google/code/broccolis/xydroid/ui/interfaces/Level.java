@@ -11,4 +11,6 @@ public interface Level
     public void draw(Canvas canvas, Paint paint);
 
     public boolean collidesWith(Player player, Point movingAmount);
+
+    public boolean reachedY(Player player);
 }

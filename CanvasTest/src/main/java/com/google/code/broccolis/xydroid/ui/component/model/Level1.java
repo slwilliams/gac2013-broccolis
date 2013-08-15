@@ -139,6 +139,7 @@ public class Level1 implements Level
 
 
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
+        paint.setColor(Color.BLACK);
         paint.setTextSize(25);
         canvas.drawText("Broccolis: " + score, parseXToInt(1110f / NEXUS_WIDTH), parseYToInt(50 / NEXUS_HEIGHT), paint);
     }

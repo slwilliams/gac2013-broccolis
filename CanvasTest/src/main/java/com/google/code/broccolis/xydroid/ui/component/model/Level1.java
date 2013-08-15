@@ -2,7 +2,6 @@ package com.google.code.broccolis.xydroid.ui.component.model;
 
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,18 +13,13 @@ import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
-import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
-
-import java.util.ArrayList;
 
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
 public class Level1 extends Level
@@ -128,51 +122,5 @@ public class Level1 extends Level
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
         paint.setTextSize(25);
         canvas.drawText("Broccolis: " + score, parseXToInt(1110f / NEXUS_WIDTH), parseYToInt(50 / NEXUS_HEIGHT), paint);
-    }
-
-    public ArrayList<WallView> getWalls()
-    {
-        return walls;
-    }
-
-    @Override
-    public boolean collidesWith(Player player, Point moveAmount)
-    {
-        for (WallView w : walls)
-        {
-            if (w.collidesWith(player, moveAmount))
-            {
-                return true;
-            }
-        }
-        for (SpikeView s : spikes)
-        {
-            if (s.collidesWith(player, moveAmount))
-            {
-                player.setY(player.getStartY());
-                player.setX(player.getStartX());
-                score = 0;
-                for (Broccoli br : broccolis)
-                {
-                    br.setVisibility(true);
-
-                }
-
-                return true;
-            }
-        }
-
-        for (Broccoli br : broccolis)
-        {
-            if (br.contains(player, moveAmount) && br.isVisible())
-            {
-                br.setVisibility(false);
-                score++;
-                return true;
-            }
-
-        }
-
-        return false;
     }
 }

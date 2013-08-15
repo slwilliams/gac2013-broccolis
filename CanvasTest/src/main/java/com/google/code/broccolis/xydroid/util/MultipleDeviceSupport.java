@@ -26,7 +26,7 @@ public class MultipleDeviceSupport
     {
         if (x < 0 || x > 1)
         {
-            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds x="+x);
+            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds x=" + x);
             Log.e(TAG, NAME, exception);
         }
         return (int) (x * SCREEN_WIDTH);
@@ -36,7 +36,7 @@ public class MultipleDeviceSupport
     {
         if (y < 0 || y > 1)
         {
-            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds y="+y);
+            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds y=" + y);
             Log.e(TAG, NAME, exception);
         }
         return (int) (y * SCREEN_HEIGHT);
@@ -44,12 +44,12 @@ public class MultipleDeviceSupport
 
     public static int parseNexusX(int x)
     {
-        return parseXToInt(((float)x)/NEXUS_WIDTH);
+        return parseXToInt(((float) x) / NEXUS_WIDTH);
     }
 
     public static int parseNexusY(int y)
     {
-        return parseYToInt(((float)y)/NEXUS_HEIGHT);
+        return parseYToInt(((float) y) / NEXUS_HEIGHT);
     }
 
 }

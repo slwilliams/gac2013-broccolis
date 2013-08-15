@@ -34,10 +34,6 @@ public abstract class Level
         walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
     }
 
-    abstract public void draw(Canvas canvas, Paint paint);
-
-    abstract public boolean collidesWith(Player player, Point movingAmount);
-
     public final boolean goalReached(Player player, Point movingAmount)
     {
         int x = player.getX();
@@ -70,4 +66,44 @@ public abstract class Level
     {
         return pointY.y;
     }
+
+    public boolean collidesWith(Player player, Point movingAmount)
+    {
+        for (WallView w : walls)
+        {
+            if (w.collidesWith(player, movingAmount))
+            {
+                return true;
+            }
+        }
+        for (SpikeView s : spikes)
+        {
+            if (s.collidesWith(player, movingAmount))
+            {
+                player.setY(player.getStartY());
+                player.setX(player.getStartX());
+                score = 0;
+                for (Broccoli br : broccolis)
+                {
+                    br.setVisibility(true);
+                }
+
+                return true;
+            }
+        }
+
+        for (Broccoli br : broccolis)
+        {
+            if (br.contains(player, movingAmount) && br.isVisible())
+            {
+                br.setVisibility(false);
+                score++;
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    abstract public void draw(Canvas canvas, Paint paint);
 }

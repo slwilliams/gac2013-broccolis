@@ -179,10 +179,14 @@ public class DrawView extends View
         {
             f.draw(canvas, paint);
         }
-        if(!off)
+        if (!off)
+        {
             level.draw(canvas, paint);
-        if(!off)
+        }
+        if (!off)
+        {
             player.draw(canvas, paint);
+        }
 
         postInvalidateOnAnimation();
     }
@@ -220,7 +224,7 @@ public class DrawView extends View
 
     public synchronized boolean collision(Player player, Point moveAmount)
     {
-        if (level.goalReached(player, moveAmount))
+        if (level.goalReached(player, moveAmount) && !finished)
         {
             if (level instanceof Level1)
             {

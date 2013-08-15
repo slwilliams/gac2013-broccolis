@@ -3,7 +3,6 @@ package com.google.code.broccolis.xydroid.ui.component.view;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
@@ -15,7 +14,6 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import static android.graphics.Bitmap.createScaledBitmap;
 import static android.graphics.BitmapFactory.decodeResource;
-import static android.graphics.Color.BLACK;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 import static java.lang.Math.abs;

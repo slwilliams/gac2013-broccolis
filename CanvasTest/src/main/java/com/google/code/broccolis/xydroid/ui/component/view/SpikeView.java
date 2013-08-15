@@ -12,7 +12,6 @@ import com.google.code.broccolis.xydroid.ui.interfaces.Obstacle;
 
 public class SpikeView implements Drawable
 {
-
     private SpikeModel model;
 
     public SpikeView(Point[] points, int color)
@@ -30,6 +29,7 @@ public class SpikeView implements Drawable
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
+        paint.setColor(model.getColor());
         canvas.drawPath(path,paint);
     }
 }

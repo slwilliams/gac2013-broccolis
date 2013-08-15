@@ -12,6 +12,7 @@ import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
+import com.google.code.broccolis.xydroid.util.Broccoli;
 import com.google.code.broccolis.xydroid.util.Player;
 
 import java.util.ArrayList;
@@ -20,17 +21,19 @@ import java.util.ArrayList;
 public class Level2 implements Level
 {
 
-    ArrayList<WallView> walls = new ArrayList<WallView>();
-    ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
-    double val = 0.1;
+    private ArrayList<WallView> walls = new ArrayList<WallView>();
+    private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
+    private ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
+
+    private double val = 0.1;
+    private int score = 0;
+
     Bitmap b;
-    Bitmap broccoli;
 
     public Level2(Resources res)
     {
 
         b = BitmapFactory.decodeResource(res, R.drawable.y);
-        broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
 
         walls.add(new WallView(new Point(0, 100), new Point(100, 125), Color.GREEN));
         walls.add(new WallView(new Point(1000, 100), new Point(1100, 160), Color.GREEN));
@@ -81,6 +84,11 @@ public class Level2 implements Level
         walls.add(new WallView(new Point(1270, 0), new Point(1270, 700), Color.BLACK));
         walls.add(new WallView(new Point(0, 700), new Point(1270, 700), Color.BLACK));
 
+        broccolis.add(new Broccoli(1020, 50, res));
+        broccolis.add(new Broccoli(330, 250, res));
+        broccolis.add(new Broccoli(550, 400, res));
+
+
     }
 
     @Override
@@ -98,10 +106,15 @@ public class Level2 implements Level
         {
             s.draw(canvas, paint);
         }
+
+        for (Broccoli br : broccolis)
+        {
+            br.draw(canvas, paint);
+        }
+
         canvas.drawBitmap(b, 20, 50, paint);
-        canvas.drawBitmap(broccoli, 1020, 50, paint);
-        canvas.drawBitmap(broccoli, 330, 250, paint);
-        canvas.drawBitmap(broccoli, 550, 400, paint);
+        canvas.drawText("Broccolis: "+score, 1110, 50, paint);
+
     }
 
     public ArrayList<WallView> getWalls()
@@ -128,6 +141,20 @@ public class Level2 implements Level
                 return true;
             }
         }
+
+        for (Broccoli br : broccolis)
+        {
+            if (br.contains(player, movingAmount))
+            {
+                broccolis.remove(br);
+                score++;
+                return true;
+            }
+        }
+
         return false;
     }
+
+
+
 }

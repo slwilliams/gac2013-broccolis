@@ -54,7 +54,7 @@ public class DrawView extends View
         super(context);
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
-        player = new Player(100, 450, Color.BLACK, getResources());
+        player = new Player(100, 650, Color.BLACK, getResources());
         initWorld();
         this.context = context;
         initAccelerometer();

@@ -127,7 +127,7 @@ public class Level2 implements Level
         }
 
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
-        paint.setTextSize(20);
+        paint.setTextSize(25);
         canvas.drawText("Broccolis: " + score, 1110, 50, paint);
 
     }

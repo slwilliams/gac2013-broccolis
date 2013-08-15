@@ -103,6 +103,16 @@ public class DrawView extends View
         isPaused = true;
     }
 
+    public void resume()
+    {
+        isPaused = false;
+    }
+
+    public void undo()
+    {
+        functions.remove(functions.size()-1);
+    }
+
     public void initAccelerometer()
     {
         SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -148,12 +158,14 @@ public class DrawView extends View
         }
 
         doPhysics();
-        level.draw(canvas, paint);
 
         for (FunctionView f : functions)
         {
             f.draw(canvas, paint);
         }
+
+        level.draw(canvas, paint);
+
 
         player.draw(canvas, paint);
 

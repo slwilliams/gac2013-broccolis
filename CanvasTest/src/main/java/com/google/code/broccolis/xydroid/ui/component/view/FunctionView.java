@@ -1,6 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.component.view;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -18,6 +20,7 @@ public class FunctionView implements Terrain
 {
     private FunctionModel model;
 
+
     public FunctionView(String function, PointOnScreen initialCoordinate, int xMax)
     {
         model = new FunctionModel(function, initialCoordinate, xMax);
@@ -27,12 +30,13 @@ public class FunctionView implements Terrain
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
-        paint.setStrokeWidth(1.5f);
+        paint.setStrokeWidth(5.f);
         paint.setStyle(STROKE);
-        paint.setColor(BLACK);
-
+        paint.setColor(Color.RED);
         canvas.drawPath(path, paint);
-
+        paint.setStrokeWidth(2f);
+        paint.setColor(BLACK);
+        canvas.drawPath(path, paint);
         paint.setStyle(FILL);
     }
 

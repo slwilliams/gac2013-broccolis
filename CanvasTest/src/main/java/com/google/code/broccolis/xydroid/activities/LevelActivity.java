@@ -19,7 +19,7 @@ import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 public class LevelActivity extends Activity
 {
     private static final String NAME = "Level ";
-    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "Custom", "Clear"};
+    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "xcos(x)", "tan(x)", "Custom", "Clear", "Undo"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private DrawView drawView;
@@ -55,6 +55,12 @@ public class LevelActivity extends Activity
         drawView.setPaused();
     }
 
+    public void onResume()
+    {
+        super.onResume();
+        drawView.resume();
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener
     {
         @Override
@@ -84,10 +90,19 @@ public class LevelActivity extends Activity
                 drawView.addFunction("60*sin(x*0.1)*(x*0.007)");
                 break;
             case 5:
-                drawView.addCustomFunction();
+                drawView.addFunction("60*cos(x*0.1)*(x*0.007)");
                 break;
             case 6:
+                drawView.addFunction("tan(x*0.05)");
+                break;
+            case 7:
+                drawView.addCustomFunction();
+                break;
+            case 8:
                 drawView.clear();
+                break;
+            case 9:
+                drawView.undo();
         }
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);

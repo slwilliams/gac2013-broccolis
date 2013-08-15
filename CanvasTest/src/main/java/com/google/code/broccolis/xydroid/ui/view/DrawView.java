@@ -14,6 +14,7 @@ import android.hardware.SensorManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
@@ -26,6 +27,10 @@ import java.util.ArrayList;
 
 public class DrawView extends View
 {
+    boolean isPaused = false;
+    boolean waitForFunctionTap = false;
+    String functionString = null;
+
     Paint paint = new Paint();
 
     public static int height = 0;
@@ -70,7 +75,10 @@ public class DrawView extends View
             @Override
             public void onSensorChanged(SensorEvent event)
             {
-                xAcc = event.values[1];
+                if (!isPaused)
+                {
+                    xAcc = event.values[1];
+                }
             }
 
             @Override
@@ -84,7 +92,7 @@ public class DrawView extends View
     private void initWorld()
     {
         buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
-        functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
+        //functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
     }
 
     public void onDraw(Canvas canvas)
@@ -184,8 +192,10 @@ public class DrawView extends View
         {
             if (b.isTouched((int) eventX, (int) eventY))
             {
-                if (b.getText().toLowerCase().equals("functions"))
+                if (b.getText().toLowerCase().equals("functions") && !isPaused)
                 {
+                    isPaused = true;
+                    xAcc = 0;
                     AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
                     alert.setTitle("Enter Function");
@@ -198,8 +208,9 @@ public class DrawView extends View
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
                         {
-                            String value = input.getText().toString();
-                            functions.add(new FunctionView(value, new Point(600, 300), 800, width, height));
+                            functionString = input.getText().toString();
+                            Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
+                            waitForFunctionTap = true;
                         }
                     });
 
@@ -207,6 +218,7 @@ public class DrawView extends View
                     {
                         public void onClick(DialogInterface dialog, int whichButton)
                         {
+                            isPaused = false;
                         }
                     });
 
@@ -215,7 +227,26 @@ public class DrawView extends View
             }
             else
             {
-                if (!falling)
+                if (waitForFunctionTap)
+                {
+                    int tapX = (int) eventX;
+                    int limitLeft;
+                    int maxX;
+                    if (tapX > player.getX())
+                    {
+                        limitLeft = player.getX() + 40;
+                        maxX = tapX - limitLeft;
+                    }
+                    else
+                    {
+                        limitLeft = tapX;
+                        maxX = player.getX() - limitLeft;
+                    }
+                    functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY()-20), maxX, width, height));
+                    waitForFunctionTap = false;
+                    isPaused = false;
+                }
+                else if (!falling)
                 {
                     jumping = true;
                     jumpBase = player.getY();

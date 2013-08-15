@@ -2,8 +2,10 @@ package com.google.code.broccolis.xydroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 
 import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
@@ -37,4 +39,11 @@ public class MainActivity extends Activity
         Intent intent = new Intent(this, PlayLevel.class);
         startActivity(intent);
     }
+
+    /*public void selectLevel(View view)
+    {
+        Intent intent = new Intent(this, SelectLevel.class);
+        startActivity(intent);
+    }*/
+
 }

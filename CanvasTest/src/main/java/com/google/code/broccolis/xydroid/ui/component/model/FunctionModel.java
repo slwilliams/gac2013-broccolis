@@ -39,7 +39,9 @@ public class FunctionModel
         try
         {
             calculable = new ExpressionBuilder("-1*(" + function + ")").withVariable("x", 0).build();
-            for (int i = 0; i < xMax; i++)
+            int i = (xMax < 0 ? xMax : 0);
+            int limit = (i == 0 ? xMax : 0);
+            for (; i < limit; i++)
             {
                 int calc = (int) calculable.calculate(i);
                 int x = i + initialCoordinate.getScreenX();

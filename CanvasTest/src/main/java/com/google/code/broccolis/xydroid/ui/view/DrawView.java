@@ -11,7 +11,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -49,7 +48,7 @@ public class DrawView extends View
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
-    private final double SHAKE_DELTA = 1;
+    private final double SHAKE_DELTA = 1.5;
     private double then;
 
     public DrawView(Context context)
@@ -225,27 +224,29 @@ public class DrawView extends View
         if (waitForFunctionTap)
         {
             int tapX = (int) eventX;
-            int limitLeft;
-            int maxX;
+            int origin, maxX;
             if (tapX > player.getX())
             {
-                limitLeft = player.getX() + 40;
-                maxX = tapX - limitLeft;
+                origin = player.getX() + 40;
             }
             else
             {
-                limitLeft = tapX;
-                maxX = player.getX() - limitLeft;
+                origin = player.getX() - 40;
             }
-            functions.add(new FunctionView(functionString, new PointOnScreen(parseXToFloat(limitLeft), parseYToFloat(player.getY() - 20)), maxX));
+            maxX = tapX - origin;
+            functions.add(new FunctionView(functionString, new PointOnScreen(parseXToFloat(origin), parseYToFloat(player.getY() - 20)), maxX));
             waitForFunctionTap = false;
             isPaused = false;
         }
         else if (!falling)
         {
-            jumping = true;
-            jumpBase = player.getY();
+            if(eventX >= 75)
+            {
+                jumping = true;
+                jumpBase = player.getY();
+            }
         }
+
 
         return true;
     }

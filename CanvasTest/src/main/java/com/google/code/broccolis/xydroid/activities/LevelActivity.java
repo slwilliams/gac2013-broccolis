@@ -20,7 +20,7 @@ import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 public class LevelActivity extends Activity
 {
     private static final String NAME = "Level ";
-    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "xcos(x)", "tan(x)", "Custom", "Clear", "Undo"};
+    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "xcos(x)", "tan(x)", "Custom", "Clear", "Undo", "off"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private DrawView drawView;
@@ -105,6 +105,9 @@ public class LevelActivity extends Activity
                 break;
             case 9:
                 drawView.undo();
+                break;
+            case 10:
+                drawView.off();
         }
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);

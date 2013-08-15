@@ -2,10 +2,12 @@ package com.google.code.broccolis.xydroid.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.code.broccolis.xydroid.R;
 
@@ -20,6 +22,10 @@ public class SelectLevelActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_level);
+        TextView textview = (TextView) findViewById(R.layout.select_level);
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/noteworthy.otf");
+
+//        textview.setTypeface(face, Typeface.BOLD);
 
         Log.i(TAG, NAME + "created");
     }

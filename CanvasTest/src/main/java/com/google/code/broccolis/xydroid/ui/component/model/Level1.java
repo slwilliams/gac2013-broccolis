@@ -130,6 +130,14 @@ public class Level1 implements Level
             }
         }
 
+        paint.setColor(Color.BLACK);
+        canvas.drawRect(0, 300, 20, 400, paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawLine(3, 325, 17, 350, paint);
+
+        canvas.drawLine(3, 375, 17, 350, paint);
+
+
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
         paint.setTextSize(25);
         canvas.drawText("Broccolis: " + score, parseXToInt(1110f / NEXUS_WIDTH), parseYToInt(50 / NEXUS_HEIGHT), paint);

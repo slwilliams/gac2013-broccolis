@@ -31,7 +31,6 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parse
 public class Level2 implements Level
 {
     private static final String NAME = "Level2 ";
-    private static final int levelNum = 2;
     private Bitmap yBitmap;
     private ArrayList<WallView> walls = new ArrayList<WallView>();
     private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
@@ -48,8 +47,8 @@ public class Level2 implements Level
         walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
         walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 160f / NEXUS_HEIGHT), res));
         walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 300f / NEXUS_HEIGHT), new PointOnScreen(850f / NEXUS_WIDTH, 355f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), res));
-        walls.add(new WallView(new PointOnScreen(600f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 555f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 530f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(600f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 530f / NEXUS_HEIGHT), res));
         walls.add(new WallView(new PointOnScreen(1000f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), new PointOnScreen(1100f / NEXUS_WIDTH, 475f / NEXUS_HEIGHT), res));
 
         for (int i = 1005; i < 1090; i += 30)
@@ -124,6 +123,15 @@ public class Level2 implements Level
                 br.draw(canvas, paint);
             }
         }
+        paint.setColor(Color.BLACK);
+        canvas.drawRect(0, 300, 20, 400, paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawLine(3, 325, 17, 350, paint);
+
+        canvas.drawLine(3, 375, 17, 350, paint);
+
+
+
 
         canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
         paint.setTextSize(25);

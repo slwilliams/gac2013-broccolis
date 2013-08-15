@@ -55,6 +55,8 @@ public class DrawView extends View
     private AlertDialog alertDialog;
     private double then;
 
+    public boolean off = false;
+
     public DrawView(Context context, int levelNum)
     {
         super(context);
@@ -171,11 +173,17 @@ public class DrawView extends View
         {
             f.draw(canvas, paint);
         }
-        level.draw(canvas, paint);
-
-        player.draw(canvas, paint);
+        if(!off)
+            level.draw(canvas, paint);
+        if(!off)
+            player.draw(canvas, paint);
 
         postInvalidateOnAnimation();
+    }
+
+    public void off()
+    {
+        off = true;
     }
 
     public void doPhysics()

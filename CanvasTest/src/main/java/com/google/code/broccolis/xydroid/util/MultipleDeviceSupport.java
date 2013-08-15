@@ -49,7 +49,7 @@ public class MultipleDeviceSupport
 
     public static int parseNexusY(int y)
     {
-        return parseXToInt(((float)y)/NEXUS_HEIGHT);
+        return parseYToInt(((float)y)/NEXUS_HEIGHT);
     }
 
 }

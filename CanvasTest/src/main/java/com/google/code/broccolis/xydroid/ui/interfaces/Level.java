@@ -2,6 +2,7 @@ package com.google.code.broccolis.xydroid.ui.interfaces;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 
 public abstract class Level
 {
@@ -105,5 +108,34 @@ public abstract class Level
         return false;
     }
 
-    abstract public void draw(Canvas canvas, Paint paint);
+    public void draw(Canvas canvas, Paint paint)
+    {
+        for (WallView w : walls)
+        {
+            w.draw(canvas, paint);
+        }
+        for (SpikeView s : spikes)
+        {
+            s.draw(canvas, paint);
+        }
+
+        for (Broccoli br : broccolis)
+        {
+            if (br.isVisible())
+            {
+                br.draw(canvas, paint);
+            }
+        }
+        paint.setColor(Color.BLACK);
+        canvas.drawRect(0, parseNexusY(300), parseNexusX(20), parseNexusY(400), paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawLine(parseNexusX(3), parseNexusY(325), parseNexusX(17), parseNexusY(350), paint);
+
+        canvas.drawLine(parseNexusX(3), parseNexusY(375), parseNexusX(17), parseNexusY(350), paint);
+
+
+        canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
+        paint.setTextSize(25);
+        canvas.drawText("Broccolis: " + score, parseNexusX(1110), parseNexusY(50), paint);
+    }
 }

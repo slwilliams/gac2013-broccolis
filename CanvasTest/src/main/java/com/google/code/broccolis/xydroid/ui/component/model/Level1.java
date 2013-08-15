@@ -20,7 +20,6 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
 public class Level1 extends Level
 {
@@ -90,37 +89,9 @@ public class Level1 extends Level
     @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        walls.get(2).move((int) (Math.sin(val) * 5), 0);
+        walls.get(6).move((int) (Math.sin(val) * 5), 0);
         val += 0.03;
 
-        for (WallView w : walls)
-        {
-            w.draw(canvas, paint);
-        }
-
-        for (SpikeView s : spikes)
-        {
-            s.draw(canvas, paint);
-        }
-
-        for (Broccoli br : broccolis)
-        {
-            if (br.isVisible())
-            {
-                br.draw(canvas, paint);
-            }
-        }
-
-        paint.setColor(Color.BLACK);
-        canvas.drawRect(0, 300, 20, 400, paint);
-        paint.setColor(Color.WHITE);
-        canvas.drawLine(3, 325, 17, 350, paint);
-
-        canvas.drawLine(3, 375, 17, 350, paint);
-
-
-        canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
-        paint.setTextSize(25);
-        canvas.drawText("Broccolis: " + score, parseXToInt(1110f / NEXUS_WIDTH), parseYToInt(50 / NEXUS_HEIGHT), paint);
+        super.draw(canvas, paint);
     }
 }

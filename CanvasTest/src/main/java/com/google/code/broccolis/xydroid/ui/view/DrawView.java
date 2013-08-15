@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
@@ -46,7 +47,7 @@ public class DrawView extends View
     private boolean jumping = false;
     private boolean falling = false;
     private Paint paint = new Paint();
-    private Level level = new Level2(getResources());
+    private Level level = new Level1(getResources());
     private Player player;
     private Context context;
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();

@@ -23,12 +23,10 @@ public class PlayLevel extends Activity
     private ListView drawerList;
     DrawView drawView;
 
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
 
         drawView = new DrawView(this);
         drawView.setBackgroundColor(Color.WHITE);
@@ -44,6 +42,7 @@ public class PlayLevel extends Activity
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
+    @Override
     public void onPause()
     {
         super.onPause();

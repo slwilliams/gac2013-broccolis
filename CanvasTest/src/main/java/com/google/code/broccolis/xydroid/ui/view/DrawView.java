@@ -131,6 +131,7 @@ public class DrawView extends View
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
+    @Override
     public void onDraw(Canvas canvas)
     {
         if (!collision(player, new Point((int) xAcc * 2, 0)))

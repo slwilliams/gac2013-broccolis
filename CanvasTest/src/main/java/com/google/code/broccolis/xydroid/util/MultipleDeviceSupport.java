@@ -14,31 +14,31 @@ public class MultipleDeviceSupport
 
     public static float parseXToFloat(int x) throws IllegalArgumentException
     {
+        return ((float) x) / ((float) SCREEN_WIDTH);
+    }
+
+    public static float parseYToFloat(int y) throws IllegalArgumentException
+    {
+        return ((float) y) / ((float) SCREEN_HEIGHT);
+    }
+
+    public static int parseXToInt(float x)
+    {
         if (x < 0 || x > 1)
         {
             IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds");
             Log.e(TAG, NAME, exception);
         }
-        return ((float) x) / ((float) SCREEN_WIDTH);
+        return (int) (x * SCREEN_WIDTH);
     }
 
-    public static float parseYToFloat(int y) throws IllegalArgumentException
+    public static int parseYToInt(float y)
     {
         if (y < 0 || y > 1)
         {
             IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds");
             Log.e(TAG, NAME, exception);
         }
-        return ((float) y) / ((float) SCREEN_HEIGHT);
-    }
-
-    public static int parseXToInt(float x)
-    {
-        return (int) (x * SCREEN_WIDTH);
-    }
-
-    public static int parseYToInt(float y)
-    {
         return (int) (y * SCREEN_HEIGHT);
     }
 }

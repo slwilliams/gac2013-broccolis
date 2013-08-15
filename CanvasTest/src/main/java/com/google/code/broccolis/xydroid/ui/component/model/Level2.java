@@ -14,17 +14,20 @@ import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
+import com.google.code.broccolis.xydroid.util.Constants;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
+import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 
 
 public class Level2 implements Level
 {
+    private static final String NAME = "Level2 ";
 
     private Bitmap yBitmap;
     private ArrayList<WallView> walls = new ArrayList<WallView>();
@@ -116,7 +119,6 @@ public class Level2 implements Level
         {
             if (br.isVisible())
             {
-                Log.i("DRAW", "BROCCOLIS");
                 br.draw(canvas, paint);
             }
         }
@@ -137,7 +139,7 @@ public class Level2 implements Level
     {
         if (goalReached(player, movingAmount))
         {
-            Log.i("LEVEL COMPLETE", "LEVEL COMPLETE");
+            Log.i(TAG, "complete");
         }
 
         for (WallView w : walls)

@@ -33,7 +33,6 @@ public class LevelActivity extends Activity
         int level = Integer.parseInt(called.getExtras().get("level").toString());
 
         drawView = new DrawView(this, level);
-        drawView.setBackgroundColor(Color.WHITE);
 
         setContentView(R.layout.main_view);
 

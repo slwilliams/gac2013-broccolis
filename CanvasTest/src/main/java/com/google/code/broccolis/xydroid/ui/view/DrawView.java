@@ -49,7 +49,7 @@ public class DrawView extends View
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
-    private final double SHAKE_DELTA = 1;
+    private final double SHAKE_DELTA = 1.5;
     private double then;
 
     public DrawView(Context context)
@@ -243,8 +243,11 @@ public class DrawView extends View
         }
         else if (!falling)
         {
-            jumping = true;
-            jumpBase = player.getY();
+            if(eventX >= 75)
+            {
+                jumping = true;
+                jumpBase = player.getY();
+            }
         }
 
         return true;

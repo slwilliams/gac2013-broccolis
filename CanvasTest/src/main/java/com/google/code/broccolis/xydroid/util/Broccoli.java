@@ -8,46 +8,52 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.R;
+import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 
-/**
- * Created by demouser on 8/15/13.
- */
-public class Broccoli {
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
-    private int x;
-    private int y;
-    private Bitmap broccolimage;
+public class Broccoli implements Drawable
+{
+    private float x;
+    private float y;
     private boolean visible = true;
+    private Bitmap broccoliImage;
 
-    public Broccoli(int x, int y, Resources res)
+    public Broccoli(float x, float y, Resources res)
     {
         this.x = x;
         this.y = y;
-        broccolimage = BitmapFactory.decodeResource(res, R.drawable.broccoli);
+        broccoliImage = BitmapFactory.decodeResource(res, R.drawable.broccoli);
     }
 
-    public int getXTop() {
-        return x;
+    public int getXTop()
+    {
+        return parseXToInt(x);
     }
 
-    public int getYTop() {
-        return y;
+    public int getYTop()
+    {
+        return parseYToInt(y);
     }
+
     public int getXBottom()
     {
-        return x+broccolimage.getWidth();
+        return parseXToInt(x) + broccoliImage.getWidth();
     }
 
     public int getYBottom()
     {
-        return y+broccolimage.getHeight();
+        return parseYToInt(y) + broccoliImage.getHeight();
     }
+
     public void setVisibility(boolean visibility)
     {
         visible = visibility;
     }
 
-    public boolean contains(Player player, Point movingAmount){
+    public boolean contains(Player player, Point movingAmount)
+    {
 
         int x = player.getX();
         int y = player.getY();
@@ -60,9 +66,10 @@ public class Broccoli {
         return pBottom.y >= getYTop() && pTop.y <= getYBottom() && pBottom.x >= getXTop() && pTop.x <= getXBottom();
     }
 
+    @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        canvas.drawBitmap(broccolimage, x, y, paint);
+        canvas.drawBitmap(broccoliImage, parseXToInt(x), parseYToInt(y), paint);
     }
 
     public boolean isVisible()

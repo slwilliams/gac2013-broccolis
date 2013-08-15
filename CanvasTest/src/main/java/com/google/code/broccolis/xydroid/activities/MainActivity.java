@@ -43,7 +43,7 @@ public class MainActivity extends Activity
         Log.i(TAG, NAME + "starting new game");
 
         Intent intent = new Intent(MainActivity.this, LevelActivity.class);
-
+        intent.putExtra("level", "1");
         startActivity(intent);
     }
 
@@ -58,7 +58,7 @@ public class MainActivity extends Activity
 
     public void about(View view)
     {
-        Intent intent = new Intent(this, AboutActivity.class);
+        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
         startActivity(intent);
     }
 

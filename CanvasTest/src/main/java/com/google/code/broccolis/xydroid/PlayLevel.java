@@ -18,7 +18,7 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class PlayLevel extends Activity
 {
-    private String[] items = {"test",  "test2"};
+    private String[] items = {"x^2",  "test2"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     DrawView drawView;
@@ -34,7 +34,6 @@ public class PlayLevel extends Activity
         DrawView.height = height;
         DrawView.width = width;
         drawView = new DrawView(this);
-
         drawView.setBackgroundColor(Color.WHITE);
 
         setContentView(R.layout.main_view);
@@ -45,14 +44,7 @@ public class PlayLevel extends Activity
         ((FrameLayout) findViewById(R.id.content_frame)).addView(drawView);
 
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
-        // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-
-
-
-
-
     }
 
     public void onPause()
@@ -60,27 +52,21 @@ public class PlayLevel extends Activity
         drawView.setPaused();
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    private class DrawerItemClickListener implements ListView.OnItemClickListener
+    {
         @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
+        public void onItemClick(AdapterView parent, View view, int position, long id)
+        {
             selectItem(position);
         }
     }
 
-    /** Swaps fragments in the main content view */
-    private void selectItem(int position) {
-        // Create a new fragment and specify the planet to show based on position
-        //Fragment fragment = new PlanetFragment();
-        Bundle args = new Bundle();
-      //  args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-        //fragment.setArguments(args);
-//
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-       /* fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();*/
-
+    private void selectItem(int position)
+    {
+        if(position == 0)
+        {
+            drawView.addFunction("(x*0.05)^2");
+        }
         // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);

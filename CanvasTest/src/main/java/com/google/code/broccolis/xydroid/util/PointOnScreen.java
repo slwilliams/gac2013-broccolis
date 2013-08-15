@@ -1,11 +1,7 @@
 package com.google.code.broccolis.xydroid.util;
 
 import android.graphics.PointF;
-import android.util.Log;
 
-import static com.google.code.broccolis.xydroid.util.Constants.TAG;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 

@@ -34,8 +34,6 @@ public class FunctionModel
 
         function = repairSmallMistakes(function);
 
-        Log.i(TAG,NAME+"INITCOORDS"+initialCoordinate.getScreenX()+","+initialCoordinate.getScreenY());
-
         try
         {
             calculable = new ExpressionBuilder("-1*(" + function + ")").withVariable("x", 0).build();
@@ -50,7 +48,7 @@ public class FunctionModel
                 {
                     continue;
                 }
-                points.add(new PointOnScreen(parseXToFloat(x),parseYToFloat(y)));
+                points.add(new PointOnScreen(parseXToFloat(x), parseYToFloat(y)));
             }
         }
         catch (Exception e)
@@ -68,16 +66,16 @@ public class FunctionModel
     {
         StringBuilder builder = new StringBuilder();
 
-        for (int i=0; i<function.length(); i++)
+        for (int i = 0; i < function.length(); i++)
         {
             char c = function.charAt(i);
 
-            if (isDigit(c) && builder.length()>0 && builder.toString().endsWith("x"))
+            if (isDigit(c) && builder.length() > 0 && builder.toString().endsWith("x"))
             {
                 builder.append("*");
             }
 
-            if (c=='x' && builder.length()>0 && isDigit(builder.charAt(builder.length()-1)))
+            if (c == 'x' && builder.length() > 0 && isDigit(builder.charAt(builder.length() - 1)))
             {
                 builder.append("*");
             }

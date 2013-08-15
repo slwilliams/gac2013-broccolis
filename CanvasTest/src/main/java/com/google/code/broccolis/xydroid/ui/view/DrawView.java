@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
-import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
@@ -35,9 +34,10 @@ public class DrawView extends View
     private static final int jumpHeight = 500;
     private static final int jumpSpeed = 15;
     private static final int gravity = 5;
-    boolean isPaused = false;
-    boolean waitForFunctionTap = false;
-    String functionString = null;
+    private final double SHAKE_DELTA = 2;
+    private boolean isPaused = false;
+    private boolean waitForFunctionTap = false;
+    private String functionString = null;
     private int jumpBase = 400;
     private float xAcc = 0;
     private boolean jumping = false;
@@ -46,11 +46,9 @@ public class DrawView extends View
     private Level level = new Level2(getResources());
     private Player player;
     private Context context;
-    private ArrayList<Button> buttons = new ArrayList<Button>();
     private ArrayList<FunctionView> functions = new ArrayList<FunctionView>();
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
-    private final double SHAKE_DELTA = 2;
     private double then;
 
     public DrawView(Context context)
@@ -60,7 +58,7 @@ public class DrawView extends View
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
 
-        player = new Player(100f/NEXUS_WIDTH, 650f/NEXUS_HEIGHT, Color.BLACK, getResources());
+        player = new Player(100f / NEXUS_WIDTH, 650f / NEXUS_HEIGHT, Color.BLACK, getResources());
         this.context = context;
 
         alertDialogInput = new EditText(context);
@@ -110,15 +108,17 @@ public class DrawView extends View
                 if (!isPaused)
                 {
                     xAcc = event.values[1];
-                    double zAcc = (double)event.values[2];
+                    double zAcc = (double) event.values[2];
 
 
-                    if(Math.abs(zAcc - then) > SHAKE_DELTA)
+                    if (Math.abs(zAcc - then) > SHAKE_DELTA)
+                    {
                         if (!falling)
                         {
                             jumpBase = player.getY();
                             jumping = true;
                         }
+                    }
                     then = zAcc;
                 }
             }
@@ -131,6 +131,7 @@ public class DrawView extends View
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
+    @Override
     public void onDraw(Canvas canvas)
     {
         if (!collision(player, new Point((int) xAcc * 2, 0)))
@@ -140,11 +141,6 @@ public class DrawView extends View
 
         doPhysics();
         level.draw(canvas, paint);
-
-        for (Button b : buttons)
-        {
-            b.draw(canvas, paint);
-        }
 
         for (FunctionView f : functions)
         {
@@ -242,7 +238,7 @@ public class DrawView extends View
         }
         else if (!falling)
         {
-            if(eventX >= 75)
+            if (eventX >= 75)
             {
                 jumping = true;
                 jumpBase = player.getY();

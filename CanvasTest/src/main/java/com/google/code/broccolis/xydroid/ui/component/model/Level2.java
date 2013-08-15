@@ -32,42 +32,46 @@ public class Level2 implements Level
         b = BitmapFactory.decodeResource(res, R.drawable.y);
         broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
 
-        walls.add(new WallView(new Point(0, 100), new Point(100,125), Color.GREEN));
-        walls.add(new WallView(new Point(1000, 100), new Point(1100,160), Color.GREEN));
-        walls.add(new WallView(new Point(300, 300), new Point(850,355), Color.GREEN));
-        walls.add(new WallView(new Point(300, 500), new Point(400,555), Color.GREEN));
-        walls.add(new WallView(new Point(600, 500), new Point(800,555), Color.GREEN));
-        walls.add(new WallView(new Point(1000, 450), new Point(1100,475), Color.GREEN));
+        walls.add(new WallView(new Point(0, 100), new Point(100, 125), Color.GREEN));
+        walls.add(new WallView(new Point(1000, 100), new Point(1100, 160), Color.GREEN));
+        walls.add(new WallView(new Point(300, 300), new Point(850, 355), Color.GREEN));
+        walls.add(new WallView(new Point(300, 500), new Point(400, 555), Color.GREEN));
+        walls.add(new WallView(new Point(600, 500), new Point(800, 555), Color.GREEN));
+        walls.add(new WallView(new Point(1000, 450), new Point(1100, 475), Color.GREEN));
 
-        for (int i=1005; i<1090; i+=30){
+        for (int i = 1005; i < 1090; i += 30)
+        {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i,160),
-                    new Point(i+30, 160),
-                    new Point(i+15, 200)
+                    new Point(i, 160),
+                    new Point(i + 30, 160),
+                    new Point(i + 15, 200)
             }, Color.BLACK));
         }
 
-        for (int i=310; i<850; i+=30){
+        for (int i = 310; i < 850; i += 30)
+        {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i,355),
-                    new Point(i+30, 355),
-                    new Point(i+15, 420)
+                    new Point(i, 355),
+                    new Point(i + 30, 355),
+                    new Point(i + 15, 420)
             }, Color.BLACK));
         }
 
-        for (int i=305; i<390; i+=30){
+        for (int i = 305; i < 390; i += 30)
+        {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i,500),
-                    new Point(i+30, 500),
-                    new Point(i+15, 480)
+                    new Point(i, 500),
+                    new Point(i + 30, 500),
+                    new Point(i + 15, 480)
             }, Color.BLACK));
         }
 
-        for (int i=610; i<780; i+=30){
+        for (int i = 610; i < 780; i += 30)
+        {
             spikes.add(new SpikeView(new Point[]{
-                    new Point(i,500),
-                    new Point(i+30, 500),
-                    new Point(i+15, 480)
+                    new Point(i, 500),
+                    new Point(i + 30, 500),
+                    new Point(i + 15, 480)
             }, Color.BLACK));
         }
 
@@ -99,6 +103,7 @@ public class Level2 implements Level
         canvas.drawBitmap(broccoli, 330, 250, paint);
         canvas.drawBitmap(broccoli, 550, 400, paint);
     }
+
     public ArrayList<WallView> getWalls()
     {
         return walls;

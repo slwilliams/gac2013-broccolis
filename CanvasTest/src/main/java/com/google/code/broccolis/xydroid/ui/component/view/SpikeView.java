@@ -7,7 +7,6 @@ import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.SpikeModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
-import com.google.code.broccolis.xydroid.ui.interfaces.Obstacle;
 
 
 public class SpikeView implements Drawable
@@ -18,7 +17,7 @@ public class SpikeView implements Drawable
     {
         Path path = new Path();
         path.moveTo(points[0].x, points[0].y);
-        for(Point p : points)
+        for (Point p : points)
         {
             path.lineTo(p.x, p.y);
         }
@@ -30,6 +29,6 @@ public class SpikeView implements Drawable
     {
         Path path = model.getPath();
         paint.setColor(model.getColor());
-        canvas.drawPath(path,paint);
+        canvas.drawPath(path, paint);
     }
 }

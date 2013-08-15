@@ -15,13 +15,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
-
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
+import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
-import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
 
 import java.util.ArrayList;
 
@@ -76,7 +74,9 @@ public class DrawView extends View
             }
 
             @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+            public void onAccuracyChanged(Sensor sensor, int accuracy)
+            {
+            }
 
         }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
@@ -84,14 +84,14 @@ public class DrawView extends View
     private void initWorld()
     {
         buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
-        functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0,300), 600, width, height));
+        functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
     }
 
     public void onDraw(Canvas canvas)
     {
-        if (!collision(player, new Point((int)xAcc*2, 0)))
+        if (!collision(player, new Point((int) xAcc * 2, 0)))
         {
-            player.move((int)xAcc*2, 0);
+            player.move((int) xAcc * 2, 0);
         }
 
         doPhysics();
@@ -102,7 +102,7 @@ public class DrawView extends View
             b.draw(canvas, paint);
         }
 
-        for(FunctionView f : functions)
+        for (FunctionView f : functions)
         {
             f.draw(canvas, paint);
         }
@@ -150,7 +150,7 @@ public class DrawView extends View
         {
             for (FunctionView f : functions)
             {
-                if(f.collidesWith(player, moveAmount))
+                if (f.collidesWith(player, moveAmount))
                 {
                     falling = false;
                     return true;
@@ -184,7 +184,7 @@ public class DrawView extends View
         {
             if (b.isTouched((int) eventX, (int) eventY))
             {
-                if(b.getText().toLowerCase().equals("functions"))
+                if (b.getText().toLowerCase().equals("functions"))
                 {
                     AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
@@ -205,7 +205,9 @@ public class DrawView extends View
 
                     alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                     {
-                        public void onClick(DialogInterface dialog, int whichButton) { }
+                        public void onClick(DialogInterface dialog, int whichButton)
+                        {
+                        }
                     });
 
                     alert.show();
@@ -213,7 +215,7 @@ public class DrawView extends View
             }
             else
             {
-                if(!falling)
+                if (!falling)
                 {
                     jumping = true;
                     jumpBase = player.getY();

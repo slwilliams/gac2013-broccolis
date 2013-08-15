@@ -1,8 +1,5 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.Log;
@@ -38,8 +35,10 @@ public class FunctionModel
                 int calc = (int) calculable.calculate(i);
                 int x = i + initialCoordinate.x;
                 int y = calc + initialCoordinate.y;
-                if(x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                if (x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                {
                     continue;
+                }
                 points.add(new Point(x, y));
             }
         }
@@ -99,7 +98,7 @@ public class FunctionModel
         path = new Path();
         path.moveTo(points.get(0).x, points.get(0).y);
 
-        for(Point point : points)
+        for (Point point : points)
         {
             path.lineTo(point.x, point.y);
         }

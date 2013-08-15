@@ -8,8 +8,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.google.code.broccolis.xydroid.R;
+import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
 
-public class Player
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
+
+public class Player implements Drawable
 {
     private int playerX = 0;
     private int playerY = 0;
@@ -18,12 +22,12 @@ public class Player
     private int startX;
     private int startY;
 
-    public Player(int initialX, int initialY, int color, Resources res)
+    public Player(float initialX, float initialY, int color, Resources res)
     {
-        this.playerX = initialX;
-        this.playerY = initialY;
-        startX = initialX;
-        startY = initialY;
+        this.playerX = parseXToInt(initialX);
+        this.playerY = parseYToInt(initialY);
+        startX = parseXToInt(initialX);
+        startY = parseYToInt(initialY);
         this.color = color;
         this.playerImage = BitmapFactory.decodeResource(res, R.drawable.x);
     }
@@ -72,6 +76,7 @@ public class Player
         playerY += yAmt;
     }
 
+    @Override
     public void draw(Canvas canvas, Paint paint)
     {
         paint.setColor(color);

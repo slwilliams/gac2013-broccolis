@@ -25,6 +25,8 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
@@ -58,7 +60,7 @@ public class DrawView extends View
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
 
-        player = new Player(100, 650, Color.BLACK, getResources());
+        player = new Player(100f/NEXUS_WIDTH, 650f/NEXUS_HEIGHT, Color.BLACK, getResources());
         this.context = context;
 
         alertDialogInput = new EditText(context);

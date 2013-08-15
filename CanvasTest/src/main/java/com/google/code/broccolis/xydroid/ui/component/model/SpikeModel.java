@@ -20,4 +20,7 @@ public class SpikeModel {
     public int getColor(){
         return  color;
     }
+    public Point[] getPoints(){
+        return points;
+    }
 }

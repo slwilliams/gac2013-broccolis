@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
+import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.Button;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Player;
@@ -33,7 +34,7 @@ public class DrawView extends View
 
     Player player;
 
-    Level level = new Level1(getResources());
+    Level level = new Level2(getResources());
 
     ArrayList<Button> buttons = new ArrayList<Button>();
     ArrayList<FunctionView> functions = new ArrayList<FunctionView>();

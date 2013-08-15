@@ -29,6 +29,9 @@
         <activity android:name=".PlayLevel"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".SelectLevel"
+                  android:screenOrientation="landscape"
+                  android:configChanges="orientation|keyboardHidden"/>
 
     </application>
 

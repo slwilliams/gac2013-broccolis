@@ -1,16 +1,73 @@
 package com.google.code.broccolis.xydroid.ui.interfaces;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
+import com.google.code.broccolis.xydroid.ui.component.view.WallView;
+import com.google.code.broccolis.xydroid.util.Broccoli;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
-public interface Level
+import java.util.ArrayList;
+
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+
+public abstract class Level
 {
-    public void draw(Canvas canvas, Paint paint);
+    protected ArrayList<WallView> walls = new ArrayList<WallView>();
+    protected ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
+    protected ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
+    protected Bitmap yBitmap;
+    protected Point pointY;
+    protected double val = 0.1;
+    protected int score = 0;
 
-    public boolean collidesWith(Player player, Point movingAmount);
+    public Level()
+    {
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
+        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
+    }
 
-    public boolean reachedY(Player player);
+    abstract public void draw(Canvas canvas, Paint paint);
+
+    abstract public boolean collidesWith(Player player, Point movingAmount);
+
+    public final boolean goalReached(Player player, Point movingAmount)
+    {
+        int x = player.getX();
+        int y = player.getY();
+
+        int width = player.getWidth();
+        int height = player.getHeight();
+        Point pTop = new Point(x + movingAmount.x, y + movingAmount.y);
+        Point pBottom = new Point(x + width + movingAmount.x, y + height + movingAmount.y);
+
+        return pBottom.y >= getGoalTopY() && pTop.y <= getGoalBottomY() && pBottom.x >= getGoalTopX() && pTop.x <= getGoalBottomX();
+    }
+
+    private int getGoalBottomX()
+    {
+        return pointY.x + yBitmap.getWidth();
+    }
+
+    private int getGoalBottomY()
+    {
+        return pointY.y + yBitmap.getHeight();
+    }
+
+    private int getGoalTopX()
+    {
+        return pointY.x;
+    }
+
+    private int getGoalTopY()
+    {
+        return pointY.y;
+    }
 }

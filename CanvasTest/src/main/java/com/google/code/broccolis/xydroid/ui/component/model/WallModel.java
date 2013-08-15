@@ -1,6 +1,9 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
 import android.graphics.Point;
+import android.util.Log;
+
+import com.google.code.broccolis.xydroid.util.Player;
 
 public class WallModel
 {
@@ -48,8 +51,16 @@ public class WallModel
         return color;
     }
 
-    public boolean contains(int x, int y)
+    public boolean contains(Player player, Point moveAmount)
     {
-        return y + 5 >= getYMin() && x + 5 > getXMin() && y - 5 <= getYMax() && x - 5 <= getXMax();
+        int x = player.getX();
+        int y = player.getY();
+
+        int width = player.getWidth();
+        int height = player.getHeight();
+        Point pTop = new Point(x + moveAmount.x, y + moveAmount.y);
+        Point pBottom = new Point(x + width + moveAmount.x, y + height + moveAmount.y);
+
+        return pBottom.y >= getYMin() && pTop.y <= getYMax() && pBottom.x >= getXMin() && pTop.x <= getXMax();
     }
 }

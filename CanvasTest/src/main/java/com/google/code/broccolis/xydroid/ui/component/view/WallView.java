@@ -25,7 +25,7 @@ public class WallView implements Terrain
     @Override
     public boolean collidesWith(Player player, Point movingAmount)
     {
-        return model.contains(player.getX() + movingAmount.x, player.getY() + movingAmount.y);
+        return model.contains(player, movingAmount);
     }
 
     @Override

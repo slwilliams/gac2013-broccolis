@@ -65,6 +65,6 @@ public class Player
         paint.setColor(color);
 //        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
 //        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
-        canvas.drawBitmap(b, playerX - 10, playerY - 15, paint);
+        canvas.drawBitmap(b, playerX, playerY, paint);
     }
 }

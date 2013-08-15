@@ -1,5 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.Log;
@@ -18,22 +21,26 @@ import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SC
 
 public class FunctionModel
 {
-    private static final int RADIUS = 5;
     private static final String NAME = "FunctionModel ";
     private Calculable calculable = null;
     private List<Point> points;
     private List<Point> allPoints;
+    private Path path;
 
-    public FunctionModel(String function, Point initialCoordinate, int xMax)
+    public FunctionModel(String function, Point initialCoordinate, int xMax, int screenWidth, int screenHeight)
     {
-        points = new ArrayList<Point>();
-
+        this.points = new ArrayList<Point>();
         try
         {
             calculable = new ExpressionBuilder(function).withVariable("x", 0).build();
             for (int i = 0; i < xMax; i++)
             {
-                points.add(new Point(i + initialCoordinate.x, (int) calculable.calculate(i) + initialCoordinate.y));
+                int calc = (int) calculable.calculate(i);
+                int x = i + initialCoordinate.x;
+                int y = calc + initialCoordinate.y;
+                if(x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                    continue;
+                points.add(new Point(x, y));
             }
         }
         catch (Exception e)
@@ -43,6 +50,7 @@ public class FunctionModel
 
         allPoints = new ArrayList<Point>(points);
         optimizePoints();
+        generatePath();
     }
 
     private void optimizePoints()
@@ -86,15 +94,19 @@ public class FunctionModel
         return point.x > SCREEN_WIDTH || point.x < 0 || point.y < 0 || point.y > SCREEN_HEIGHT;
     }
 
-    public Path getPath()
+    public void generatePath()
     {
-        Path path = new Path();
+        path = new Path();
         path.moveTo(points.get(0).x, points.get(0).y);
-        for (Point point : points)
+
+        for(Point point : points)
         {
             path.lineTo(point.x, point.y);
         }
+    }
 
+    public Path getPath()
+    {
         return path;
     }
 

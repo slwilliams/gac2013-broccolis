@@ -11,8 +11,6 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class PlayLevel extends Activity
 {
-    private DrawView drawView;
-
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -26,7 +24,7 @@ public class PlayLevel extends Activity
         DrawView.height = height;
         DrawView.width = width;
 
-        drawView = new DrawView(this);
+        DrawView drawView = new DrawView(this);
 
         drawView.setBackgroundColor(Color.WHITE);
         setContentView(drawView);

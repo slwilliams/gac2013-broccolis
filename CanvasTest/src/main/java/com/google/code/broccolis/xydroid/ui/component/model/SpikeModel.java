@@ -1,25 +1,26 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
+import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.Point;
 
-/**
- * Created by demouser on 8/14/13.
- */
 public class SpikeModel
 {
-
-    private Point[] points;
+    private Path path;
     private int color;
 
-    public SpikeModel(Point[] points, int color)
-    {
+    public SpikeModel(Path path, int color){
 
-        this.points = points;
+        this.path = path;
         this.color = color;
     }
 
-    public int getColor()
+    public int getColor(){
+        return  color;
+    }
+
+    public Path getPath()
     {
-        return color;
+        return path;
     }
 }

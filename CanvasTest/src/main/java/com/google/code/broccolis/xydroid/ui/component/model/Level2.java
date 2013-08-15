@@ -1,5 +1,8 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +13,7 @@ import android.graphics.Point;
 import android.util.Log;
 
 import com.google.code.broccolis.xydroid.R;
+import com.google.code.broccolis.xydroid.activities.LevelActivity;
 import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
@@ -27,6 +31,7 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 public class Level2 implements Level
 {
     private static final String NAME = "Level2 ";
+    private static final int levelNum = 2;
 
     private Bitmap yBitmap;
     private ArrayList<WallView> walls = new ArrayList<WallView>();
@@ -38,7 +43,6 @@ public class Level2 implements Level
 
     public Level2(Resources res)
     {
-
         yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
         pointY = new Point(20, 50);
 
@@ -138,7 +142,6 @@ public class Level2 implements Level
     {
         if (goalReached(player, movingAmount))
         {
-            Log.i(TAG, "complete");
         }
 
         for (WallView w : walls)
@@ -158,7 +161,6 @@ public class Level2 implements Level
                 for (Broccoli br : broccolis)
                 {
                     br.setVisibility(true);
-
                 }
 
                 return true;
@@ -175,8 +177,6 @@ public class Level2 implements Level
             }
 
         }
-
-
         return false;
     }
 

@@ -1,6 +1,5 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -65,6 +64,7 @@ public class DrawView extends View
             case 1: level = new Level1(getResources());
                     break;
             case 2: level = new Level2(getResources());
+                    break;
         }
 
         paint.setAntiAlias(true);
@@ -171,9 +171,7 @@ public class DrawView extends View
         {
             f.draw(canvas, paint);
         }
-
         level.draw(canvas, paint);
-
 
         player.draw(canvas, paint);
 

@@ -16,6 +16,8 @@ import de.congrace.exp4j.ExpressionBuilder;
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 import static java.lang.Character.isDigit;
 
 public class FunctionModel
@@ -46,7 +48,7 @@ public class FunctionModel
                 {
                     continue;
                 }
-                points.add(new PointOnScreen((float) x / (float) SCREEN_WIDTH, (float) y / (float) SCREEN_HEIGHT));
+                points.add(new PointOnScreen(parseXToFloat(x),parseYToFloat(y)));
             }
         }
         catch (Exception e)

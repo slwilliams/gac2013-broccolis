@@ -25,8 +25,8 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
 public class DrawView extends View
 {
@@ -226,7 +226,7 @@ public class DrawView extends View
                 limitLeft = tapX;
                 maxX = player.getX() - limitLeft;
             }
-            functions.add(new FunctionView(functionString, new PointOnScreen((float) limitLeft / (float) SCREEN_WIDTH, (float) (player.getY() - 20) / (float) SCREEN_HEIGHT), maxX));
+            functions.add(new FunctionView(functionString, new PointOnScreen(parseXToFloat(limitLeft), parseYToFloat(player.getY() - 20)), maxX));
             waitForFunctionTap = false;
             isPaused = false;
         }

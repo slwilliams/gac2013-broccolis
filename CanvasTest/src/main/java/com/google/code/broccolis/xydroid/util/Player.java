@@ -14,24 +14,24 @@ public class Player
     private int playerX = 0;
     private int playerY = 0;
     private int color = Color.BLACK;
-    Bitmap b;
+    private Bitmap playerImage;
 
     public Player(int initialX, int initialY, int color, Resources res)
     {
         this.playerX = initialX;
         this.playerY = initialY;
         this.color = color;
-        b = BitmapFactory.decodeResource(res, R.drawable.x);
+        this.playerImage = BitmapFactory.decodeResource(res, R.drawable.x);
     }
 
     public int getWidth()
     {
-        return b.getWidth();
+        return playerImage.getWidth();
     }
 
     public int getHeight()
     {
-        return b.getHeight();
+        return playerImage.getHeight();
     }
 
     public int getX()
@@ -63,8 +63,6 @@ public class Player
     public void draw(Canvas canvas, Paint paint)
     {
         paint.setColor(color);
-//        canvas.drawLine(playerX - 10, playerY - 10, playerX + 10, playerY + 10, paint);
-//        canvas.drawLine(playerX - 10, playerY + 10, playerX + 10, playerY - 10, paint);
-        canvas.drawBitmap(b, playerX, playerY, paint);
+        canvas.drawBitmap(playerImage, playerX, playerY, paint);
     }
 }

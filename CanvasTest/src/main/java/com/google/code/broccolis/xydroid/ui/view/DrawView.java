@@ -43,6 +43,7 @@ public class DrawView extends View
     float xAcc = 0;
 
     boolean jumping = false;
+    boolean falling = false;
     int jumpBase = 400;
     int jumpHeight = 100;
     int jumpSpeed = 15;
@@ -54,6 +55,7 @@ public class DrawView extends View
     {
         super(context);
         paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
         player = new Player(100, 450, Color.BLACK, getResources());
         initWorld();
         this.context = context;
@@ -116,6 +118,7 @@ public class DrawView extends View
         if (!collision(player, new Point(0, gravity)))
         {
             player.move(0, gravity);
+            falling = true;
         }
 
         if (jumping && Math.abs(player.getY() - jumpBase) > jumpHeight)
@@ -140,6 +143,7 @@ public class DrawView extends View
     {
         if (level.collidesWith(player, moveAmount))
         {
+            falling = false;
             return true;
         }
         else
@@ -148,6 +152,7 @@ public class DrawView extends View
             {
                 if(f.collidesWith(player, moveAmount))
                 {
+                    falling = false;
                     return true;
                 }
             }
@@ -208,8 +213,11 @@ public class DrawView extends View
             }
             else
             {
-                jumping = true;
-                jumpBase = player.getY();
+                if(!falling)
+                {
+                    jumping = true;
+                    jumpBase = player.getY();
+                }
             }
         }
 

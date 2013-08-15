@@ -18,7 +18,7 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class PlayLevel extends Activity
 {
-    private String[] items = {"x^2",  "test2"};
+    private String[] items = {"x^2",  "Custom"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     DrawView drawView;
@@ -66,6 +66,10 @@ public class PlayLevel extends Activity
         if(position == 0)
         {
             drawView.addFunction("(x*0.05)^2");
+        }
+        if(position == 1)
+        {
+            drawView.addCustomFunction();
         }
         // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);

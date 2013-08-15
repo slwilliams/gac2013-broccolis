@@ -66,6 +66,47 @@ public class DrawView extends View
         waitForFunctionTap = true;
     }
 
+    public void addCustomFunction()
+    {
+        isPaused = true;
+        xAcc = 0;
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+
+        alert.setTitle("Enter Function");
+        alert.setMessage("e.g. x^2 + 2x + 5");
+
+        final EditText input = new EditText(getContext());
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                functionString = input.getText().toString();
+                Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
+                waitForFunctionTap = true;
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                isPaused = false;
+            }
+        });
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener()
+        {
+            public void onDismiss(DialogInterface dialog)
+            {
+                isPaused = false;
+            }
+        });
+
+        alert.show();
+    }
+
     public DrawView(Context context)
     {
         super(context);
@@ -103,7 +144,6 @@ public class DrawView extends View
 
     private void initWorld()
     {
-        buttons.add(new Button(new Point(25, 25), new Point(200, 75), "Functions"));
         //functions.add(new FunctionView("10*sin(x*0.05)*(0.01*x)", new Point(0, 300), 600, width, height));
     }
 
@@ -200,79 +240,32 @@ public class DrawView extends View
             eventY = event.getY();
         }
 
-        for (Button b : buttons)
+        if (waitForFunctionTap)
         {
-            if (b.isTouched((int) eventX, (int) eventY))
+            int tapX = (int) eventX;
+            int limitLeft;
+            int maxX;
+            if (tapX > player.getX())
             {
-                if (b.getText().toLowerCase().equals("functions") && !isPaused)
-                {
-                    isPaused = true;
-                    xAcc = 0;
-                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-
-                    alert.setTitle("Enter Function");
-                    alert.setMessage("e.g. x^2 + 2x + 5");
-
-                    final EditText input = new EditText(getContext());
-                    alert.setView(input);
-
-                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                            functionString = input.getText().toString();
-                            Toast.makeText(context, "Tap to finish function", Toast.LENGTH_LONG).show();
-                            waitForFunctionTap = true;
-                        }
-                    });
-
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int whichButton)
-                        {
-                            isPaused = false;
-                        }
-                    });
-
-                    alert.setOnDismissListener(new DialogInterface.OnDismissListener()
-                    {
-                        public void onDismiss(DialogInterface dialog)
-                        {
-                            isPaused = false;
-                        }
-                    });
-
-                    alert.show();
-                }
+                limitLeft = player.getX() + 40;
+                maxX = tapX - limitLeft;
             }
             else
             {
-                if (waitForFunctionTap)
-                {
-                    int tapX = (int) eventX;
-                    int limitLeft;
-                    int maxX;
-                    if (tapX > player.getX())
-                    {
-                        limitLeft = player.getX() + 40;
-                        maxX = tapX - limitLeft;
-                    }
-                    else
-                    {
-                        limitLeft = tapX;
-                        maxX = player.getX() - limitLeft;
-                    }
-                    functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY() - 20), maxX, width, height));
-                    waitForFunctionTap = false;
-                    isPaused = false;
-                }
-                else if (!falling)
-                {
-                    jumping = true;
-                    jumpBase = player.getY();
-                }
+                limitLeft = tapX;
+                maxX = player.getX() - limitLeft;
             }
+            functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY() - 20), maxX, width, height));
+            waitForFunctionTap = false;
+            isPaused = false;
         }
+        else if (!falling)
+        {
+            jumping = true;
+            jumpBase = player.getY();
+        }
+
+
 
         return true;
     }

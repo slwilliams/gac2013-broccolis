@@ -14,12 +14,16 @@ public class Player
     private int playerX = 0;
     private int playerY = 0;
     private int color = Color.BLACK;
-    private Bitmap playerImage; 
+    private Bitmap playerImage;
+    private int startX;
+    private int startY;
 
     public Player(int initialX, int initialY, int color, Resources res)
     {
         this.playerX = initialX;
         this.playerY = initialY;
+        startX = initialX;
+        startY = initialY;
         this.color = color;
         this.playerImage = BitmapFactory.decodeResource(res, R.drawable.x);
     }
@@ -37,6 +41,14 @@ public class Player
     public int getX()
     {
         return playerX;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public int getStartY() {
+        return startY;
     }
 
     public void setX(int x)

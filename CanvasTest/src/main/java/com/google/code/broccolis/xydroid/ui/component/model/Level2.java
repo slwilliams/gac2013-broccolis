@@ -119,6 +119,15 @@ public class Level2 implements Level
                 return true;
             }
         }
+        for (SpikeView s : spikes)
+        {
+            if (s.collidesWith(player, movingAmount))
+            {
+                player.setY(player.getStartY());
+                player.setX(player.getStartX());
+                return true;
+            }
+        }
         return false;
     }
 }

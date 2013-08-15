@@ -15,7 +15,7 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:hardwareAccelerated="true">
         <activity
-                android:name="com.google.code.broccolis.xydroid.MainActivity"
+                android:name=".activities.MainActivity"
                 android:label="XYDroid"
                 android:screenOrientation="landscape"
                 android:configChanges="orientation|keyboardHidden">
@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LevelActivity"
+        <activity android:name=".activities.LevelActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".SelectLevelActivity"
+        <activity android:name=".activities.SelectLevelActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".AboutActivity"
+        <activity android:name=".activities.AboutActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
     </application>

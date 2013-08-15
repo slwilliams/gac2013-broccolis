@@ -1,4 +1,4 @@
-package com.google.code.broccolis.xydroid;
+package com.google.code.broccolis.xydroid.activities;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;

@@ -17,6 +17,7 @@ public class Broccoli {
     private int x;
     private int y;
     private Bitmap broccolimage;
+    private boolean visible = true;
 
     public Broccoli(int x, int y, Resources res)
     {
@@ -41,6 +42,10 @@ public class Broccoli {
     {
         return y+broccolimage.getHeight();
     }
+    public void setVisibility(boolean visibility)
+    {
+        visible = visibility;
+    }
 
     public boolean contains(Player player, Point movingAmount){
 
@@ -58,5 +63,10 @@ public class Broccoli {
     public void draw(Canvas canvas, Paint paint)
     {
         canvas.drawBitmap(broccolimage, x, y, paint);
+    }
+
+    public boolean isVisible()
+    {
+        return visible;
     }
 }

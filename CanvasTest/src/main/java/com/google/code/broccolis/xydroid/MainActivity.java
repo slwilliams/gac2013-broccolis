@@ -2,13 +2,8 @@ package com.google.code.broccolis.xydroid;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-
-import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class MainActivity extends Activity
 {
@@ -25,12 +20,10 @@ public class MainActivity extends Activity
         startActivity(intent);
     }
 
-   /* public void startLevel(View view)
+    /*public void selectLevel(View view)
     {
-        int buttonId = view.getId();
-        switch(buttonId)
-        {
-            case R.id.buttonLevel1 etc....
-        }
+        Intent intent = new Intent(this, SelectLevel.class);
+        startActivity(intent);
     }*/
+
 }

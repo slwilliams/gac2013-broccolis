@@ -53,7 +53,8 @@
                 android:shadowDy="0"
                 android:shadowRadius="5"
                 android:layout_column="16"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:onClick="selectLevel"/>
     </TableRow>
 
 

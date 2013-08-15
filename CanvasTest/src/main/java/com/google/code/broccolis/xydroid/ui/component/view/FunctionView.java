@@ -6,15 +6,14 @@ import android.graphics.Path;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.FunctionModel;
-import com.google.code.broccolis.xydroid.ui.interfaces.Obstacle;
-import com.google.code.broccolis.xydroid.ui.interfaces.Drawable;
+import com.google.code.broccolis.xydroid.ui.interfaces.Terrain;
 import com.google.code.broccolis.xydroid.util.Player;
 
 import static android.graphics.Color.BLACK;
 import static android.graphics.Paint.Style.FILL;
 import static android.graphics.Paint.Style.STROKE;
 
-public class FunctionView implements Drawable, Obstacle
+public class FunctionView implements Terrain
 {
     private FunctionModel model;
 

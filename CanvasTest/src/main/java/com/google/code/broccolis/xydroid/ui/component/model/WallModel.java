@@ -1,7 +1,6 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
 import android.graphics.Point;
-import android.util.Log;
 
 import com.google.code.broccolis.xydroid.util.Player;
 

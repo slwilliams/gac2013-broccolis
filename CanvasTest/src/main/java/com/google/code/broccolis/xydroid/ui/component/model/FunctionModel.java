@@ -1,8 +1,5 @@
 package com.google.code.broccolis.xydroid.ui.component.model;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.Log;
@@ -16,6 +13,8 @@ import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.DeviceDependantVariables.SCREEN_WIDTH;
 
 public class FunctionModel
 {
@@ -36,8 +35,10 @@ public class FunctionModel
                 int calc = (int) calculable.calculate(i);
                 int x = i + initialCoordinate.x;
                 int y = calc + initialCoordinate.y;
-                if(x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                if (x > screenWidth || y > screenHeight || x < 0 || y < 0)
+                {
                     continue;
+                }
                 points.add(new Point(x, y));
             }
         }
@@ -72,6 +73,24 @@ public class FunctionModel
                 i++;
             }
         }
+
+        i = 0;
+        while (i < allPoints.size())
+        {
+            if (isOutOfBounds(allPoints.get(i)))
+            {
+                allPoints.remove(i);
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+
+    private boolean isOutOfBounds(Point point)
+    {
+        return point.x > SCREEN_WIDTH || point.x < 0 || point.y < 0 || point.y > SCREEN_HEIGHT;
     }
 
     public void generatePath()
@@ -79,7 +98,7 @@ public class FunctionModel
         path = new Path();
         path.moveTo(points.get(0).x, points.get(0).y);
 
-        for(Point point : points)
+        for (Point point : points)
         {
             path.lineTo(point.x, point.y);
         }
@@ -111,7 +130,11 @@ public class FunctionModel
 
         for (Point point : allPoints)
         {
-            if (top.x < point.x || bottom.x > point.x || top.y < point.y || bottom.y > point.y)
+            if (top.x < point.x)
+            {
+                break;
+            }
+            if (bottom.x > point.x || top.y < point.y || bottom.y > point.y)
             {
                 continue;
             }

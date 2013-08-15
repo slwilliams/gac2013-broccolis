@@ -2,10 +2,9 @@ package com.google.code.broccolis.xydroid.util;
 
 import android.os.Bundle;
 
-import com.google.code.broccolis.xydroid.R;
 
-
-public class startInterface {
+public class StartInterface
+{
 
     //@Override
     public void onCreate(Bundle savedInstanceState)

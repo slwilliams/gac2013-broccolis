@@ -32,7 +32,9 @@
         <activity android:name=".SelectLevel"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|keyboardHidden"/>
-
+        <activity android:name=".About"
+                  android:screenOrientation="landscape"
+                  android:configChanges="orientation|keyboardHidden"/>
     </application>
 
 </manifest>

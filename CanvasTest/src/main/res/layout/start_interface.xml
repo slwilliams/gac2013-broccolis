@@ -67,7 +67,7 @@
         <Button
                 android:text="@string/aboutButton"
                 android:id="@+id/button3"
-
+                android:onClick="about"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 android:gravity="center"

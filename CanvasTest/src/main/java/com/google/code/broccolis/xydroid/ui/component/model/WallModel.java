@@ -3,21 +3,22 @@ package com.google.code.broccolis.xydroid.ui.component.model;
 import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 public class WallModel
 {
-    private Point top;
-    private Point bottom;
+    private PointOnScreen top;
+    private PointOnScreen bottom;
     private int color;
 
-    public WallModel(Point top, Point bottom, int color)
+    public WallModel(PointOnScreen top, PointOnScreen bottom, int color)
     {
         this.top = top;
         this.bottom = bottom;
         this.color = color;
     }
 
-    public void move(int x, int y)
+    public void move(float x, float y)
     {
         top.x += x;
         bottom.x += x;
@@ -27,22 +28,22 @@ public class WallModel
 
     public int getYMin()
     {
-        return top.y;
+        return top.getScreenY();
     }
 
     public int getXMin()
     {
-        return top.x;
+        return top.getScreenX();
     }
 
     public int getYMax()
     {
-        return bottom.y;
+        return bottom.getScreenY();
     }
 
     public int getXMax()
     {
-        return bottom.x;
+        return bottom.getScreenX();
     }
 
     public int getColor()

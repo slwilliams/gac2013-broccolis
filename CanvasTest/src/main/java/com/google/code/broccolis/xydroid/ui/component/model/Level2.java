@@ -13,9 +13,14 @@ import com.google.code.broccolis.xydroid.ui.component.view.SpikeView;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
+import com.google.code.broccolis.xydroid.util.MultipleDeviceSupport;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
+
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 
 
 public class Level2 implements Level
@@ -35,12 +40,12 @@ public class Level2 implements Level
 
         b = BitmapFactory.decodeResource(res, R.drawable.y);
 
-        walls.add(new WallView(new Point(0, 100), new Point(100, 125), Color.GREEN));
-        walls.add(new WallView(new Point(1000, 100), new Point(1100, 160), Color.GREEN));
-        walls.add(new WallView(new Point(300, 300), new Point(850, 355), Color.GREEN));
-        walls.add(new WallView(new Point(300, 500), new Point(400, 555), Color.GREEN));
-        walls.add(new WallView(new Point(600, 500), new Point(800, 555), Color.GREEN));
-        walls.add(new WallView(new Point(1000, 450), new Point(1100, 475), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(0f/NEXUS_WIDTH, 100f/NEXUS_HEIGHT), new PointOnScreen(100f/NEXUS_WIDTH, 125f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(1000f/NEXUS_WIDTH, 100f/NEXUS_HEIGHT), new PointOnScreen(1100f/NEXUS_WIDTH, 160f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(300f/NEXUS_WIDTH, 300f/NEXUS_HEIGHT), new PointOnScreen(850f/NEXUS_WIDTH, 355f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(300f/NEXUS_WIDTH, 500f/NEXUS_HEIGHT), new PointOnScreen(400f/NEXUS_WIDTH, 555f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(600f/NEXUS_WIDTH, 500f/NEXUS_HEIGHT), new PointOnScreen(800f/NEXUS_WIDTH, 555f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(1000f/NEXUS_WIDTH, 450f/NEXUS_HEIGHT), new PointOnScreen(1100f/NEXUS_WIDTH, 475f/NEXUS_HEIGHT), Color.GREEN));
 
         for (int i = 1005; i < 1090; i += 30)
         {
@@ -79,10 +84,10 @@ public class Level2 implements Level
         }
 
         //bounds
-        walls.add(new WallView(new Point(0, 0), new Point(0, 700), Color.BLACK));
-        walls.add(new WallView(new Point(0, 0), new Point(1270, 0), Color.BLACK));
-        walls.add(new WallView(new Point(1270, 0), new Point(1270, 700), Color.BLACK));
-        walls.add(new WallView(new Point(0, 700), new Point(1270, 700), Color.BLACK));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f/NEXUS_HEIGHT), Color.BLACK));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f/NEXUS_WIDTH, 0), Color.BLACK));
+        walls.add(new WallView(new PointOnScreen(1270f/NEXUS_WIDTH, 0), new PointOnScreen(1270f/NEXUS_WIDTH, 700f/NEXUS_HEIGHT), Color.BLACK));
+        walls.add(new WallView(new PointOnScreen(0, 700f/NEXUS_HEIGHT), new PointOnScreen(1270f/NEXUS_WIDTH, 700f/NEXUS_HEIGHT), Color.BLACK));
 
         broccolis.add(new Broccoli(1020, 50, res));
         broccolis.add(new Broccoli(330, 250, res));

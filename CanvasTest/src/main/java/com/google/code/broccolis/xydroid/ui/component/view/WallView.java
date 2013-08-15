@@ -6,20 +6,25 @@ import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.WallModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Terrain;
+import com.google.code.broccolis.xydroid.util.MultipleDeviceSupport;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
+
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
 public class WallView implements Terrain
 {
     private WallModel model;
 
-    public WallView(Point top, Point bottom, int color)
+    public WallView(PointOnScreen top, PointOnScreen bottom, int color)
     {
         model = new WallModel(top, bottom, color);
     }
 
     public void move(int x, int y)
     {
-        model.move(x, y);
+        model.move(parseXToFloat(x), parseYToFloat(y));
     }
 
     @Override

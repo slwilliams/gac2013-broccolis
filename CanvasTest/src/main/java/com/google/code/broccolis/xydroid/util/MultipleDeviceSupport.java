@@ -2,6 +2,8 @@ package com.google.code.broccolis.xydroid.util;
 
 public class MultipleDeviceSupport
 {
+    public static final float NEXUS_WIDTH = 1280;
+    public static final float NEXUS_HEIGHT = 736;
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
 

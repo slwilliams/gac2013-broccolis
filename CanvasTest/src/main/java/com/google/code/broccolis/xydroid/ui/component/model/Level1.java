@@ -12,9 +12,16 @@ import android.graphics.Point;
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.component.view.WallView;
 import com.google.code.broccolis.xydroid.ui.interfaces.Level;
+import com.google.code.broccolis.xydroid.util.MultipleDeviceSupport;
 import com.google.code.broccolis.xydroid.util.Player;
+import com.google.code.broccolis.xydroid.util.PointOnScreen;
+
+import org.apache.http.NoHttpResponseException;
 
 import java.util.ArrayList;
+
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 
 public class Level1 implements Level
 {
@@ -25,10 +32,10 @@ public class Level1 implements Level
 
     public Level1(Resources res)
     {
-        walls.add(new WallView(new Point(0, 650), new Point(1300, 675), Color.RED));
-        walls.add(new WallView(new Point(500, 400), new Point(1300, 425), Color.BLUE));
-        walls.add(new WallView(new Point(0, 500), new Point(300, 525), Color.GREEN));
-        walls.add(new WallView(new Point(700, 200), new Point(1300, 225), Color.YELLOW));
+        walls.add(new WallView(new PointOnScreen(0, 650f/ NEXUS_HEIGHT), new PointOnScreen(1300f/NEXUS_WIDTH, 675f/NEXUS_HEIGHT), Color.RED));
+        walls.add(new WallView(new PointOnScreen(500f/NEXUS_WIDTH, 400f/NEXUS_HEIGHT), new PointOnScreen(1300f/NEXUS_WIDTH, 425f/NEXUS_HEIGHT), Color.BLUE));
+        walls.add(new WallView(new PointOnScreen(0, 500f/NEXUS_HEIGHT), new PointOnScreen(300f/NEXUS_WIDTH, 525f/NEXUS_HEIGHT), Color.GREEN));
+        walls.add(new WallView(new PointOnScreen(700f/NEXUS_WIDTH, 200f/NEXUS_HEIGHT), new PointOnScreen(1300f/NEXUS_WIDTH, 225f/NEXUS_HEIGHT), Color.YELLOW));
 
         broccoli = BitmapFactory.decodeResource(res, R.drawable.broccoli);
     }

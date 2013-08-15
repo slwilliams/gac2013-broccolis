@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
 import java.util.ArrayList;
 
+import static com.google.code.broccolis.xydroid.util.Constants.TAG;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
@@ -31,6 +33,7 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parse
 
 public class DrawView extends View
 {
+    private static final String NAME = "DrawView ";
     private static final int jumpHeight = 100;
     private static final int jumpSpeed = 15;
     private static final int gravity = 5;
@@ -65,6 +68,8 @@ public class DrawView extends View
         createAlert();
 
         initAccelerometer();
+
+        Log.i(TAG, NAME + "created");
     }
 
     public void clear()
@@ -81,6 +86,8 @@ public class DrawView extends View
 
     public void addCustomFunction()
     {
+        Log.i(TAG, NAME + "adding function");
+
         isPaused = true;
         xAcc = 0;
 

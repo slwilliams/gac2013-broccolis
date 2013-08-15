@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,12 +13,15 @@ import android.widget.ListView;
 
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
+import static com.google.code.broccolis.xydroid.util.Constants.TAG;
+
 public class PlayLevel extends Activity
 {
+    private static final String NAME = "Level ";
     private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "Custom", "Clear"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
-    DrawView drawView;
+    private DrawView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -36,12 +40,17 @@ public class PlayLevel extends Activity
 
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        Log.i(TAG, NAME + "created");
     }
 
     @Override
     public void onPause()
     {
+        Log.i(TAG, NAME + "paused");
+
         super.onPause();
+
         drawView.setPaused();
     }
 

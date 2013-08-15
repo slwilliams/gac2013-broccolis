@@ -35,9 +35,9 @@ public class DrawView extends View
     private static final int jumpSpeed = 15;
     private static final int gravity = 5;
     private final double SHAKE_DELTA = 2;
-    boolean isPaused = false;
-    boolean waitForFunctionTap = false;
-    String functionString = null;
+    private boolean isPaused = false;
+    private boolean waitForFunctionTap = false;
+    private String functionString = null;
     private int jumpBase = 400;
     private float xAcc = 0;
     private boolean jumping = false;

@@ -26,7 +26,7 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 public class Level2 implements Level
 {
 
-    Bitmap b;
+    private Bitmap yBitmap;
     private ArrayList<WallView> walls = new ArrayList<WallView>();
     private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
     private ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
@@ -37,7 +37,7 @@ public class Level2 implements Level
     public Level2(Resources res)
     {
 
-        b = BitmapFactory.decodeResource(res, R.drawable.y);
+        yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
         pointY = new Point(20, 50);
 
         walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), Color.GREEN));
@@ -121,7 +121,7 @@ public class Level2 implements Level
             }
         }
 
-        canvas.drawBitmap(b, pointY.x, pointY.y, paint);
+        canvas.drawBitmap(yBitmap, pointY.x, pointY.y, paint);
         paint.setTextSize(20);
         canvas.drawText("Broccolis: " + score, 1110, 50, paint);
 
@@ -195,12 +195,12 @@ public class Level2 implements Level
 
     public int getGoalBottomX()
     {
-        return pointY.x + b.getWidth();
+        return pointY.x + yBitmap.getWidth();
     }
 
     public int getGoalBottomY()
     {
-        return pointY.y + b.getHeight();
+        return pointY.y + yBitmap.getHeight();
     }
 
     public int getGoalTopX()

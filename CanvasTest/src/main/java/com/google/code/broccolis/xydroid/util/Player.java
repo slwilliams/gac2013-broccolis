@@ -14,7 +14,7 @@ public class Player
     private int playerX = 0;
     private int playerY = 0;
     private int color = Color.BLACK;
-    private Bitmap playerImage;
+    private Bitmap playerImage; 
 
     public Player(int initialX, int initialY, int color, Resources res)
     {

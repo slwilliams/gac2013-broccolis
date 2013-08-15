@@ -31,7 +31,7 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parse
 
 public class DrawView extends View
 {
-    private static final int jumpHeight = 500;
+    private static final int jumpHeight = 100;
     private static final int jumpSpeed = 15;
     private static final int gravity = 5;
     private final double SHAKE_DELTA = 2;

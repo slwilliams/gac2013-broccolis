@@ -94,9 +94,9 @@ public class Level2 implements Level
         walls.add(new WallView(new PointOnScreen(1270f/NEXUS_WIDTH, 0), new PointOnScreen(1270f/NEXUS_WIDTH, 700f/NEXUS_HEIGHT), Color.BLACK));
         walls.add(new WallView(new PointOnScreen(0, 700f/NEXUS_HEIGHT), new PointOnScreen(1270f/NEXUS_WIDTH, 700f/NEXUS_HEIGHT), Color.BLACK));
 
-        broccolis.add(new Broccoli(1020, 50, res));
-        broccolis.add(new Broccoli(330, 250, res));
-        broccolis.add(new Broccoli(550, 400, res));
+        broccolis.add(new Broccoli(1020f/NEXUS_WIDTH, 50f/NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(330f/NEXUS_WIDTH, 250f/NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(550f/NEXUS_WIDTH, 400f/NEXUS_HEIGHT, res));
 
 
     }
@@ -119,8 +119,10 @@ public class Level2 implements Level
 
         for (Broccoli br : broccolis)
         {
-            if(br.isVisible())
+            if(br.isVisible()){
+                Log.i("DRAW", "BROCCOLIS");
                 br.draw(canvas, paint);
+            }
         }
 
         canvas.drawBitmap(b, pointY.x, pointY.y, paint);

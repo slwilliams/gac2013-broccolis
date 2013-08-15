@@ -6,7 +6,6 @@ import android.graphics.Point;
 
 import com.google.code.broccolis.xydroid.ui.component.model.WallModel;
 import com.google.code.broccolis.xydroid.ui.interfaces.Terrain;
-import com.google.code.broccolis.xydroid.util.MultipleDeviceSupport;
 import com.google.code.broccolis.xydroid.util.Player;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 

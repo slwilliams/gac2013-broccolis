@@ -1,13 +1,9 @@
 package com.google.code.broccolis.xydroid;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +14,7 @@ import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 public class PlayLevel extends Activity
 {
-    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)",  "Custom", "Clear"};
+    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "Custom", "Clear"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     DrawView drawView;
@@ -60,21 +56,28 @@ public class PlayLevel extends Activity
 
     private void selectItem(int position)
     {
-        switch(position)
+        switch (position)
         {
-            case 0: drawView.addFunction("x");
-                    break;
-            case 1: drawView.addFunction("-x");
-                    break;
-            case 2: drawView.addFunction("(x*0.05)^2");
-                    break;
-            case 3: drawView.addFunction("60*sin(x*0.02)");
-                    break;
-            case 4: drawView.addFunction("60*sin(x*0.1)*(x*0.007)");
-                    break;
-            case 5: drawView.addCustomFunction();
-                    break;
-            case 6: drawView.clear();
+            case 0:
+                drawView.addFunction("x");
+                break;
+            case 1:
+                drawView.addFunction("-x");
+                break;
+            case 2:
+                drawView.addFunction("(x*0.05)^2");
+                break;
+            case 3:
+                drawView.addFunction("60*sin(x*0.02)");
+                break;
+            case 4:
+                drawView.addFunction("60*sin(x*0.1)*(x*0.007)");
+                break;
+            case 5:
+                drawView.addCustomFunction();
+                break;
+            case 6:
+                drawView.clear();
         }
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);

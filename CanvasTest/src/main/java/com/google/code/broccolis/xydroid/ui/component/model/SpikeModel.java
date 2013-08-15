@@ -34,7 +34,9 @@ public class SpikeModel
     {
         return path;
     }
-    public boolean contains(Player player, Point moveAmount){
+
+    public boolean contains(Player player, Point moveAmount)
+    {
 
         int x = player.getX();
         int y = player.getY();
@@ -43,10 +45,10 @@ public class SpikeModel
         int height = player.getHeight();
         Point pTop = new Point(x + moveAmount.x, y + moveAmount.y);
         Point pBottom = new Point(x + width + moveAmount.x, y + height + moveAmount.y);
-        Point pMiddle = new Point(x+moveAmount.x + width/2, y + height/2 + moveAmount.y);
+        Point pMiddle = new Point(x + moveAmount.x + width / 2, y + height / 2 + moveAmount.y);
 
-        return region.contains(pTop.x,pTop.y) || region.contains(pTop.x+width, pTop.y)
-                || region.contains(x, pTop.y+height) || region.contains(pTop.x+width, pTop.y+height)
+        return region.contains(pTop.x, pTop.y) || region.contains(pTop.x + width, pTop.y)
+                || region.contains(x, pTop.y + height) || region.contains(pTop.x + width, pTop.y + height)
                 || region.contains(pMiddle.x, pMiddle.y);
     }
 }

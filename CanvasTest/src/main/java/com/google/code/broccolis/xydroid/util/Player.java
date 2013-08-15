@@ -47,11 +47,13 @@ public class Player implements Drawable
         return playerX;
     }
 
-    public int getStartX() {
+    public int getStartX()
+    {
         return startX;
     }
 
-    public int getStartY() {
+    public int getStartY()
+    {
         return startY;
     }
 

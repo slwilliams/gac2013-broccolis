@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.code.broccolis.xydroid.ui.view.DrawView;
-
 public class SelectLevel extends Activity
 {
     @Override
@@ -22,16 +20,17 @@ public class SelectLevel extends Activity
         int lNumber = Integer.parseInt((String) ((Button) view).getText());
         Intent intent;
 
-        switch (lNumber){
+        switch (lNumber)
+        {
             case 1:
                 intent = new Intent(this, PlayLevel.class);
                 startActivity(intent);
-            break;
+                break;
 
             case 2:
                 //intent = new Intent(this, class);
                 //startActivity(intent);
-             break;
+                break;
         }
 
     }

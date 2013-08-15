@@ -109,7 +109,8 @@ public class Level2 implements Level
 
         for (Broccoli br : broccolis)
         {
-            br.draw(canvas, paint);
+            if(br.isVisible())
+                br.draw(canvas, paint);
         }
 
         canvas.drawBitmap(b, 20, 50, paint);
@@ -138,6 +139,13 @@ public class Level2 implements Level
             {
                 player.setY(player.getStartY());
                 player.setX(player.getStartX());
+                score = 0;
+                for (Broccoli br : broccolis)
+                {
+                    br.setVisibility(true);
+
+                }
+
                 return true;
             }
         }
@@ -146,7 +154,7 @@ public class Level2 implements Level
         {
             if (br.contains(player, movingAmount))
             {
-                broccolis.remove(br);
+                br.setVisibility(false);
                 score++;
                 return true;
             }

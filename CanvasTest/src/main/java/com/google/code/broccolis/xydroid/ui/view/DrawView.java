@@ -222,6 +222,14 @@ public class DrawView extends View
                         }
                     });
 
+                    alert.setOnDismissListener(new DialogInterface.OnDismissListener()
+                    {
+                        public void onDismiss(DialogInterface dialog)
+                        {
+                            isPaused = false;
+                        }
+                    });
+
                     alert.show();
                 }
             }
@@ -242,7 +250,7 @@ public class DrawView extends View
                         limitLeft = tapX;
                         maxX = player.getX() - limitLeft;
                     }
-                    functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY()-20), maxX, width, height));
+                    functions.add(new FunctionView(functionString, new Point(limitLeft, player.getY() - 20), maxX, width, height));
                     waitForFunctionTap = false;
                     isPaused = false;
                 }

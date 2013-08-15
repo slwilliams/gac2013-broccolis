@@ -34,8 +34,6 @@ public class FunctionModel
 
         function = repairSmallMistakes(function);
 
-        Log.i(TAG, NAME + "INITCOORDS" + initialCoordinate.getScreenX() + "," + initialCoordinate.getScreenY());
-
         try
         {
             calculable = new ExpressionBuilder("-1*(" + function + ")").withVariable("x", 0).build();

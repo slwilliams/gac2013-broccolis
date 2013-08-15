@@ -31,10 +31,10 @@ public class Level1 implements Level
 
     public Level1(Resources res)
     {
-        walls.add(new WallView(new PointOnScreen(0, 650f / NEXUS_HEIGHT), new PointOnScreen(1300f / NEXUS_WIDTH, 675f / NEXUS_HEIGHT), Color.RED));
-        walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(1300f / NEXUS_WIDTH, 425f / NEXUS_HEIGHT), Color.BLUE));
+        walls.add(new WallView(new PointOnScreen(0, 650f / NEXUS_HEIGHT), new PointOnScreen(1f, 675f / NEXUS_HEIGHT), Color.RED));
+        walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(1f, 425f / NEXUS_HEIGHT), Color.BLUE));
         walls.add(new WallView(new PointOnScreen(0, 500f / NEXUS_HEIGHT), new PointOnScreen(300f / NEXUS_WIDTH, 525f / NEXUS_HEIGHT), Color.GREEN));
-        walls.add(new WallView(new PointOnScreen(700f / NEXUS_WIDTH, 200f / NEXUS_HEIGHT), new PointOnScreen(1300f / NEXUS_WIDTH, 225f / NEXUS_HEIGHT), Color.YELLOW));
+        walls.add(new WallView(new PointOnScreen(700f / NEXUS_WIDTH, 200f / NEXUS_HEIGHT), new PointOnScreen(1f, 225f / NEXUS_HEIGHT), Color.YELLOW));
 
         broccoliBitmap = BitmapFactory.decodeResource(res, R.drawable.broccoli);
     }

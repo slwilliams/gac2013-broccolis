@@ -26,7 +26,7 @@ public class MultipleDeviceSupport
     {
         if (x < 0 || x > 1)
         {
-            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds");
+            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds x="+x);
             Log.e(TAG, NAME, exception);
         }
         return (int) (x * SCREEN_WIDTH);
@@ -36,7 +36,7 @@ public class MultipleDeviceSupport
     {
         if (y < 0 || y > 1)
         {
-            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds");
+            IllegalArgumentException exception = new IllegalArgumentException("Argument out of bounds y="+y);
             Log.e(TAG, NAME, exception);
         }
         return (int) (y * SCREEN_HEIGHT);

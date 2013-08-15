@@ -7,5 +7,7 @@
     <string name="newGameButton">New Game</string>
     <string name="selectLevelButton">Select Level</string>
     <string name="aboutButton">About</string>
+    <string name="level1">1</string>
+    <string name="level2">2</string>
 
 </resources>

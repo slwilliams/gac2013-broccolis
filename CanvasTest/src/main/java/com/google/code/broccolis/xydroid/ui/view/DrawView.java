@@ -1,8 +1,10 @@
 package com.google.code.broccolis.xydroid.ui.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.code.broccolis.xydroid.activities.LevelActivity;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
@@ -54,6 +57,7 @@ public class DrawView extends View
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
     private double then;
+    private boolean finished;
 
     public boolean off = false;
 
@@ -61,12 +65,14 @@ public class DrawView extends View
     {
         super(context);
 
-        switch(levelNum)
+        switch (levelNum)
         {
-            case 1: level = new Level1(getResources());
-                    break;
-            case 2: level = new Level2(getResources());
-                    break;
+            case 1:
+                level = new Level1(getResources());
+                break;
+            case 2:
+                level = new Level2(getResources());
+                break;
         }
 
         paint.setAntiAlias(true);
@@ -120,7 +126,7 @@ public class DrawView extends View
 
     public void undo()
     {
-        functions.remove(functions.size()-1);
+        functions.remove(functions.size() - 1);
     }
 
     public void initAccelerometer()
@@ -212,8 +218,20 @@ public class DrawView extends View
         }
     }
 
-    public boolean collision(Player player, Point moveAmount)
+    public synchronized boolean collision(Player player, Point moveAmount)
     {
+        if (level.goalReached(player, moveAmount))
+        {
+            if (level instanceof Level1)
+            {
+                Intent intent = new Intent(context, LevelActivity.class);
+                intent.putExtra("level", 2);
+                context.startActivity(intent);
+                ((Activity) context).finish();
+                finished = true;
+            }
+        }
+
         if (level.collidesWith(player, moveAmount))
         {
             falling = false;

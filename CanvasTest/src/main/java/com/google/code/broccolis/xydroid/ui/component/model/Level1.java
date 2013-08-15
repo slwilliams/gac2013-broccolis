@@ -23,22 +23,16 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToInt;
 
-public class Level1 implements Level
+public class Level1 extends Level
 {
-
-    private ArrayList<WallView> walls = new ArrayList<WallView>();
-    private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
-    private ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
-    private double val = 0.1;
-    private int score = 0;
-    private Point pointY;
-    private Bitmap yBitmap;
-
     public Level1(Resources res)
     {
+        super();
 
         walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
         walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), res));
@@ -93,13 +87,6 @@ public class Level1 implements Level
                     new Point(parseNexusX(1100), parseNexusY(i + 10))
             }, Color.BLACK));
         }
-
-        //bounds
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
-        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
-
 
         broccolis.add(new Broccoli(20f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
         broccolis.add(new Broccoli(500f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT, res));
@@ -186,14 +173,6 @@ public class Level1 implements Level
 
         }
 
-        return false;
-    }
-
-    @Override
-    public boolean reachedY(Player player)
-    {
-//        pointY.x
-//        yBitmap.getHeight()[]
         return false;
     }
 }

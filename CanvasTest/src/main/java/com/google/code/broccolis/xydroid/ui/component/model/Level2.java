@@ -28,19 +28,15 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parse
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
 
 
-public class Level2 implements Level
+public class Level2 extends Level
 {
     private static final String NAME = "Level2 ";
-    private Bitmap yBitmap;
-    private ArrayList<WallView> walls = new ArrayList<WallView>();
-    private ArrayList<SpikeView> spikes = new ArrayList<SpikeView>();
-    private ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
-    private double val = 0.1;
-    private int score = 0;
-    private Point pointY;
+    private static final int levelNum = 2;
 
     public Level2(Resources res)
     {
+        super();
+
         yBitmap = BitmapFactory.decodeResource(res, R.drawable.y);
         pointY = new Point(parseNexusX(20), parseNexusY(50));
 
@@ -87,17 +83,9 @@ public class Level2 implements Level
             }, Color.BLACK));
         }
 
-        //bounds
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
-        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
-        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
-
         broccolis.add(new Broccoli(1020f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
         broccolis.add(new Broccoli(330f / NEXUS_WIDTH, 250f / NEXUS_HEIGHT, res));
         broccolis.add(new Broccoli(550f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT, res));
-
-
     }
 
     @Override
@@ -124,11 +112,11 @@ public class Level2 implements Level
             }
         }
         paint.setColor(Color.BLACK);
-        canvas.drawRect(0, 300, 20, 400, paint);
+        canvas.drawRect(0, parseNexusY(300), parseNexusX(20), parseNexusY(400), paint);
         paint.setColor(Color.WHITE);
-        canvas.drawLine(3, 325, 17, 350, paint);
+        canvas.drawLine(parseNexusX(3), parseNexusY(325), parseNexusX(17), parseNexusY(350), paint);
 
-        canvas.drawLine(3, 375, 17, 350, paint);
+        canvas.drawLine(parseNexusX(3), parseNexusY(375), parseNexusX(17), parseNexusY(350), paint);
 
 
 
@@ -188,44 +176,6 @@ public class Level2 implements Level
         return false;
     }
 
-    @Override
-    public boolean reachedY(Player player)
-    {
-//        WallView yBlock = new WallView(new PointOnScreen(parseXToFloat(pointY.x),parseYToFloat(pointY.y)));
-        return false;
-    }
 
-    public boolean goalReached(Player player, Point movingAmount)
-    {
-        int x = player.getX();
-        int y = player.getY();
 
-        int width = player.getWidth();
-        int height = player.getHeight();
-        Point pTop = new Point(x + movingAmount.x, y + movingAmount.y);
-        Point pBottom = new Point(x + width + movingAmount.x, y + height + movingAmount.y);
-
-        return pBottom.y >= getGoalTopY() && pTop.y <= getGoalBottomY() && pBottom.x >= getGoalTopX() && pTop.x <= getGoalBottomX();
-
-    }
-
-    public int getGoalBottomX()
-    {
-        return pointY.x + yBitmap.getWidth();
-    }
-
-    public int getGoalBottomY()
-    {
-        return pointY.y + yBitmap.getHeight();
-    }
-
-    public int getGoalTopX()
-    {
-        return pointY.x;
-    }
-
-    public int getGoalTopY()
-    {
-        return pointY.y;
-    }
 }

@@ -145,7 +145,7 @@ public class FunctionModel
 
     public int getGrad(int x)
     {
-        double h = (double) x * 1e-8;
+        double h = ((double) x) * 1e-8;
         return (int) ((calculable.calculate(x + h) - calculable.calculate(x)) / h); //TODO its just approximation, can implement better algorithm
     }
 

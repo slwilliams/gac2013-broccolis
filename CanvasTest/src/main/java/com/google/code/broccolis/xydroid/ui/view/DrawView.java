@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.activities.LevelActivity;
 import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
@@ -348,8 +347,10 @@ public class DrawView extends View
             }
         });
 
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener()
+        {
+            public void onCancel(DialogInterface dialog)
+            {
                 isPaused = false;
             }
         });

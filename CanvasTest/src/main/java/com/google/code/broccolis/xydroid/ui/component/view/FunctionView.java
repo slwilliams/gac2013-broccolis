@@ -14,6 +14,8 @@ import com.google.code.broccolis.xydroid.util.PointOnScreen;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Paint.Style.FILL;
 import static android.graphics.Paint.Style.STROKE;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
 
 public class FunctionView implements Terrain
 {
@@ -29,11 +31,11 @@ public class FunctionView implements Terrain
     public void draw(Canvas canvas, Paint paint)
     {
         Path path = model.getPath();
-        paint.setStrokeWidth(5.f);
+        paint.setStrokeWidth((5f / NEXUS_HEIGHT) * SCREEN_HEIGHT);
         paint.setStyle(STROKE);
         paint.setColor(Color.RED);
         canvas.drawPath(path, paint);
-        paint.setStrokeWidth(2f);
+        paint.setStrokeWidth((2f / NEXUS_HEIGHT) * SCREEN_HEIGHT);
         paint.setColor(BLACK);
         canvas.drawPath(path, paint);
         paint.setStyle(FILL);

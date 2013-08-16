@@ -37,20 +37,20 @@ public class MainActivity extends Activity
     private void setComponentSizes()
     {
         Button button = (Button) findViewById(R.id.button1);
-        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
-        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+        button.setScaleX(SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY(SCREEN_HEIGHT / (NEXUS_HEIGHT));
 
         button = (Button) findViewById(R.id.button2);
-        button.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
-        button.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
+        button.setScaleX(SCREEN_WIDTH / NEXUS_WIDTH);
+        button.setScaleY(SCREEN_HEIGHT / NEXUS_HEIGHT);
 
         button = (Button) findViewById(R.id.button3);
-        button.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
-        button.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
+        button.setScaleX(SCREEN_WIDTH / NEXUS_WIDTH);
+        button.setScaleY(SCREEN_HEIGHT / NEXUS_HEIGHT);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
-        imageView.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
+        imageView.setScaleX(SCREEN_WIDTH / NEXUS_WIDTH);
+        imageView.setScaleY(SCREEN_HEIGHT / NEXUS_HEIGHT);
     }
 
     private void setScreenSize()

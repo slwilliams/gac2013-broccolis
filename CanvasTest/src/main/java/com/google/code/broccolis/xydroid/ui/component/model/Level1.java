@@ -13,6 +13,8 @@ import com.google.code.broccolis.xydroid.ui.interfaces.Level;
 import com.google.code.broccolis.xydroid.util.Broccoli;
 import com.google.code.broccolis.xydroid.util.PointOnScreen;
 
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
@@ -25,13 +27,13 @@ public class Level1 extends Level
 
         pointY = new Point(parseXToInt(parseNexusX(960)), parseNexusY(50));
 
-        walls.add(new WallView(new PointOnScreen(0, parseNexusY(100)), new PointOnScreen(parseNexusX(100), parseNexusY(125)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(500), parseNexusY(400)), new PointOnScreen(parseNexusX(800), parseNexusY(450)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(150), parseNexusY(500)), new PointOnScreen(parseNexusX(300), parseNexusY(525)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(930), parseNexusY(100)), new PointOnScreen(parseNexusX(1050), parseNexusY(130)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(300), parseNexusY(130)), new PointOnScreen(parseNexusX(400), parseNexusY(190)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(1160), parseNexusY(550)), new PointOnScreen(parseNexusX(1280), parseNexusY(590)), res));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(1160), parseNexusY(450)), new PointOnScreen(parseNexusX(1280), parseNexusY(475)), res));
+        walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(150f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT), new PointOnScreen(300f / NEXUS_WIDTH, 525f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(930f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(1050f / NEXUS_WIDTH, 130f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(300f / NEXUS_WIDTH, 130f / NEXUS_HEIGHT), new PointOnScreen(400f / NEXUS_WIDTH, 190f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(1160f / NEXUS_WIDTH, 550f / NEXUS_HEIGHT), new PointOnScreen(1280f / NEXUS_WIDTH, 590f / NEXUS_HEIGHT), res));
+        walls.add(new WallView(new PointOnScreen(1160f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), new PointOnScreen(1280f / NEXUS_WIDTH, 475f / NEXUS_HEIGHT), res));
 
         for (int i = 945; i < 1020; i += 30)
         {

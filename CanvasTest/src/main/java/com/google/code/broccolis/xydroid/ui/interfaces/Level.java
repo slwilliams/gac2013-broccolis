@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import static android.graphics.Bitmap.createScaledBitmap;
 import static android.graphics.BitmapFactory.decodeResource;
 import static android.graphics.Color.BLACK;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 
@@ -34,10 +36,10 @@ public abstract class Level
 
     public Level(Resources res)
     {
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, parseNexusY(700))));
-        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(parseNexusX(1270), 0)));
-        walls.add(new WallView(new PointOnScreen(parseNexusX(1270), 0), new PointOnScreen(parseNexusX(1270), parseNexusY(700))));
-        walls.add(new WallView(new PointOnScreen(0, parseNexusY(700)), new PointOnScreen(parseNexusX(1270), parseNexusY(700))));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
+        walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
+        walls.add(new WallView(new PointOnScreen(0, 700f / NEXUS_HEIGHT), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
 
         yBitmap = decodeResource(res, R.drawable.y);
         yBitmap = createScaledBitmap(yBitmap, parseNexusX(yBitmap.getWidth()), parseNexusY(yBitmap.getHeight()), true);

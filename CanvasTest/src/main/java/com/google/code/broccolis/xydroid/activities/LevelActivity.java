@@ -76,7 +76,7 @@ public class LevelActivity extends Activity
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        setComponentSizes();
+//        setComponentSizes();
 
         Log.i(TAG, NAME + "created");
     }

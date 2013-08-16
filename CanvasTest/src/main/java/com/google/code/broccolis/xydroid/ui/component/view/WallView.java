@@ -20,9 +20,9 @@ import static java.lang.Math.abs;
 
 public class WallView implements Terrain
 {
+    private boolean visible = false;
     private Bitmap textureBitmap;
     private WallModel model;
-    boolean visible = false;
 
     public WallView(PointOnScreen top, PointOnScreen bottom)
     {

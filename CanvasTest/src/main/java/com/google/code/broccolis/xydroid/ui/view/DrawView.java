@@ -13,13 +13,16 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.activities.LevelActivity;
+//import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
@@ -35,8 +38,6 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToFloat;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseYToFloat;
-
-//import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 
 public class DrawView extends View
 {
@@ -70,7 +71,6 @@ public class DrawView extends View
     {
         super(context);
         //keyboard = new CustomKeyboard((Activity) context, R.id.keyboardview, R.xml.func_keyboard);
-
         switch (levelNum)
         {
             case 1:
@@ -349,9 +349,9 @@ public class DrawView extends View
             }
         });
 
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener()
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener()
         {
-            public void onDismiss(DialogInterface dialog)
+            public void onCancel(DialogInterface dialog)
             {
                 isPaused = false;
             }

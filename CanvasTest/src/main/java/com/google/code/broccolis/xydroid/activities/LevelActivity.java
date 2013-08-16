@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
@@ -36,9 +37,9 @@ public class LevelActivity extends Activity
         Intent called = getIntent();
         int level = Integer.parseInt(called.getExtras().get("level").toString());
 
-        drawView = new DrawView(this, level);
-
         setContentView(R.layout.main_view);
+
+        drawView = new DrawView(this, level);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener()
@@ -71,7 +72,7 @@ public class LevelActivity extends Activity
         });
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
-        ((FrameLayout) findViewById(R.id.content_frame)).addView(drawView);
+        ((RelativeLayout) findViewById(R.id.content_frame)).addView(drawView);
 
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());

@@ -13,17 +13,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.activities.LevelActivity;
-//import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
+import com.google.code.broccolis.xydroid.ui.component.CustomKeyboard;
 import com.google.code.broccolis.xydroid.ui.component.model.Level1;
 import com.google.code.broccolis.xydroid.ui.component.model.Level2;
 import com.google.code.broccolis.xydroid.ui.component.view.FunctionView;
@@ -63,7 +61,7 @@ public class DrawView extends View
     private EditText alertDialogInput;
     private AlertDialog alertDialog;
     private double then;
-    //private CustomKeyboard keyboard;
+    private CustomKeyboard keyboard;
     private boolean finished;
 
     public boolean off = false;
@@ -212,9 +210,9 @@ public class DrawView extends View
 
     public void doPhysics()
     {
-        if (!collision(player, new Point(0, (int) gravity)))
+        if (!collision(player, new Point(0, gravity)))
         {
-            player.move(0, (int) gravity);
+            player.move(0, gravity);
             gravity += delta;
 
             falling = true;
@@ -357,7 +355,5 @@ public class DrawView extends View
         });
 
         alertDialog = builder.create();
-        //alertDialog.getWindow().setAttributes(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        alertDialog.getWindow().setAttributes(new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM));
     }
 }

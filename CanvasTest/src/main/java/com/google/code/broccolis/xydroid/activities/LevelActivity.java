@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -15,6 +16,10 @@ import com.google.code.broccolis.xydroid.R;
 import com.google.code.broccolis.xydroid.ui.view.DrawView;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
 
 public class LevelActivity extends Activity
 {
@@ -71,7 +76,108 @@ public class LevelActivity extends Activity
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
+        setComponentSizes();
+
         Log.i(TAG, NAME + "created");
+    }
+
+    private void setComponentSizes()
+    {
+        Button button = (Button)findViewById(R.id.button11);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button12);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button13);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button21);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button22);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button23);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button31);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button32);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button33);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button41);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button42);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button43);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button61);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button62);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button63);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button71);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button72);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button73);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button81);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button82);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button83);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button91);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button92);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button)findViewById(R.id.button93);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
     }
 
     @Override

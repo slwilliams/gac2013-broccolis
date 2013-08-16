@@ -6,10 +6,14 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.code.broccolis.xydroid.R;
 
 import static com.google.code.broccolis.xydroid.util.Constants.TAG;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_HEIGHT;
+import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_HEIGHT;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREEN_WIDTH;
 
@@ -25,8 +29,28 @@ public class MainActivity extends Activity
         setContentView(R.layout.start_interface);
 
         setScreenSize();
+        setComponentSizes();
 
         Log.i(TAG, NAME + "created");
+    }
+
+    private void setComponentSizes()
+    {
+        Button button = (Button) findViewById(R.id.button1);
+        button.setScaleX((float) SCREEN_WIDTH / (NEXUS_WIDTH));
+        button.setScaleY((float) SCREEN_HEIGHT / (NEXUS_HEIGHT));
+
+        button = (Button) findViewById(R.id.button2);
+        button.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
+        button.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
+
+        button = (Button) findViewById(R.id.button3);
+        button.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
+        button.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setScaleX((float) SCREEN_WIDTH / NEXUS_WIDTH);
+        imageView.setScaleY((float) SCREEN_HEIGHT / NEXUS_HEIGHT);
     }
 
     private void setScreenSize()

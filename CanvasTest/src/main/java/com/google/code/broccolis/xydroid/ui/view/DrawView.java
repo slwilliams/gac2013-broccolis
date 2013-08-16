@@ -17,6 +17,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -349,14 +350,14 @@ public class DrawView extends View
             }
         });
 
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener()
-        {
-            public void onCancel(DialogInterface dialog)
-            {
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
                 isPaused = false;
             }
         });
 
         alertDialog = builder.create();
+        //alertDialog.getWindow().setAttributes(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        alertDialog.getWindow().setAttributes(new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM));
     }
 }

@@ -72,9 +72,9 @@ public class Level2 extends Level
             }, Color.BLACK));
         }
 
-        broccolis.add(new Broccoli(parseNexusX(1020), parseNexusY(50), res));
-        broccolis.add(new Broccoli(parseNexusX(330), parseNexusY(250), res));
-        broccolis.add(new Broccoli(parseNexusX(550), parseNexusY(400), res));
+        broccolis.add(new Broccoli(1020f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(330f / NEXUS_WIDTH, 250f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(550f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT, res));
     }
 
     @Override

@@ -17,7 +17,6 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.NEXUS_WIDTH;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusX;
 import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseNexusY;
-import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.parseXToInt;
 
 public class Level1 extends Level
 {
@@ -25,7 +24,7 @@ public class Level1 extends Level
     {
         super(res);
 
-        pointY = new Point(parseXToInt(parseNexusX(960)), parseNexusY(50));
+        pointY = new Point(parseNexusX(960), parseNexusY(50));
 
         walls.add(new WallView(new PointOnScreen(0f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT), new PointOnScreen(100f / NEXUS_WIDTH, 125f / NEXUS_HEIGHT), res));
         walls.add(new WallView(new PointOnScreen(500f / NEXUS_WIDTH, 400f / NEXUS_HEIGHT), new PointOnScreen(800f / NEXUS_WIDTH, 450f / NEXUS_HEIGHT), res));
@@ -78,9 +77,9 @@ public class Level1 extends Level
             }, Color.BLACK));
         }
 
-        broccolis.add(new Broccoli(parseNexusX(20), parseNexusY(50), res));
-        broccolis.add(new Broccoli(parseNexusX(500), parseNexusY(100), res));
-        broccolis.add(new Broccoli(parseNexusX(1200), parseNexusY(500), res));
+        broccolis.add(new Broccoli(20f / NEXUS_WIDTH, 50f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(500f / NEXUS_WIDTH, 100f / NEXUS_HEIGHT, res));
+        broccolis.add(new Broccoli(1200f / NEXUS_WIDTH, 500f / NEXUS_HEIGHT, res));
     }
 
     @Override

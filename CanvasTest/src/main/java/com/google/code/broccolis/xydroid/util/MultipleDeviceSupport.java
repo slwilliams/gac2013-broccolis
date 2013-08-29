@@ -8,6 +8,10 @@ public class MultipleDeviceSupport
 {
     public static final float NEXUS_WIDTH = 1280;
     public static final float NEXUS_HEIGHT = 736;
+
+    //uncomment for nexus 4
+    //public static final float NEXUS_HEIGHT = 768;
+
     private static final String NAME = "MultipleDeviceSupport ";
     public static float SCREEN_WIDTH;
     public static float SCREEN_HEIGHT;

@@ -15,7 +15,6 @@ public class SpikeModel
 
     public SpikeModel(Path path, int color)
     {
-
         this.path = path;
         this.color = color;
         region = new Region();
@@ -37,7 +36,6 @@ public class SpikeModel
 
     public boolean contains(Player player, Point moveAmount)
     {
-
         int x = player.getX();
         int y = player.getY();
 

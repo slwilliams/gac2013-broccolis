@@ -42,16 +42,16 @@ public class DrawView extends View
     private static final String NAME = "DrawView ";
     private static final int jumpHeight = parseNexusY(100);
     private static final int jumpSpeed = parseNexusY(15);
-    private static int gravity = 3;
-    private double delta = 0.3;
-    private final double SHAKE_DELTA = 2;
+    private static double gravity = 5;
+    private double delta = 0.4;
+    private final double SHAKE_DELTA = 5;
     private boolean isPaused = false;
     private boolean waitForFunctionTap = false;
     private String functionString = null;
     private int jumpBase = 400;
     private float xAcc = 0;
     private boolean jumping = false;
-    private boolean falling = false;
+    private boolean falling = true;
     private Paint paint = new Paint();
     private Level level;
     private Player player;
@@ -62,14 +62,13 @@ public class DrawView extends View
     private double then;
     private CustomKeyboard keyboard;
     private boolean finished;
-
-    public boolean off = false;
+    private String coordinatesText = "";
 
     public DrawView(Context context, int levelNum)
     {
         super(context);
         //keyboard = new CustomKeyboard((Activity) context, R.id.keyboardview, R.xml.func_keyboard);
-        switch (levelNum)
+        switch(levelNum)
         {
             case 1:
                 level = new Level1(getResources());
@@ -82,14 +81,17 @@ public class DrawView extends View
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
 
-        player = new Player(100f / NEXUS_WIDTH, 650f / NEXUS_HEIGHT, Color.BLACK, getResources());
+        Point playerStartPosition = level.playerStartPosition();
+
+        player = new Player(playerStartPosition.x / NEXUS_WIDTH, playerStartPosition.y / NEXUS_HEIGHT, getResources());
         this.context = context;
 
         alertDialogInput = new EditText(context);
         createAlert();
         //keyboard.registerEditText(alertDialogInput);
 
-        initAccelerometer();
+        //commenting this out for now, seems too jumpy...
+        //initAccelerometer();
 
         Log.i(TAG, NAME + "created");
     }
@@ -150,15 +152,14 @@ public class DrawView extends View
             @Override
             public void onSensorChanged(SensorEvent event)
             {
-                if (!isPaused)
+                if(!isPaused)
                 {
                     xAcc = event.values[1];
                     double zAcc = (double) event.values[2];
 
-
-                    if (Math.abs(zAcc - then) > SHAKE_DELTA)
+                    if(Math.abs(zAcc - then) > SHAKE_DELTA)
                     {
-                        if (!falling)
+                        if(!falling)
                         {
                             jumpBase = player.getY();
                             jumping = true;
@@ -177,6 +178,7 @@ public class DrawView extends View
     }
 
     @Override
+    @SuppressWarnings("all")
     public void onDraw(Canvas canvas)
     {
         if (!collision(player, new Point((int) xAcc * 2, 0)))
@@ -190,31 +192,27 @@ public class DrawView extends View
         {
             f.draw(canvas, paint);
         }
-        if (!off)
-        {
-            level.draw(canvas, paint);
-        }
-        if (!off)
-        {
-            player.draw(canvas, paint);
-        }
+
+        canvas.drawText(coordinatesText, 10f, 30f, paint);
+
+        level.draw(canvas, paint);
+        player.draw(canvas, paint);
 
         postInvalidateOnAnimation();
     }
 
-    public void off()
-    {
-        off = true;
-    }
-
     public void doPhysics()
     {
-        if (!collision(player, new Point(0, gravity)))
+        if (!collision(player, new Point(0, (int)gravity)))
         {
-            player.move(0, gravity);
+            player.move(0, (int)gravity);
             gravity += delta;
 
             falling = true;
+        }
+        else
+        {
+            falling = false;
         }
 
         if (jumping && Math.abs(player.getY() - jumpBase) > jumpHeight)
@@ -237,9 +235,9 @@ public class DrawView extends View
 
     public synchronized boolean collision(Player player, Point moveAmount)
     {
-        if (level.goalReached(player, moveAmount) && !finished)
+        if(level.goalReached(player, moveAmount) && !finished)
         {
-            if (level instanceof Level1)
+            if(level instanceof Level1)
             {
                 Intent intent = new Intent(context, LevelActivity.class);
                 intent.putExtra("level", 2);
@@ -249,20 +247,20 @@ public class DrawView extends View
             }
         }
 
-        if (level.collidesWith(player, moveAmount))
+        if(level.collidesWith(player, moveAmount))
         {
             falling = false;
-            gravity = 5;
+            gravity = 5.0;
             return true;
         }
         else
         {
-            for (FunctionView f : functions)
+            for(FunctionView f : functions)
             {
-                if (f.collidesWith(player, moveAmount))
+                if(f.collidesWith(player, moveAmount))
                 {
                     falling = false;
-                    gravity = 5;
+                    gravity = 5.0;
                     return true;
                 }
             }
@@ -276,7 +274,7 @@ public class DrawView extends View
         float eventX;
         float eventY;
 
-        if (event.getPointerCount() > 1)
+        if(event.getPointerCount() > 1)
         {
             int actionPointerId = event.getActionIndex();
             int index = event.findPointerIndex(actionPointerId);
@@ -290,7 +288,9 @@ public class DrawView extends View
             eventY = event.getY();
         }
 
-        if (waitForFunctionTap)
+        coordinatesText = "X: " + eventX + " Y: " + eventY;
+
+        if(waitForFunctionTap)
         {
             int tapX = (int) eventX;
             int origin, maxX;
@@ -307,16 +307,14 @@ public class DrawView extends View
             waitForFunctionTap = false;
             isPaused = false;
         }
-        else if (!falling)
+        else if(!falling)
         {
-            if (eventX >= 75)
+            if(eventX >= 75)
             {
                 jumping = true;
                 jumpBase = player.getY();
             }
         }
-
-
         return true;
     }
 

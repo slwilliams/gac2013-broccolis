@@ -78,10 +78,16 @@ public class Level2 extends Level
     }
 
     @Override
+    public Point playerStartPosition()
+    {
+        return new Point(25, 650);
+    }
+
+    @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        walls.get(9).move(0, (int) (Math.sin(val) * 5));
-        val -= 0.03;
+        walls.get(9).move(0, (int) (Math.sin(platformOffset) * 5));
+        platformOffset -= 0.03;
 
         super.draw(canvas, paint);
     }

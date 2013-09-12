@@ -56,4 +56,14 @@ public class MultipleDeviceSupport
         return parseYToInt(((float) y) / NEXUS_HEIGHT);
     }
 
+    public static float scaleToNexusX(float x)
+    {
+        return ((float) x) / NEXUS_WIDTH;
+    }
+
+    public static float scaleToNexusY(float y)
+    {
+        return ((float) y) / NEXUS_HEIGHT;
+    }
+
 }

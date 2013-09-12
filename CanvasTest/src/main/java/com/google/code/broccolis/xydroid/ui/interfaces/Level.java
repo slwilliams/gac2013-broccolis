@@ -31,11 +31,12 @@ public abstract class Level
     protected ArrayList<Broccoli> broccolis = new ArrayList<Broccoli>(3);
     protected Bitmap yBitmap;
     protected Point pointY;
-    protected double val = 0.1;
+    protected double platformOffset = 0.1;
     protected int score = 0;
 
     public Level(Resources res)
     {
+        //Absolute level bounds
         walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(0, 700f / NEXUS_HEIGHT)));
         walls.add(new WallView(new PointOnScreen(0, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 0)));
         walls.add(new WallView(new PointOnScreen(1270f / NEXUS_WIDTH, 0), new PointOnScreen(1270f / NEXUS_WIDTH, 700f / NEXUS_HEIGHT)));
@@ -44,6 +45,8 @@ public abstract class Level
         yBitmap = decodeResource(res, R.drawable.y);
         yBitmap = createScaledBitmap(yBitmap, parseNexusX(yBitmap.getWidth()), parseNexusY(yBitmap.getHeight()), true);
     }
+
+    public abstract Point playerStartPosition();
 
     public final boolean goalReached(Player player, Point movingAmount)
     {

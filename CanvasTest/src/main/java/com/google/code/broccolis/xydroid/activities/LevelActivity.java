@@ -24,7 +24,7 @@ import static com.google.code.broccolis.xydroid.util.MultipleDeviceSupport.SCREE
 public class LevelActivity extends Activity
 {
     private static final String NAME = "Level ";
-    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "xcos(x)", "tan(x)", "Custom", "Clear", "Undo", "off"};
+    private String[] items = {"x", "-x", "x^2", "sin(x)", "xsin(x)", "xcos(x)", "tan(x)", "Custom", "Clear", "Undo"};
     private DrawerLayout drawerLayout;
     private ListView drawerList;
     private DrawView drawView;
@@ -57,17 +57,14 @@ public class LevelActivity extends Activity
             @Override
             public void onDrawerClosed(View view)
             {
-                if (!drawView.isAwaitingFunctionTap())
+                if(!drawView.isAwaitingFunctionTap())
                 {
                     drawView.resume();
                 }
             }
 
             @Override
-            public void onDrawerStateChanged(int i)
-            {
-
-            }
+            public void onDrawerStateChanged(int i) {}
         });
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -76,7 +73,7 @@ public class LevelActivity extends Activity
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.list_layout, items));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-//        setComponentSizes();
+//      setComponentSizes();
 
         Log.i(TAG, NAME + "created");
     }
@@ -186,7 +183,6 @@ public class LevelActivity extends Activity
         Log.i(TAG, NAME + "paused");
 
         super.onPause();
-
         drawView.setPaused();
     }
 
@@ -207,7 +203,7 @@ public class LevelActivity extends Activity
 
     private void selectItem(int position)
     {
-        switch (position)
+        switch(position)
         {
             case 0:
                 drawView.addFunction("x");
@@ -239,8 +235,6 @@ public class LevelActivity extends Activity
             case 9:
                 drawView.undo();
                 break;
-            case 10:
-                drawView.off();
         }
         drawerList.setItemChecked(position, true);
         setTitle(items[position]);

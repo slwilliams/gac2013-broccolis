@@ -20,15 +20,12 @@ public class Player implements Drawable
 {
     private int playerX = 0;
     private int playerY = 0;
-    private int color = Color.BLACK;
     private Bitmap playerImage;
     private int startX;
     private int startY;
 
-    public Player(float initialX, float initialY, int color, Resources res)
+    public Player(float initialX, float initialY, Resources res)
     {
-        this.color = color;
-
         playerX = parseXToInt(initialX);
         playerY = parseYToInt(initialY);
         startX = parseXToInt(initialX);
@@ -87,7 +84,6 @@ public class Player implements Drawable
     @Override
     public void draw(Canvas canvas, Paint paint)
     {
-        paint.setColor(color);
         canvas.drawBitmap(playerImage, playerX, playerY, paint);
     }
 }

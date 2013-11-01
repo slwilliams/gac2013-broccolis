@@ -90,8 +90,7 @@ public class DrawView extends View
         createAlert();
         //keyboard.registerEditText(alertDialogInput);
 
-        //commenting this out for now, seems too jumpy...
-        //initAccelerometer();
+        initAccelerometer();
 
         Log.i(TAG, NAME + "created");
     }

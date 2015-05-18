@@ -1,7 +1,6 @@
-XYDroid
-==========
+# XYDroid #
+### Created for Google Android Camp 2013 ###
 An educational maths game for teenagers.
-
 
 In this Jump 'n' Run the player has to draw his/her own path with the help of mathematical functions to reach the goal, avoiding obstacles and collecting broccolis on the way.
 
